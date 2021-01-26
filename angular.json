@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Enigma-Frontend": {
+    "Enigma-website": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Enigma-Frontend",
+            "outputPath": "dist/Enigma-website",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,18 +68,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Enigma-Frontend:build"
+            "browserTarget": "Enigma-website:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Enigma-Frontend:build:production"
+              "browserTarget": "Enigma-website:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Enigma-Frontend:build"
+            "browserTarget": "Enigma-website:build"
           }
         },
         "test": {
@@ -116,16 +116,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Enigma-Frontend:serve"
+            "devServerTarget": "Enigma-website:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Enigma-Frontend:serve:production"
+              "devServerTarget": "Enigma-website:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "Enigma-Frontend"
+  "defaultProject": "Enigma-website"
 }

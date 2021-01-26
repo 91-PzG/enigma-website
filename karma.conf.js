@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/Enigma-Frontend'),
+      dir: require('path').join(__dirname, './coverage/Enigma-website'),
       subdir: '.',
       reporters: [
         { type: 'html' },
