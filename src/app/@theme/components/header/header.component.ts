@@ -1,10 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  NbMediaBreakpointsService,
-  NbMenuService,
-  NbSidebarService,
-  NbThemeService,
-} from '@nebular/theme';
+import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { LayoutService } from 'src/app/@core/utils';
@@ -13,8 +8,8 @@ type ThemesMap = { value: string; name: string }[];
 
 @Component({
   selector: 'ngx-header',
-  styleUrls: [''],
-  templateUrl: '',
+  styleUrls: ['./header.component.scss'],
+  templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
