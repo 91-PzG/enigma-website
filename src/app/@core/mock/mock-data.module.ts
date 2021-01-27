@@ -1,8 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { UserService } from './users.service';
+import { CommonModule } from "@angular/common";
+import { ModuleWithProviders, NgModule } from "@angular/core";
+import { HrWarningsService } from "./hrWarnings.service";
+import { RecruitsService } from "./recruits.service";
+import { UserService } from "./users.service";
 
-const SERVICES = [UserService];
+const SERVICES = [UserService, RecruitsService, HrWarningsService];
 
 @NgModule({
   imports: [CommonModule],

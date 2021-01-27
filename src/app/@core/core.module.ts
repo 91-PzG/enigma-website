@@ -8,8 +8,12 @@ import {
 import { NbAuthModule, NbDummyAuthStrategy } from "@nebular/auth";
 import { NbRoleProvider, NbSecurityModule } from "@nebular/security";
 import { of as observableOf } from "rxjs";
+import { HrWarningsData } from "./data/hrWarnings";
+import { RecruitsData } from "./data/recruits";
 import { UserData } from "./data/users";
+import { HrWarningsService } from "./mock/hrWarnings.service";
 import { MockDataModule } from "./mock/mock-data.module";
+import { RecruitsService } from "./mock/recruits.service";
 import { UserService } from "./mock/users.service";
 import { throwIfAlreadyLoaded } from "./module-import-guard";
 import { LayoutService, StateService } from "./utils";
@@ -23,7 +27,11 @@ const socialLinks: SocialLinks = [
   },
 ];
 
-const DATA_SERVICES = [{ provide: UserData, useClass: UserService }];
+const DATA_SERVICES = [
+  { provide: UserData, useClass: UserService },
+  { provide: RecruitsData, useClass: RecruitsService },
+  { provide: HrWarningsData, useClass: HrWarningsService },
+];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
   getRole() {
