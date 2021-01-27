@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'ngx-app',
+  selector: "event-component",
   template: `<span>Event Componenet works</span>`,
 })
 export class EventsComponent {}

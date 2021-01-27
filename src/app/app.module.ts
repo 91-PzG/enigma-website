@@ -1,7 +1,7 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   NbDatepickerModule,
   NbDialogModule,
@@ -9,11 +9,11 @@ import {
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
-} from '@nebular/theme';
-import { CoreModule } from './@core/core.module';
-import { ThemeModule } from './@theme/theme.module';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+} from "@nebular/theme";
+import { CoreModule } from "./@core/core.module";
+import { ThemeModule } from "./@theme/theme.module";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +22,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    //Nebula
+    //Nebular
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
@@ -32,7 +32,6 @@ import { AppComponent } from './app.component';
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

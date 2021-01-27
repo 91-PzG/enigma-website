@@ -1,20 +1,21 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import {
   NbMediaBreakpointsService,
   NbMenuService,
   NbSidebarService,
   NbThemeService,
-} from '@nebular/theme';
-import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
-import { LayoutService } from '../../../@core/utils';
+} from "@nebular/theme";
+import { Subject } from "rxjs";
+import { map, takeUntil } from "rxjs/operators";
+import { UserData } from "../../../@core/data/users";
+import { LayoutService } from "../../../@core/utils";
 
 type ThemesMap = { value: string; name: string }[];
 
 @Component({
-  selector: 'ngx-header',
-  styleUrls: ['./header.component.scss'],
-  templateUrl: './header.component.html',
+  selector: "ngx-header",
+  styleUrls: ["./header.component.scss"],
+  templateUrl: "./header.component.html",
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
@@ -23,29 +24,33 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   themes: ThemesMap = [
     {
-      value: 'default',
-      name: ' Light',
+      value: "default",
+      name: " Light",
     },
-    { value: 'dark', name: 'Dark' },
-    { value: 'cosmic', name: 'Cosmic' },
-    { value: 'light', name: 'Corporate' },
+    { value: "dark", name: "Dark" },
+    { value: "cosmic", name: "Cosmic" },
   ];
 
-  currentTheme = 'default';
+  currentTheme = "default";
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu = [{ title: "Profile" }, { title: "Log out" }];
 
   constructor(
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private themeService: NbThemeService,
     private layoutService: LayoutService,
-    private breakpointService: NbMediaBreakpointsService
+    private breakpointService: NbMediaBreakpointsService,
+    private userService: UserData
   ) {}
 
   ngOnInit(): void {
     this.currentTheme = this.themeService.currentTheme;
-    //Get user
+
+    this.userService
+      .getUsers()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((users: any) => (this.user = users.nick));
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService
@@ -76,8 +81,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.themeService.changeTheme(themeName);
   }
 
-  toggleSideBar(): boolean {
-    this.sidebarService.toggle(true, 'menu-sidebar');
+  toggleSidebar(): boolean {
+    this.sidebarService.toggle(true, "menu-sidebar");
     this.layoutService.changeLayoutSize();
 
     return false;

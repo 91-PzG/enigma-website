@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbSecurityModule } from '@nebular/security';
+import { CommonModule } from "@angular/common";
+import { ModuleWithProviders, NgModule } from "@angular/core";
+import { NbEvaIconsModule } from "@nebular/eva-icons";
+import { NbSecurityModule } from "@nebular/security";
 import {
   NbActionsModule,
   NbButtonModule,
@@ -14,26 +14,21 @@ import {
   NbSidebarModule,
   NbThemeModule,
   NbUserModule,
-} from '@nebular/theme';
-import { FooterComponent, HeaderComponent } from './components';
+} from "@nebular/theme";
+import { FooterComponent, HeaderComponent } from "./components";
 import {
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
-} from './layouts';
+} from "./layouts";
 import {
   CapitalizePipe,
   NumberWithCommasPipe,
   PluralPipe,
   RoundPipe,
   TimingPipe,
-} from './pipes';
-import {
-  CORPORATE_THEME,
-  COSMIC_THEME,
-  DARK_THEME,
-  DEFAULT_THEME,
-} from './styles';
+} from "./pipes";
+import { COSMIC_THEME, DARK_THEME, DEFAULT_THEME } from "./styles";
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -76,9 +71,9 @@ export class ThemeModule {
       providers: [
         ...NbThemeModule.forRoot(
           {
-            name: 'default',
+            name: "default",
           },
-          [DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME, DARK_THEME]
+          [DEFAULT_THEME, COSMIC_THEME, DARK_THEME]
         ).providers,
       ],
     };
