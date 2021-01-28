@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { LocalDataSource } from "ng2-smart-table";
-import { RecruitsData } from "../../../@core/data/recruits";
+import { Recruit, RecruitsData } from "../../../@core/data/recruits";
 
 @Component({
   selector: "hr-recruits",
@@ -33,7 +33,10 @@ export class RecruitsComponent {
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: RecruitsData) {
-    const data = this.service.getData();
+    this.service.getData().subscribe((data: Recruit[]) => this.setData(data));
+  }
+
+  private setData(data: Recruit[]) {
     this.source.load(data);
   }
 }

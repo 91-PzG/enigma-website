@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { LocalDataSource } from "ng2-smart-table";
-import { HrWarningsData } from "../../../@core/data/hrWarnings";
+import { HrWarning, HrWarningsData } from "../../../@core/data/hrWarnings";
 
 @Component({
   selector: "hr-warnings",
@@ -33,7 +33,10 @@ export class WarningListComponent {
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: HrWarningsData) {
-    const data = this.service.getData();
+    this.service.getData().subscribe((data: HrWarning[]) => this.setData(data));
+  }
+
+  private setData(data: HrWarning[]) {
     this.source.load(data);
   }
 }
