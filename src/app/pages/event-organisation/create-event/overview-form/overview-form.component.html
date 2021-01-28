@@ -1,0 +1,90 @@
+<form [formGroup]="overviewForm">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="eventname" class="label">Eventname</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="eventname"
+          placeholder="Eventname"
+          formControlName="eventName"
+          [ngClass]="{
+            'form-control-danger':
+              overviewForm.invalid &&
+              (overviewForm.dirty || overviewForm.touched)
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="eventdescription" class="label">Beschreibung</label>
+        <textarea
+          rows="5"
+          nbInput
+          fullWidth
+          id="eventdescription"
+          shape="round"
+          placeholder="Beschreibung"
+          formControlName="beschreibung"
+          [ngClass]="{
+            'form-control-danger':
+              overviewForm.invalid &&
+              (overviewForm.dirty || overviewForm.touched)
+          }"
+        ></textarea>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="date" class="label">Datum</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="date"
+          placeholder="Datum"
+          formControlName="datum"
+          [ngClass]="{
+            'form-control-danger':
+              overviewForm.invalid &&
+              (overviewForm.dirty || overviewForm.touched)
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="anmeldung" class="label">Anmeldefrist</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="anmeldung"
+          placeholder="Anmeldefrist"
+          formControlName="anmeldefrist"
+          [ngClass]="{
+            'form-control-danger':
+              overviewForm.invalid &&
+              (overviewForm.dirty || overviewForm.touched)
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="orga" class="label">Organisator</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="orga"
+          placeholder="Organisator"
+          formControlName="organisator"
+          [ngClass]="{
+            'form-control-danger':
+              overviewForm.invalid &&
+              (overviewForm.dirty || overviewForm.touched)
+          }"
+        />
+      </div>
+    </div>
+  </div>
+</form>
+<button nbButton (click)="onSubmit()">next</button>

@@ -7,6 +7,7 @@ import { EventListData } from "../data/event-list";
 export class EventListService extends EventListData {
   data = [
     {
+      id: 1,
       name: "Freundschaftsspiel gegen 38.",
       datum: new Date(),
       beschreibung: "Freundschaftsspiel gegen 38. Beschreibung",
@@ -17,6 +18,7 @@ export class EventListService extends EventListData {
       anmeldefrist: new Date(),
     },
     {
+      id: 2,
       name: "Ligaspiel gegen StuG",
       datum: new Date(),
       beschreibung: "Ligaspiel gegen StuG Beschreibung",
@@ -27,6 +29,7 @@ export class EventListService extends EventListData {
       anmeldefrist: new Date(),
     },
     {
+      id: 3,
       name: "Freundschaftsspiel gegen SKG",
       datum: new Date(),
       beschreibung: "Freundschaftsspiel gegen SKG Beschreibung",
@@ -37,6 +40,7 @@ export class EventListService extends EventListData {
       anmeldefrist: new Date(),
     },
     {
+      id: 4,
       name: "Freundschaftsspiel gegen LwJg46",
       datum: new Date(),
       beschreibung: "Freundschaftsspiel gegen LwJg46 Beschreibung",

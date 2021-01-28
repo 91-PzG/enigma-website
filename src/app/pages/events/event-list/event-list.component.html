@@ -1,0 +1,20 @@
+<nb-card>
+  <nb-card-header> Event Liste </nb-card-header>
+
+  <nb-card-body>
+    <input
+      nbInput
+      #search
+      class="search"
+      type="text"
+      placeholder="Search..."
+      (keydown.enter)="onSearch(search.value)"
+    />
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (userRowSelect)="selectEvent($event)"
+    >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

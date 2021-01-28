@@ -2,6 +2,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NbEvaIconsModule } from "@nebular/eva-icons";
 import {
   NbDatepickerModule,
   NbDialogModule,
@@ -30,6 +31,7 @@ import { AppComponent } from "./app.component";
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
     CoreModule.forRoot(),
+    NbEvaIconsModule,
     ThemeModule.forRoot(),
   ],
   bootstrap: [AppComponent],

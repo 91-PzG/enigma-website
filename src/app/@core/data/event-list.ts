@@ -1,6 +1,7 @@
 import { Observable } from "rxjs";
 
 export interface EventListEntry {
+  id: number;
   name: string;
   datum: Date;
   beschreibung: string;

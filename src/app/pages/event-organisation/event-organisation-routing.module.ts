@@ -1,13 +1,13 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { NotFoundComponent } from "../miscellaneous/not-found/not-found.component";
+import { CreateEventComponent } from "./create-event/create-event.component";
 
-export const routedComponents = [];
+export const routedComponents = [CreateEventComponent];
 
 const routes: Routes = [
   {
     path: "create",
-    component: NotFoundComponent,
+    component: CreateEventComponent,
   },
 ];
 

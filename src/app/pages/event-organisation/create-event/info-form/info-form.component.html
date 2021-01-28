@@ -1,0 +1,85 @@
+<form [formGroup]="infoForm">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="treffpunkt" class="label">Treffpunkt</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="treffpunkt"
+          placeholder="Treffpunkt"
+          formControlName="treffpunkt"
+          [ngClass]="{
+            'form-control-danger':
+              infoForm.invalid && (infoForm.dirty || infoForm.touched)
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="spielerzahl" class="label">Spielerzahl</label>
+        <input
+          type="number"
+          nbInput
+          fullWidth
+          id="spielerzahl"
+          placeholder="Spielerzahl"
+          formControlName="spielerzahl"
+          [ngClass]="{
+            'form-control-danger':
+              infoForm.invalid && (infoForm.dirty || infoForm.touched)
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="anmeldefrist" class="label">Anmeldefrist</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="anmeldefrist"
+          placeholder="Anmeldefrist"
+          formControlName="anmeldefrist"
+          [ngClass]="{
+            'form-control-danger':
+              infoForm.invalid && (infoForm.dirty || infoForm.touched)
+          }"
+        />
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="servername" class="label">Servername</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="servername"
+          placeholder="Servername"
+          formControlName="serverName"
+          [ngClass]="{
+            'form-control-danger':
+              infoForm.invalid && (infoForm.dirty || infoForm.touched)
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password" class="label">Passwort</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="password"
+          placeholder="******"
+          formControlName="password"
+          [ngClass]="{
+            'form-control-danger':
+              infoForm.invalid && (infoForm.dirty || infoForm.touched)
+          }"
+        />
+      </div>
+    </div>
+  </div>
+</form>
+<button nbButton (click)="onPrevious()">previous</button>
+<button nbButton (click)="onSubmit()">next</button>

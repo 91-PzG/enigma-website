@@ -1,0 +1,70 @@
+<form [formGroup]="spielForm">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="commander" class="label">Kommandant</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="commander"
+          placeholder="Kommandant"
+          formControlName="kommandant"
+          [ngClass]="{
+            'form-control-danger':
+              spielForm.invalid && (spielForm.dirty || spielForm.touched)
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="map" class="label">Karte</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="map"
+          placeholder=""
+          formControlName="karte"
+          [ngClass]="{
+            'form-control-danger':
+              spielForm.invalid && (spielForm.dirty || spielForm.touched)
+          }"
+        />
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="runden" class="label">Runden</label>
+        <input
+          type="number"
+          nbInput
+          fullWidth
+          id="runden"
+          placeholder="Runden"
+          formControlName="runden"
+          [ngClass]="{
+            'form-control-danger':
+              spielForm.invalid && (spielForm.dirty || spielForm.touched)
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="seite" class="label">Seite</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="seite"
+          placeholder=""
+          formControlName="seite"
+          [ngClass]="{
+            'form-control-danger':
+              spielForm.invalid && (spielForm.dirty || spielForm.touched)
+          }"
+        />
+      </div>
+    </div>
+  </div>
+</form>
+<button nbButton (click)="onPrevious()">previous</button>
+<button nbButton (click)="onSubmit()">next</button>
