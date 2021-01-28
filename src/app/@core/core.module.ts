@@ -8,9 +8,13 @@ import {
 import { NbAuthModule, NbDummyAuthStrategy } from "@nebular/auth";
 import { NbRoleProvider, NbSecurityModule } from "@nebular/security";
 import { of as observableOf } from "rxjs";
+import { CurrentManpowerData } from "./data/current-manpower";
+import { EventListData } from "./data/event-list";
 import { HrWarningsData } from "./data/hrWarnings";
 import { RecruitsData } from "./data/recruits";
 import { UserData } from "./data/users";
+import { CurrentManpowerService } from "./mock/current-manpower.service";
+import { EventListService } from "./mock/event-list.service";
 import { HrWarningsService } from "./mock/hrWarnings.service";
 import { MockDataModule } from "./mock/mock-data.module";
 import { RecruitsService } from "./mock/recruits.service";
@@ -31,6 +35,9 @@ const DATA_SERVICES = [
   { provide: UserData, useClass: UserService },
   { provide: RecruitsData, useClass: RecruitsService },
   { provide: HrWarningsData, useClass: HrWarningsService },
+  //{provide: HLLEventData,useClass:HLLEventS},
+  { provide: CurrentManpowerData, useClass: CurrentManpowerService },
+  { provide: EventListData, useClass: EventListService },
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {

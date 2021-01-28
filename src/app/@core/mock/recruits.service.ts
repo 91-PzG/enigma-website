@@ -1,9 +1,12 @@
 import { Injectable } from "@angular/core";
-import { RecruitsData } from "../data/recruits";
+import { Observable } from "rxjs";
+import "rxjs/add/observable/of";
+import "rxjs/add/operator/delay";
+import { Recruit, RecruitsData } from "../data/recruits";
 
 @Injectable()
 export class RecruitsService extends RecruitsData {
-  data = [
+  data: Recruit[] = [
     {
       name: "Grenack",
       recruitSince: new Date(),
@@ -42,7 +45,7 @@ export class RecruitsService extends RecruitsData {
     },
   ];
 
-  getData() {
-    return this.data;
+  getData(): Observable<Recruit[]> {
+    return Observable.of(this.data).delay(500);
   }
 }

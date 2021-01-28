@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import "rxjs/add/observable/of";
 import { HrWarningsData } from "../data/hrWarnings";
 
 @Injectable()
@@ -25,6 +27,6 @@ export class HrWarningsService extends HrWarningsData {
   ];
 
   getData() {
-    return this.data;
+    return Observable.of(this.data);
   }
 }
