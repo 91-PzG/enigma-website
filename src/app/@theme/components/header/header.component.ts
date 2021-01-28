@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userPictureOnly: boolean = false;
   user: any;
 
+  themeMap = ["default", "dark", "cosmic"];
   themes: ThemesMap = [
     {
       value: "default",
@@ -31,7 +32,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     { value: "cosmic", name: "Cosmic" },
   ];
 
-  currentTheme = "default";
+  currentTheme: string;
+  private themeKey = "THEME";
 
   userMenu = [{ title: "Profile" }, { title: "Log out" }];
 
@@ -45,6 +47,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.getLocalTheme();
     this.currentTheme = this.themeService.currentTheme;
 
     this.userService
@@ -69,7 +72,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         map(({ name }) => name),
         takeUntil(this.destroy$)
       )
-      .subscribe((themeName) => (this.currentTheme = themeName));
+      .subscribe((themeName) => {
+        this.currentTheme = themeName;
+        this.setLocalTheme(themeName);
+      });
   }
 
   ngOnDestroy(): void {
@@ -91,5 +97,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateHome(): boolean {
     this.menuService.navigateHome();
     return false;
+  }
+
+  private setLocalTheme(theme: string) {
+    localStorage.setItem(this.themeKey, theme);
+  }
+
+  private getLocalTheme() {
+    let storedTheme = localStorage.getItem(this.themeKey);
+    if (this.themeMap.includes(storedTheme)) this.changeTheme(storedTheme);
   }
 }
