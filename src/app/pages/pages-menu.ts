@@ -17,4 +17,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+  {
+    title: "Event Organisation",
+    icon: "edit-outline",
+    children: [
+      {
+        title: "Create Event",
+        link: "/eo/create",
+      },
+    ],
+  },
 ];
