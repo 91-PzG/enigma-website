@@ -1,11 +1,13 @@
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
+  NbAutocompleteModule,
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
   NbInputModule,
   NbSelectModule,
+  NbSpinnerModule,
   NbStepperModule,
 } from "@nebular/theme";
 import { ThemeModule } from "../../@theme/theme.module";
@@ -27,6 +29,8 @@ import {
     NbInputModule,
     NbCheckboxModule,
     NbSelectModule,
+    NbAutocompleteModule,
+    NbSpinnerModule,
   ],
   declarations: [...routedComponents, ...CREATE_EVENT_COMPONENTS],
 })

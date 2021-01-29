@@ -1,6 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
+export type InfoForm = {
+  treffpunkt: string;
+  server: string;
+  passwort: string;
+  spielerzahl: number;
+  vorbesprechung: Date;
+};
+
 @Component({
   selector: "info-form",
   styleUrls: ["../forms.scss"],
@@ -9,7 +17,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 export class InfoFormComponent implements OnInit {
   infoForm: FormGroup;
 
-  @Output() next = new EventEmitter<void>();
+  @Output() next = new EventEmitter<InfoForm>();
   @Output() previous = new EventEmitter<void>();
 
   constructor(private fb: FormBuilder) {}
@@ -20,14 +28,22 @@ export class InfoFormComponent implements OnInit {
       password: ["", Validators.required],
       treffpunkt: ["", Validators.required],
       spielerzahl: ["", Validators.required],
-      anmeldefrist: ["", Validators.required],
+      vorbesprechung: ["", Validators.required],
     });
   }
 
   onSubmit() {
     this.infoForm.markAsDirty();
-    console.log(this.infoForm.value);
-    if (this.infoForm.valid) this.next.emit();
+    if (this.infoForm.valid) {
+      const dto: InfoForm = {
+        treffpunkt: this.infoForm.controls["treffpunkt"].value,
+        server: this.infoForm.controls["serverName"].value,
+        passwort: this.infoForm.controls["password"].value,
+        spielerzahl: this.infoForm.controls["spielerzahl"].value,
+        vorbesprechung: this.infoForm.controls["vorbesprechung"].value,
+      };
+      this.next.emit(dto);
+    }
   }
 
   onPrevious() {

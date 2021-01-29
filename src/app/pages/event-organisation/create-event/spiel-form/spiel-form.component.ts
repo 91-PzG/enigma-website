@@ -1,18 +1,65 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Observable, of } from "rxjs";
+import { map } from "rxjs/operators";
+import { HLLFaction } from "../../../../@core/data/hll-faction";
+import { HLLMap, HLLMapData } from "../../../../@core/data/hll-map";
+import {
+  MemberAutocomplete,
+  MemberAutocompleteData,
+} from "../../../../@core/data/member-autocomplete";
+import { HLLFactionService } from "../../../../@core/mock/hll-faction.service";
+
+export type GameForm = {
+  kommandant: string;
+  runden: number;
+  karte: string;
+  seite: string;
+};
 
 @Component({
   selector: "spiel-form",
   styleUrls: ["../forms.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./spiel-form.component.html",
 })
 export class SpielFormComponent implements OnInit {
   spielForm: FormGroup;
+  maps: HLLMap[] = [];
+  factions: HLLFaction[] = [];
 
-  @Output() next = new EventEmitter<void>();
+  private memberList: MemberAutocomplete[] = [];
+  filteredMembers$: Observable<MemberAutocomplete[]>;
+
+  @ViewChild("autoInput") input;
+
+  @Output() next = new EventEmitter<GameForm>();
   @Output() previous = new EventEmitter<void>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    mapService: HLLMapData,
+    factionService: HLLFactionService,
+    memberService: MemberAutocompleteData
+  ) {
+    mapService.getData().subscribe((maps) => {
+      this.maps = maps;
+    });
+    factionService.getData().subscribe((factions) => {
+      this.factions = factions;
+    });
+    memberService.getData().subscribe((members) => {
+      this.memberList = members;
+      this.filteredMembers$ = of(this.memberList);
+    });
+  }
 
   ngOnInit(): void {
     this.spielForm = this.fb.group({
@@ -23,9 +70,38 @@ export class SpielFormComponent implements OnInit {
     });
   }
 
+  private filter(value: string): MemberAutocomplete[] {
+    const filterValue = value.toLowerCase();
+    return this.memberList.filter((optionValue) =>
+      optionValue.username.toLowerCase().includes(filterValue)
+    );
+  }
+
+  getFilteredOptions(value: string): Observable<MemberAutocomplete[]> {
+    return of(value).pipe(map((filterString) => this.filter(filterString)));
+  }
+
+  onChange() {
+    this.filteredMembers$ = this.getFilteredOptions(
+      this.input.nativeElement.value
+    );
+  }
+
+  onSelectionChange($event) {
+    this.filteredMembers$ = this.getFilteredOptions($event);
+  }
+
   onSubmit() {
     this.spielForm.markAsDirty();
-    if (this.spielForm.valid) this.next.emit();
+    if (this.spielForm.valid) {
+      const dto: GameForm = {
+        kommandant: this.spielForm.controls["kommandant"].value,
+        runden: this.spielForm.controls["runden"].value,
+        karte: this.spielForm.controls["karte"].value,
+        seite: this.spielForm.controls["seite"].value,
+      };
+      this.next.emit(dto);
+    }
   }
 
   onPrevious() {

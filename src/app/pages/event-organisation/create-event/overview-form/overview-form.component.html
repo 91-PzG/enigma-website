@@ -71,20 +71,26 @@
       <div class="form-group">
         <label for="orga" class="label">Organisator</label>
         <input
-          type="text"
-          nbInput
-          fullWidth
           id="orga"
-          placeholder="Organisator"
+          fullWidth
           formControlName="organisator"
-          [ngClass]="{
-            'form-control-danger':
-              overviewForm.invalid &&
-              (overviewForm.dirty || overviewForm.touched)
-          }"
+          #autoInput
+          nbInput
+          type="text"
+          (input)="onChange()"
+          placeholder="Organisator"
+          [nbAutocomplete]="auto"
         />
+        <nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
+          <nb-option
+            *ngFor="let option of filteredMembers$ | async"
+            [value]="option.username"
+          >
+            {{ option.username }}
+          </nb-option>
+        </nb-autocomplete>
       </div>
     </div>
   </div>
 </form>
-<button nbButton (click)="onSubmit()">next</button>
+<button class="navButton" nbButton (click)="onSubmit()">next</button>

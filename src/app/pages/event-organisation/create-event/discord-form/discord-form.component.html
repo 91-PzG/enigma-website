@@ -1,0 +1,42 @@
+<form [formGroup]="discordForm">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="checkbox">
+        <nb-checkbox (checkedChange)="toggleDiscord($event)"
+          >discord Nachricht erstellen?</nb-checkbox
+        >
+      </div>
+      <div class="checkbox">
+        <nb-checkbox (checkedChange)="isVerpflichtend = !isVerpflichtend"
+          >Verpflichtend?</nb-checkbox
+        >
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group" *ngIf="isSentToDiscord">
+        <label for="channel" class="label">Channel</label>
+        <input
+          id="channel"
+          fullWidth
+          formControlName="channel"
+          #autoInput
+          nbInput
+          type="text"
+          (input)="onChange()"
+          placeholder="Channel"
+          [nbAutocomplete]="auto"
+        />
+        <nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
+          <nb-option
+            *ngFor="let option of filteredChannels$ | async"
+            [value]="option.name"
+          >
+            {{ option.name }}
+          </nb-option>
+        </nb-autocomplete>
+      </div>
+    </div>
+  </div>
+</form>
+<button class="navButton" nbButton (click)="onPrevious()">previous</button>
+<button class="navButton" nbButton (click)="onSubmit()">submit</button>

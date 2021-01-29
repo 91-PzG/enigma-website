@@ -4,32 +4,42 @@
       <div class="form-group">
         <label for="commander" class="label">Kommandant</label>
         <input
-          type="text"
-          nbInput
-          fullWidth
           id="commander"
-          placeholder="Kommandant"
+          fullWidth
           formControlName="kommandant"
-          [ngClass]="{
-            'form-control-danger':
-              spielForm.invalid && (spielForm.dirty || spielForm.touched)
-          }"
+          #autoInput
+          nbInput
+          type="text"
+          (input)="onChange()"
+          placeholder="Kommandant"
+          [nbAutocomplete]="auto"
         />
+        <nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
+          <nb-option
+            *ngFor="let option of filteredMembers$ | async"
+            [value]="option.username"
+          >
+            {{ option.username }}
+          </nb-option>
+        </nb-autocomplete>
       </div>
       <div class="form-group">
         <label for="map" class="label">Karte</label>
-        <input
-          type="text"
-          nbInput
-          fullWidth
+        <nb-select
+          class="select"
           id="map"
-          placeholder=""
+          fullWidth
+          placeholder="Karte"
           formControlName="karte"
           [ngClass]="{
             'form-control-danger':
               spielForm.invalid && (spielForm.dirty || spielForm.touched)
           }"
-        />
+        >
+          <nb-option *ngFor="let map of maps" [value]="map.name">{{
+            map.name
+          }}</nb-option>
+        </nb-select>
       </div>
     </div>
     <div class="col-sm-6">
@@ -49,22 +59,25 @@
         />
       </div>
       <div class="form-group">
-        <label for="seite" class="label">Seite</label>
-        <input
-          type="text"
-          nbInput
+        <label for="faction" class="label">Seite</label>
+        <nb-select
+          class="select"
+          id="faction"
           fullWidth
-          id="seite"
-          placeholder=""
+          placeholder="Seite"
           formControlName="seite"
           [ngClass]="{
             'form-control-danger':
               spielForm.invalid && (spielForm.dirty || spielForm.touched)
           }"
-        />
+        >
+          <nb-option *ngFor="let faction of factions" [value]="faction.name">{{
+            faction.name
+          }}</nb-option>
+        </nb-select>
       </div>
     </div>
   </div>
 </form>
-<button nbButton (click)="onPrevious()">previous</button>
-<button nbButton (click)="onSubmit()">next</button>
+<button class="navButton" nbButton (click)="onPrevious()">previous</button>
+<button class="navButton" nbButton (click)="onSubmit()">next</button>

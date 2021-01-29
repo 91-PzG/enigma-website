@@ -32,14 +32,14 @@
         />
       </div>
       <div class="form-group">
-        <label for="anmeldefrist" class="label">Anmeldefrist</label>
+        <label for="vorbesprechung" class="label">Vorbesprechung</label>
         <input
           type="text"
           nbInput
           fullWidth
-          id="anmeldefrist"
-          placeholder="Anmeldefrist"
-          formControlName="anmeldefrist"
+          id="vorbesprechung"
+          placeholder="Vorbesprechung"
+          formControlName="vorbesprechung"
           [ngClass]="{
             'form-control-danger':
               infoForm.invalid && (infoForm.dirty || infoForm.touched)
@@ -81,5 +81,5 @@
     </div>
   </div>
 </form>
-<button nbButton (click)="onPrevious()">previous</button>
-<button nbButton (click)="onSubmit()">next</button>
+<button class="navButton" nbButton (click)="onPrevious()">previous</button>
+<button class="navButton" nbButton (click)="onSubmit()">next</button>

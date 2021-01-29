@@ -9,13 +9,21 @@ import { NbAuthModule, NbDummyAuthStrategy } from "@nebular/auth";
 import { NbRoleProvider, NbSecurityModule } from "@nebular/security";
 import { of as observableOf } from "rxjs";
 import { CurrentManpowerData } from "./data/current-manpower";
+import { EventchannelData } from "./data/event-channel";
 import { EventListData } from "./data/event-list";
+import { HLLFactionData } from "./data/hll-faction";
+import { HLLMapData } from "./data/hll-map";
 import { HrWarningsData } from "./data/hrWarnings";
+import { MemberAutocompleteData } from "./data/member-autocomplete";
 import { RecruitsData } from "./data/recruits";
 import { UserData } from "./data/users";
 import { CurrentManpowerService } from "./mock/current-manpower.service";
+import { EventChannelService } from "./mock/event-channel.service";
 import { EventListService } from "./mock/event-list.service";
+import { HLLFactionService } from "./mock/hll-faction.service";
+import { HLLMapService } from "./mock/hll-map.service";
 import { HrWarningsService } from "./mock/hrWarnings.service";
+import { MemberAutocompleteService } from "./mock/member-autocomplete.service";
 import { MockDataModule } from "./mock/mock-data.module";
 import { RecruitsService } from "./mock/recruits.service";
 import { UserService } from "./mock/users.service";
@@ -38,6 +46,10 @@ const DATA_SERVICES = [
   //{provide: HLLEventData,useClass:HLLEventS},
   { provide: CurrentManpowerData, useClass: CurrentManpowerService },
   { provide: EventListData, useClass: EventListService },
+  { provide: HLLMapData, useClass: HLLMapService },
+  { provide: HLLFactionData, useClass: HLLFactionService },
+  { provide: EventchannelData, useClass: EventChannelService },
+  { provide: MemberAutocompleteData, useClass: MemberAutocompleteService },
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
