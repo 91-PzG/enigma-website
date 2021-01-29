@@ -1,3 +1,5 @@
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
 export interface EventListEntry {
@@ -12,6 +14,12 @@ export interface EventListEntry {
   anmeldefrist: Date;
 }
 
-export abstract class EventListData {
-  abstract getData(): Observable<EventListEntry[]>;
+@Injectable()
+export class EventListData {
+  constructor(private http: HttpClient) {}
+  getData(): Observable<EventListEntry[]> {
+    return this.http.get("https://dev.samuelhoera.dev/events") as Observable<
+      EventListEntry[]
+    >;
+  }
 }

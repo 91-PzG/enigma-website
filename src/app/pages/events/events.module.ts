@@ -1,5 +1,10 @@
 import { NgModule } from "@angular/core";
-import { NbCardModule, NbIconModule, NbInputModule } from "@nebular/theme";
+import {
+  NbButtonModule,
+  NbCardModule,
+  NbIconModule,
+  NbInputModule,
+} from "@nebular/theme";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 import { ThemeModule } from "../../@theme/theme.module";
 import { EVENT_LIST_COMPONENTS } from "./event-list/event-list.component";
@@ -10,6 +15,7 @@ import { EventsRoutingModule, routedComponents } from "./events-routing.module";
     ThemeModule,
     EventsRoutingModule,
     NbCardModule,
+    NbButtonModule,
     Ng2SmartTableModule,
     NbIconModule,
     NbInputModule,

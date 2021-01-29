@@ -4,27 +4,31 @@ export interface HLLEvent {
   id: number;
   name: string;
   beschreibung: string;
-  datum: Date;
+  datum: string;
   treffpunkt: string;
   server: string;
-  password: string;
-  anmeldefrist: Date;
+  passwort: string;
+  anmeldefrist: string;
   spielerzahl: number;
   teilnehmer: number;
-  organistor: string;
+  organisator: string;
   verpflichtend: boolean;
   closed: true;
-  spiel?: HLLGame;
-}
-
-export interface HLLGame {
-  vorbesprechung: Date;
+  vorbesprechung: string;
   runden: number;
   karte: string;
   seite: string;
   kommandant: string;
+  locked: boolean;
+  anmeldung: Anmeldung | null;
+}
+
+export interface Anmeldung {
+  type: string;
+  squad: number;
+  abteilung: string;
 }
 
 export abstract class HLLEventData {
-  abstract getUsers(): Observable<HLLEvent>;
+  abstract getData(eventId: number): Observable<HLLEvent>;
 }

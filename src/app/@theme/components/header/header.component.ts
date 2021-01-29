@@ -1,13 +1,15 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { NbAuthJWTToken, NbAuthService } from "@nebular/auth";
 import {
   NbMediaBreakpointsService,
+  NbMenuItem,
   NbMenuService,
   NbSidebarService,
   NbThemeService,
 } from "@nebular/theme";
 import { Subject } from "rxjs";
 import { map, takeUntil } from "rxjs/operators";
-import { UserData } from "../../../@core/data/users";
 import { LayoutService } from "../../../@core/utils";
 
 type ThemesMap = { value: string; name: string }[];
@@ -20,7 +22,9 @@ type ThemesMap = { value: string; name: string }[];
 export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
-  user: any;
+  user: { username?: string; avatar?: string; id?: string } = {
+    avatar: "assets/images/avatar.png",
+  };
 
   themeMap = ["default", "dark", "cosmic"];
   themes: ThemesMap = [
@@ -35,7 +39,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   currentTheme: string;
   private themeKey = "THEME";
 
-  userMenu = [{ title: "Profile" }, { title: "Log out" }];
+  userMenu: NbMenuItem[] = [
+    { title: "Profile" },
+    { title: "Log in", link: "auth/login" },
+  ];
 
   constructor(
     private sidebarService: NbSidebarService,
@@ -43,17 +50,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private themeService: NbThemeService,
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
-    private userService: UserData
-  ) {}
+    private authService: NbAuthService,
+    private router: Router
+  ) {
+    this.authService.onTokenChange().subscribe((token: NbAuthJWTToken) => {
+      if (token.isValid()) {
+        this.user = token.getPayload();
+        this.login();
+      } else {
+        this.user.avatar = "assets/images/avatar.png";
+        this.logout();
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.getLocalTheme();
     this.currentTheme = this.themeService.currentTheme;
-
-    this.userService
-      .getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => (this.user = users.nick));
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService
@@ -97,6 +110,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateHome(): boolean {
     this.menuService.navigateHome();
     return false;
+  }
+
+  private login() {
+    this.userMenu[1] = { title: "Log out", link: "auth/logout" };
+  }
+
+  private logout() {
+    this.userMenu[1] = { title: "Log in", link: "auth/login" };
   }
 
   private setLocalTheme(theme: string) {

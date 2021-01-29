@@ -5,6 +5,7 @@ import {
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
+  NbDatepickerModule,
   NbInputModule,
   NbSelectModule,
   NbSpinnerModule,
@@ -31,6 +32,7 @@ import {
     NbSelectModule,
     NbAutocompleteModule,
     NbSpinnerModule,
+    NbDatepickerModule,
   ],
   declarations: [...routedComponents, ...CREATE_EVENT_COMPONENTS],
 })

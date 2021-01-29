@@ -40,11 +40,15 @@
           id="vorbesprechung"
           placeholder="Vorbesprechung"
           formControlName="vorbesprechung"
+          [nbDatepicker]="vorbesprechungPicker"
           [ngClass]="{
             'form-control-danger':
               infoForm.invalid && (infoForm.dirty || infoForm.touched)
           }"
-        />
+        /><nb-date-timepicker
+          #vorbesprechungPicker
+          format="dd.MM yyyy hh:mm"
+        ></nb-date-timepicker>
       </div>
     </div>
     <div class="col-sm-6">

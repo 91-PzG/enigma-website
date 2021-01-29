@@ -45,12 +45,17 @@
           id="date"
           placeholder="Datum"
           formControlName="datum"
+          [nbDatepicker]="datumPicker"
           [ngClass]="{
             'form-control-danger':
               overviewForm.invalid &&
               (overviewForm.dirty || overviewForm.touched)
           }"
         />
+        <nb-date-timepicker
+          #datumPicker
+          format="dd.MM yyyy hh:mm"
+        ></nb-date-timepicker>
       </div>
       <div class="form-group">
         <label for="anmeldung" class="label">Anmeldefrist</label>
@@ -61,12 +66,16 @@
           id="anmeldung"
           placeholder="Anmeldefrist"
           formControlName="anmeldefrist"
+          [nbDatepicker]="anmeldungPicker"
           [ngClass]="{
             'form-control-danger':
               overviewForm.invalid &&
               (overviewForm.dirty || overviewForm.touched)
           }"
-        />
+        /><nb-date-timepicker
+          #anmeldungPicker
+          format="dd.MM yyyy hh:mm"
+        ></nb-date-timepicker>
       </div>
       <div class="form-group">
         <label for="orga" class="label">Organisator</label>

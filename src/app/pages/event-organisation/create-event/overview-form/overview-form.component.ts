@@ -84,6 +84,7 @@ export class OverviewFormComponent implements OnInit {
 
   onSubmit() {
     this.overviewForm.markAsDirty();
+
     if (this.overviewForm.valid) {
       const dto: OverviewForm = {
         name: this.overviewForm.controls["eventName"].value,
@@ -95,6 +96,7 @@ export class OverviewFormComponent implements OnInit {
             find.username == this.overviewForm.controls["organisator"].value
         ).id,
       };
+      console.log(dto);
       this.next.emit(dto);
     }
   }

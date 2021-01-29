@@ -16,6 +16,11 @@ const routes: Routes = [
           import("./events/events.module").then((m) => m.EventsModule),
       },
       {
+        path: "roster",
+        loadChildren: () =>
+          import("./roster/roster.module").then((m) => m.RosterModule),
+      },
+      {
         path: "hr",
         loadChildren: () => import("./hr/hr.module").then((m) => m.HrModule),
       },

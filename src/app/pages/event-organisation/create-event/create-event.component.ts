@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Component, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { NbStepperComponent } from "@nebular/theme";
@@ -34,6 +34,7 @@ export class CreateEventComponent {
   sending = false;
 
   eventDto = {};
+  result = { header: "Creating event...", button: "Try again" };
 
   constructor(private router: Router, private http: HttpClient) {}
 
@@ -50,12 +51,26 @@ export class CreateEventComponent {
     this.sending = true;
     setTimeout(() => (this.sending = false), 1000);
     this.next(dto);
-    console.log(this.eventDto);
+    this.commitEvent();
   }
 
-  commitEvent() {}
+  commitEvent() {
+    this.http
+      .post("https://dev.samuelhoera.dev/events", this.eventDto)
+      .subscribe(
+        (data: any) => {
+          this.result.header = "Event successfully created!";
+          this.result.button = "View Event";
+        },
+        (error: HttpErrorResponse) => {
+          this.result.header = `${error.status}: ${error.statusText}`;
+          console.log(error);
+        }
+      );
+  }
 
-  viewEvent() {
-    console.log("Route to event");
+  finalButton() {
+    if (this.eventId) console.log("Route to event");
+    else this.stepper.reset();
   }
 }

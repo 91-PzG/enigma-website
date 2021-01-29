@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://enigma.samuelhoera.dev",
+    "secure": false
+  }
+}

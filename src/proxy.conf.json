@@ -1,8 +1,0 @@
-{
-  "/api": {
-    "target": "https://enigma.samuelhoera.dev",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  }
-}

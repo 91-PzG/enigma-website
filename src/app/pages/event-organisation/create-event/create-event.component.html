@@ -31,12 +31,9 @@
           </nb-step>
           <nb-step [hidden]="true" label="">
             <div class="step-container">
-              <h3>Event creation complete!</h3>
-              <button nbButton class="navButton" (click)="stepper.reset()">
-                Try again
-              </button>
-              <button nbButton class="navButton" (click)="viewEvent()">
-                View Event
+              <h3>{{ result.header }}</h3>
+              <button nbButton class="navButton" (click)="finalButton()">
+                {{ result.button }}
               </button>
             </div>
           </nb-step>
