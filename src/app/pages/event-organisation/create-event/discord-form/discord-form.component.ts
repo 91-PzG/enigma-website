@@ -9,10 +9,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
-import {
-  EventChannel,
-  EventchannelData,
-} from "../../../../@core/data/event-channel";
+import { EventChannel, EventchannelData } from "../../../../@core/data";
 
 export type DiscordForm = {
   verpflichtend: boolean;

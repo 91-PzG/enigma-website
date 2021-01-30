@@ -12,22 +12,28 @@ import {
 } from "@nebular/auth";
 import { NbRoleProvider, NbSecurityModule } from "@nebular/security";
 import { of as observableOf } from "rxjs";
-import { CurrentManpowerData } from "./data/current-manpower";
-import { EventchannelData } from "./data/event-channel";
-import { EventListData } from "./data/event-list";
-import { HLLEventData } from "./data/hll-event";
-import { HLLFactionData } from "./data/hll-faction";
-import { HLLMapData } from "./data/hll-map";
-import { HrWarningsData } from "./data/hrWarnings";
-import { MemberAutocompleteData } from "./data/member-autocomplete";
-import { RecruitsData } from "./data/recruits";
-import { CurrentManpowerService } from "./mock/current-manpower.service";
-import { HLLEventService } from "./mock/hll-event.service";
-import { HLLFactionService } from "./mock/hll-faction.service";
-import { HLLMapService } from "./mock/hll-map.service";
-import { HrWarningsService } from "./mock/hrWarnings.service";
+import {
+  CurrentManpowerData,
+  EventchannelData,
+  EventListData,
+  HLLEventData,
+  HLLFactionData,
+  HLLMapData,
+  HrWarningsData,
+  MemberAutocompleteData,
+  RecruitsData,
+  UserData,
+} from "./data";
+import {
+  CurrentManpowerService,
+  HLLEventService,
+  HLLFactionService,
+  HLLMapService,
+  HrWarningsService,
+  RecruitsService,
+  UserService,
+} from "./mock";
 import { MockDataModule } from "./mock/mock-data.module";
-import { RecruitsService } from "./mock/recruits.service";
 import { throwIfAlreadyLoaded } from "./module-import-guard";
 import { LayoutService, StateService } from "./utils";
 
@@ -44,6 +50,7 @@ const DATA_MOCK_SERVICES = [
   EventchannelData,
   //{ provide: MemberAutocompleteData, useClass: MemberAutocompleteService },
   MemberAutocompleteData,
+  { provide: UserData, useClass: UserService },
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {

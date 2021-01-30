@@ -9,13 +9,14 @@ import {
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
-import { HLLFaction } from "../../../../@core/data/hll-faction";
-import { HLLMap, HLLMapData } from "../../../../@core/data/hll-map";
 import {
+  HLLFaction,
+  HLLFactionData,
+  HLLMap,
+  HLLMapData,
   MemberAutocomplete,
   MemberAutocompleteData,
-} from "../../../../@core/data/member-autocomplete";
-import { HLLFactionService } from "../../../../@core/mock/hll-faction.service";
+} from "../../../../@core/data";
 
 export type GameForm = {
   kommandant: string;
@@ -46,7 +47,7 @@ export class SpielFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     mapService: HLLMapData,
-    factionService: HLLFactionService,
+    factionService: HLLFactionData,
     memberService: MemberAutocompleteData
   ) {
     mapService.getData().subscribe((maps) => {

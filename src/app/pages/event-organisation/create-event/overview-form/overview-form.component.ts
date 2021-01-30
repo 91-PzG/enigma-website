@@ -18,7 +18,7 @@ import { map } from "rxjs/operators";
 import {
   MemberAutocomplete,
   MemberAutocompleteData,
-} from "../../../../@core/data/member-autocomplete";
+} from "../../../../@core/data";
 
 export type OverviewForm = {
   name: string;
