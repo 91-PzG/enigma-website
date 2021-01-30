@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { LocalDataSource } from "ng2-smart-table";
+import { map } from "rxjs/operators";
 import { EventListData, EventListEntry } from "../../../@core/data/event-list";
 import { EventListIconComponent } from "./event-list-icon.component";
 
@@ -43,8 +44,21 @@ export class EventListComponent {
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: EventListData, private router: Router) {
+    const shortenDescription = (description: string) => {
+      return description.length <= 150
+        ? description
+        : description.slice(0, 147).concat("...");
+    };
     this.service
       .getData()
+      .pipe(
+        map((events: EventListEntry[]) => {
+          return events.map((event: EventListEntry) => ({
+            ...event,
+            beschreibung: shortenDescription(event.beschreibung),
+          }));
+        })
+      )
       .subscribe((data: EventListEntry[]) => this.setData(data));
   }
 
