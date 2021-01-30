@@ -13,6 +13,7 @@ import {
 import { NbRoleProvider, NbSecurityModule } from "@nebular/security";
 import { of as observableOf } from "rxjs";
 import { CurrentManpowerData } from "./data/current-manpower";
+import { EventchannelData } from "./data/event-channel";
 import { EventListData } from "./data/event-list";
 import { HLLEventData } from "./data/hll-event";
 import { HLLFactionData } from "./data/hll-faction";
@@ -40,7 +41,7 @@ const DATA_MOCK_SERVICES = [
   { provide: HLLMapData, useClass: HLLMapService },
   { provide: HLLFactionData, useClass: HLLFactionService },
   //{ provide: EventchannelData, useClass: EventChannelService },
-  EventListData,
+  EventchannelData,
   //{ provide: MemberAutocompleteData, useClass: MemberAutocompleteService },
   MemberAutocompleteData,
 ];

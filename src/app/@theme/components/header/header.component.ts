@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { NbAuthJWTToken, NbAuthService } from "@nebular/auth";
 import {
   NbMediaBreakpointsService,
@@ -9,8 +8,9 @@ import {
   NbThemeService,
 } from "@nebular/theme";
 import { Subject } from "rxjs";
-import { map, takeUntil } from "rxjs/operators";
+import { filter, map, takeUntil } from "rxjs/operators";
 import { LayoutService } from "../../../@core/utils";
+import { UserDetailService } from "../../../pages/user-detail/user-detail.service";
 
 type ThemesMap = { value: string; name: string }[];
 
@@ -51,8 +51,39 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
     private authService: NbAuthService,
-    private router: Router
+    private userService: UserDetailService
   ) {
+    this.authHandling();
+    this.profileHandling();
+  }
+
+  ngOnInit(): void {
+    this.getLocalTheme();
+    this.currentTheme = this.themeService.currentTheme;
+    this.themeHandling();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  changeTheme(themeName: string): void {
+    this.themeService.changeTheme(themeName);
+  }
+
+  toggleSidebar(): boolean {
+    this.sidebarService.toggle(true, "menu-sidebar");
+    this.layoutService.changeLayoutSize();
+    return false;
+  }
+
+  navigateHome(): boolean {
+    this.menuService.navigateHome();
+    return false;
+  }
+
+  private authHandling() {
     this.authService.onTokenChange().subscribe((token: NbAuthJWTToken) => {
       if (token.isValid()) {
         this.user = token.getPayload();
@@ -64,10 +95,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
-    this.getLocalTheme();
-    this.currentTheme = this.themeService.currentTheme;
-
+  private themeHandling() {
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService
       .onMediaQueryChange()
@@ -91,25 +119,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  changeTheme(themeName: string): void {
-    this.themeService.changeTheme(themeName);
-  }
-
-  toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, "menu-sidebar");
-    this.layoutService.changeLayoutSize();
-
-    return false;
-  }
-
-  navigateHome(): boolean {
-    this.menuService.navigateHome();
-    return false;
+  private profileHandling() {
+    this.menuService
+      .onItemClick()
+      .pipe(filter(({ item }) => item.title === "Profile"))
+      .subscribe(() => this.userService.openDialog());
   }
 
   private login() {

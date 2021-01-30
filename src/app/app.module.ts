@@ -45,7 +45,7 @@ import { AppComponent } from "./app.component";
     {
       provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER,
       useValue: function (req: HttpRequest<any>) {
-        if (req.url === "/api/auth/refresh-token") {
+        if (req.url.includes("refresh-token")) {
           return true;
         }
         return false;
