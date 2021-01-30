@@ -6,6 +6,7 @@ import { EventListData, EventListEntry } from "../../../@core/data/event-list";
 import { EventListIconComponent } from "./event-list-icon.component";
 
 export const EVENT_LIST_COMPONENTS = [EventListIconComponent];
+const maxDescriptionLength = 150;
 
 @Component({
   selector: "event-list",
@@ -45,9 +46,9 @@ export class EventListComponent {
 
   constructor(private service: EventListData, private router: Router) {
     const shortenDescription = (description: string) => {
-      return description.length <= 150
+      return description.length <= maxDescriptionLength
         ? description
-        : description.slice(0, 147).concat("...");
+        : description.slice(0, maxDescriptionLength - 3).concat("...");
     };
     this.service
       .getData()
