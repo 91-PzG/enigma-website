@@ -11,7 +11,6 @@ import {
   NbPasswordAuthStrategy,
 } from "@nebular/auth";
 import { NbRoleProvider, NbSecurityModule } from "@nebular/security";
-import { of as observableOf } from "rxjs";
 import {
   CurrentManpowerData,
   EventchannelData,
@@ -35,6 +34,7 @@ import {
 } from "./mock";
 import { MockDataModule } from "./mock/mock-data.module";
 import { throwIfAlreadyLoaded } from "./module-import-guard";
+import { accessControl, RoleProvider } from "./security";
 import { LayoutService, StateService } from "./utils";
 
 const DATA_MOCK_SERVICES = [
@@ -53,13 +53,6 @@ const DATA_MOCK_SERVICES = [
   { provide: UserData, useClass: UserService },
 ];
 
-export class NbSimpleRoleProvider extends NbRoleProvider {
-  getRole() {
-    // here you could provide any role base on any auth flow
-    return observableOf("guest");
-  }
-}
-
 export const NB_CORE_PROVIDERS = [
   ...MockDataModule.forRoot().providers,
   ...DATA_MOCK_SERVICES,
@@ -75,19 +68,9 @@ export const NB_CORE_PROVIDERS = [
     ],
   }).providers,
   ...NbSecurityModule.forRoot({
-    accessControl: {
-      guest: {
-        view: "*",
-      },
-      user: {
-        parent: "guest",
-        create: "*",
-        edit: "*",
-        remove: "*",
-      },
-    },
+    accessControl,
   }).providers,
-  { provide: NbRoleProvider, useClass: NbSimpleRoleProvider },
+  { provide: NbRoleProvider, useClass: RoleProvider },
   LayoutService,
   StateService,
 ];
