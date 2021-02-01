@@ -1,6 +1,7 @@
 import { NbAccessControl } from "@nebular/security";
 
 export const accessControl: NbAccessControl = {
+  guest: {},
   member: {
     view: ["events", "roster"],
   },

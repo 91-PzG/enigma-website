@@ -1,8 +1,18 @@
 import { NbMenuItem } from "@nebular/theme";
 
-export const MENU_ITEMS: NbMenuItem[] = [
+export class NbMenuItemWithPermissions extends NbMenuItem {
+  access?: { permission: string; resource: string };
+  children?: NbMenuItemWithPermissions[];
+}
+
+export const MENU_ITEMS: NbMenuItemWithPermissions[] = [
   { title: "Home", icon: "home-outline", link: "/home", home: true },
-  { title: "Events", icon: "calendar-outline", link: "/events" },
+  {
+    title: "Events",
+    icon: "calendar-outline",
+    link: "/events",
+    access: { permission: "view", resource: "events" },
+  },
   {
     title: "Human Resources",
     icon: "people-outline",
@@ -16,6 +26,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: "/hr/archive",
       },
     ],
+    access: { permission: "view", resource: "hr" },
   },
   {
     title: "Event Organisation",
@@ -26,5 +37,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: "/eo/create",
       },
     ],
+    access: { permission: "view", resource: "eo" },
   },
 ];

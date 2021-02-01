@@ -11,8 +11,7 @@ export class RoleProvider implements NbRoleProvider {
   getRole(): Observable<string[]> {
     return this.authService.onTokenChange().pipe(
       map((token: NbAuthJWTToken) => {
-        return ["guest"];
-        //Logic for extracting roles from discord
+        return token.isValid() ? ["clanrat"] : ["guest"];
       })
     );
   }
