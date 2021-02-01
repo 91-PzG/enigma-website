@@ -114,6 +114,6 @@ export class HLLEventService extends HLLEventData {
   ];
 
   getData(eventId: number): Observable<HLLEvent> {
-    return Observable.of(this.data[eventId - 1]);
+    return Observable.of(this.data[eventId % 4]);
   }
 }
