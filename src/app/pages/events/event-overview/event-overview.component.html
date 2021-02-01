@@ -4,27 +4,27 @@
 <div class="row show-grid">
   <div class="col-md-8">
     <nb-card>
-      <nb-card-header> {{ event.name }}</nb-card-header>
+      <nb-card-header> {{ event?.name }}</nb-card-header>
       <nb-card-body
         ><div class="row">
           <div class="col-6 small-text">Datum:</div>
-          <div class="col-6 right-align small-text">{{ event.datum }}</div>
+          <div class="col-6 right-align small-text">{{ event?.datum }}</div>
         </div>
         <div class="row">
           <div class="col-6 small-text">Vorbesprechung:</div>
           <div class="col-6 right-align small-text">
-            {{ event.vorbesprechung }}
+            {{ event?.vorbesprechung }}
           </div>
         </div></nb-card-body
       >
       <nb-card-body>
-        {{ event.beschreibung }}
+        {{ event?.beschreibung }}
       </nb-card-body>
       <nb-card-footer
         ><div class="row">
           <div class="col-4 col-md-6 small-text">Organisator:</div>
           <div class="col-8 col-md-6 right-align small-text">
-            {{ event.organisator }}
+            {{ event?.organisator }}
           </div>
         </div></nb-card-footer
       > </nb-card
@@ -34,19 +34,19 @@
         ><div class="row">
           <div class="col-md-3 col-6">
             <div class="small-text">Kommandant:</div>
-            <div>{{ event.kommandant }}</div>
+            <div>{{ event?.kommandant }}</div>
           </div>
           <div class="col-md-3 col-6">
             <div class="small-text">Runden:</div>
-            <div>{{ event.runden }}</div>
+            <div>{{ event?.runden }}</div>
           </div>
           <div class="col-md-3 col-6">
             <div class="small-text">Karte:</div>
-            <div>{{ event.karte }}</div>
+            <div>{{ event?.karte }}</div>
           </div>
           <div class="col-md-3 col-6">
             <div class="small-text">Seite:</div>
-            <div>{{ event.seite }}</div>
+            <div>{{ event?.seite }}</div>
           </div>
         </div></nb-card-body
       >
@@ -60,11 +60,11 @@
         ><div class="row">
           <div class="col-6">
             <div class="small-text">Spieler:</div>
-            <div>{{ event.teilnehmer }}/{{ event.spielerzahl }}</div>
+            <div>{{ event?.teilnehmer }}/{{ event?.spielerzahl }}</div>
           </div>
           <div class="col-6">
             <div class="small-text">Anmeldefrist:</div>
-            <div>{{ event.anmeldefrist }}</div>
+            <div>{{ event?.anmeldefrist }}</div>
           </div>
         </div></nb-card-body
       >
@@ -75,11 +75,11 @@
         ><div class="row">
           <div class="col-6">
             <div class="small-text">Server:</div>
-            <div>{{ event.server }}</div>
+            <div>{{ event?.server }}</div>
           </div>
           <div class="col-6">
             <div class="small-text">Passwort:</div>
-            <div>{{ event.passwort }}</div>
+            <div>{{ event?.passwort }}</div>
           </div>
         </div></nb-card-body
       >
