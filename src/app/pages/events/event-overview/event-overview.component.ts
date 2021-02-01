@@ -63,7 +63,7 @@ export class EventOverviewComponent {
       }
     } else {
       this.anmeldung = {
-        status: "warning",
+        status: this.event.verpflichtend ? "warning" : "basic",
         message: "Du hast dich noch nicht für das Event gemeldet!",
       };
     }
