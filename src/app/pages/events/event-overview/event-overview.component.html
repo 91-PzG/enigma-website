@@ -8,12 +8,14 @@
       <nb-card-body
         ><div class="row">
           <div class="col-6 small-text">Datum:</div>
-          <div class="col-6 right-align small-text">{{ event?.datum }}</div>
+          <div class="col-6 right-align small-text">
+            {{ event?.datum | localDate }}
+          </div>
         </div>
         <div class="row">
           <div class="col-6 small-text">Vorbesprechung:</div>
           <div class="col-6 right-align small-text">
-            {{ event?.vorbesprechung }}
+            {{ event?.vorbesprechung | localDate }}
           </div>
         </div></nb-card-body
       >
@@ -64,7 +66,7 @@
           </div>
           <div class="col-6">
             <div class="small-text">Anmeldefrist:</div>
-            <div>{{ event?.anmeldefrist }}</div>
+            <div>{{ event?.anmeldefrist | localDate }}</div>
           </div>
         </div></nb-card-body
       >

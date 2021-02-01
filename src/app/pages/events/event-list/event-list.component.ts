@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { LocalDataSource } from "ng2-smart-table";
-import { map } from "rxjs/operators";
 import { EventListData, EventListEntry } from "../../../@core/data/event-list";
+import { LocalDatePipe } from "../../../@theme/pipes";
 import { EventListIconComponent } from "./event-list-icon.component";
 
 export const EVENT_LIST_COMPONENTS = [EventListIconComponent];
@@ -29,37 +29,29 @@ export class EventListComponent {
       datum: {
         title: "Datum",
         sortDirection: "desc",
+        valuePrepareFunction: this.prepareDate.bind(this),
       },
       anmeldefrist: {
         title: "Anmeldefrist",
+        valuePrepareFunction: this.prepareDate.bind(this),
       },
       players: {
         title: "Spieler",
       },
       beschreibung: {
         title: "Beschreibung",
+        valuePrepareFunction: this.shortenDescription,
       },
     },
   };
 
   source: LocalDataSource = new LocalDataSource();
 
+  datePipe = new LocalDatePipe();
+
   constructor(private service: EventListData, private router: Router) {
-    const shortenDescription = (description: string) => {
-      return description.length <= maxDescriptionLength
-        ? description
-        : description.slice(0, maxDescriptionLength - 3).concat("...");
-    };
     this.service
       .getData()
-      .pipe(
-        map((events: EventListEntry[]) => {
-          return events.map((event: EventListEntry) => ({
-            ...event,
-            beschreibung: shortenDescription(event.beschreibung),
-          }));
-        })
-      )
       .subscribe((data: EventListEntry[]) => this.setData(data));
   }
 
@@ -100,5 +92,15 @@ export class EventListComponent {
       ],
       false
     );
+  }
+
+  prepareDate(date: string): string {
+    return this.datePipe.transform(date);
+  }
+
+  shortenDescription(description: String) {
+    return description.length <= maxDescriptionLength
+      ? description
+      : description.slice(0, maxDescriptionLength - 3).concat("...");
   }
 }

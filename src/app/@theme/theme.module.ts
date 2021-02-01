@@ -26,13 +26,7 @@ import {
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
 } from "./layouts";
-import {
-  CapitalizePipe,
-  NumberWithCommasPipe,
-  PluralPipe,
-  RoundPipe,
-  TimingPipe,
-} from "./pipes";
+import { LocalDatePipe } from "./pipes";
 import { COSMIC_THEME, DARK_THEME, DEFAULT_THEME } from "./styles";
 
 const NB_MODULES = [
@@ -62,13 +56,7 @@ const COMPONENTS = [
   TwoColumnsLayoutComponent,
   LoginComponent,
 ];
-const PIPES = [
-  CapitalizePipe,
-  PluralPipe,
-  RoundPipe,
-  TimingPipe,
-  NumberWithCommasPipe,
-];
+const PIPES = [LocalDatePipe];
 
 @NgModule({
   imports: [CommonModule, ...NB_MODULES],

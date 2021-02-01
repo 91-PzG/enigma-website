@@ -24,15 +24,8 @@ export class EventOverviewComponent {
 
   private setEvent(event: HLLEvent) {
     this.event = event;
-    this.event.datum = this.parseDate(this.event.datum);
-    this.event.anmeldefrist = this.parseDate(this.event.anmeldefrist);
-    this.event.vorbesprechung = this.parseDate(this.event.vorbesprechung);
 
     this.setAnmeldung();
-  }
-
-  private parseDate(date: string): string {
-    return new Date(date).toLocaleString("de-de").slice(0, -3);
   }
 
   private setAnmeldung() {
