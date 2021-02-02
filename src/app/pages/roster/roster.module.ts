@@ -1,4 +1,5 @@
 import { DragDropModule } from "@angular/cdk/drag-drop";
+import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import {
   NbButtonModule,
@@ -15,6 +16,7 @@ import { RosterRoutingModule, routedComponents } from "./roster-routing.module";
 
 @NgModule({
   imports: [
+    CommonModule,
     ThemeModule,
     NbCardModule,
     NbButtonModule,

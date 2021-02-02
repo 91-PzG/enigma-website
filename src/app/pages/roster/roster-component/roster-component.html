@@ -1,24 +1,14 @@
-<nb-card 
-  ><nb-card-body [nbSpinner]="loading"
-        nbSpinnerStatus="primary"
-        nbSpinnerSize="giant"
-        nbSpinnerMessage=""
+<nb-card
+  ><nb-card-body
+    [nbSpinner]="loading"
+    nbSpinnerStatus="primary"
+    nbSpinnerSize="giant"
+    nbSpinnerMessage=""
     ><nb-tabset>
-      <nb-tab tabTitle="Übsersicht"></nb-tab>
-      <nb-tab tabTitle="2"
-        ><div
-          cdkDropList
-          class="example-list"
-          (cdkDropListDropped)="drop($event)"
-        >
-          <div class="example-box" *ngFor="let movie of movies" cdkDrag>
-            {{movie}}
-          </div>
-        </div></nb-tab
-      >
-    </nb-tabset></nb-card-body [nbSpinner]="sending"
-        nbSpinnerStatus="primary"
-        nbSpinnerSize="giant"
-        nbSpinnerMessage=""
-  ></nb-card 
->
+      <nb-tab tabTitle="Übersicht"><roster-overview></roster-overview></nb-tab>
+      <nb-tab
+        *ngFor="let division of this.service.divisions"
+        [tabTitle]="division.name"
+        ><roster-division [division]="division.key"></roster-division
+      ></nb-tab> </nb-tabset></nb-card-body
+></nb-card>
