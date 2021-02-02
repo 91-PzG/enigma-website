@@ -1,6 +1,4 @@
 .soldier-list {
-  width: 200px;
-  //max-width: 100%;
   border: solid 1px #ccc;
   min-height: 60px;
   display: block;
@@ -44,4 +42,9 @@
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.add-squad-button {
+  margin-top: auto;
+  margin-bottom: auto;
 }

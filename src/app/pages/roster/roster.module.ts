@@ -4,6 +4,7 @@ import { NgModule } from "@angular/core";
 import {
   NbButtonModule,
   NbCardModule,
+  NbDialogModule,
   NbIconModule,
   NbInputModule,
   NbSpinnerModule,
@@ -23,6 +24,7 @@ import { RosterRoutingModule, routedComponents } from "./roster-routing.module";
     NbIconModule,
     NbInputModule,
     NbTabsetModule,
+    NbDialogModule,
     NbSpinnerModule,
     RosterRoutingModule,
     DragDropModule,

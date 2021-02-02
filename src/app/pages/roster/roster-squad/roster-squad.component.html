@@ -1,0 +1,16 @@
+<h5>{{ this.squad.name }}</h5>
+<div
+  cdkDropList
+  class="soldier-list"
+  (cdkDropListDropped)="onDrop($event)"
+  id="{{ 'squad-' + squad.id }}"
+>
+  <div
+    class="soldier-box"
+    *ngFor="let soldier of this.squad.members"
+    cdkDrag
+    [cdkDragData]="soldier"
+  >
+    {{ soldier.username }}
+  </div>
+</div>

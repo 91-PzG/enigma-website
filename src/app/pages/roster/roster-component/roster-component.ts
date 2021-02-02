@@ -1,13 +1,17 @@
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { CreateSquadComponent } from "../create-squad/create-squad.component";
 import { RosterDataService } from "../roster-data.service";
 import { RosterDivisionComponent } from "../roster-division/roster-division.component";
 import { RosterOverviewComponent } from "../roster-overview/roster-overview.component";
+import { RosterSquadComponent } from "../roster-squad/roster-squad.component";
 
 export const ROSTER_COMPONENTS = [
   RosterOverviewComponent,
   RosterDivisionComponent,
+  RosterSquadComponent,
+  CreateSquadComponent,
 ];
 
 @Component({
@@ -33,7 +37,7 @@ export class RosterComponent {
     });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<any>) {
     moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
   }
 }

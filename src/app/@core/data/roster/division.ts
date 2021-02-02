@@ -12,6 +12,10 @@ export class Division {
   reserve: Enrolment[];
   squads: Squad[] = [];
 
+  sortByDate = (a: Enrolment, b: Enrolment) => {
+    return a.timestamp > b.timestamp ? 1 : -1;
+  };
+
   constructor(data: DivisionDto) {
     this.pool = data.pool;
     this.reserve = data.reserve;
@@ -52,8 +56,8 @@ export class Division {
     if (soldier.squad) {
       this.squads
         .find((squad) => squad.id == soldier.squad)
-        .removeMember(soldier.position);
-    } else if ((soldier.teilahme = "AN")) {
+        .removeSoldier(soldier.position);
+    } else if (soldier.teilahme == "AN") {
       const index = this.pool.findIndex((find) => find.id == soldier.id);
       this.pool.splice(index, 1);
     } else {
@@ -62,13 +66,21 @@ export class Division {
     }
   }
 
-  moveTo(soldier: Enrolment) {
+  moveInSquad(oldPos: number, newPos: number, squad: number) {
+    this.squads.find((f) => f.id == squad).moveSoldier(oldPos, newPos);
+  }
+
+  moveTo(soldier: Enrolment, index: number) {
     if (soldier.squad) {
-      this.squads.find((squad) => squad.id == soldier.squad).addMember(soldier);
+      this.squads
+        .find((squad) => squad.id == soldier.squad)
+        .addSoldier(soldier);
     } else if ((soldier.teilahme = "AN")) {
       this.pool.push(soldier);
+      this.pool.sort(this.sortByDate);
     } else {
       this.reserve.push(soldier);
+      this.reserve.sort(this.sortByDate);
     }
   }
 }

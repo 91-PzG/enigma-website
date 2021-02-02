@@ -34,16 +34,16 @@ export class Roster {
       this.commander.role = null;
       switch (this.commander.abteilung) {
         case "Armor":
-          this.armor.moveTo(this.commander);
+          this.armor.moveTo(this.commander, null);
           break;
         case "Artillerie":
-          this.artillery.moveTo(this.commander);
+          this.artillery.moveTo(this.commander, null);
           break;
         case "Recon":
-          this.recon.moveTo(this.commander);
+          this.recon.moveTo(this.commander, null);
           break;
         default:
-          this.infanterie.moveTo(this.commander);
+          this.infanterie.moveTo(this.commander, null);
       }
       this.commander = null;
     }

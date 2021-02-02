@@ -20,23 +20,24 @@ export class Squad implements SquadDto {
     this.members = data.members;
   }
 
-  addMember(member: Enrolment) {
-    this.members.push(member);
+  addSoldier(soldier: Enrolment) {
+    this.shiftSoldier(this.members.length, soldier.position);
+    this.members.splice(soldier.position, 0, soldier);
   }
 
-  moveMember(oldPos: number, newPos: number) {
-    const squad = this.members[oldPos];
-    squad.position = newPos;
+  moveSoldier(oldPos: number, newPos: number) {
+    const soldier = this.members[oldPos];
+    soldier.position = newPos;
 
-    this.shiftMember(oldPos, newPos);
-    this.members.push(squad);
+    this.shiftSoldier(oldPos, newPos);
+    this.members.splice(newPos, 0, soldier);
   }
 
-  removeMember(pos: number) {
-    this.shiftMember(pos, this.members.length);
+  removeSoldier(pos: number) {
+    this.shiftSoldier(pos, this.members.length);
   }
 
-  private shiftMember(oldPos: number, newPos: number) {
+  private shiftSoldier(oldPos: number, newPos: number) {
     const left = Math.min(oldPos, newPos);
     const right = Math.max(oldPos, newPos);
     const dir = oldPos > newPos ? 1 : -1;

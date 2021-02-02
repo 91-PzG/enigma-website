@@ -1,22 +1,46 @@
 <div class="row show-grid" cdkDropListGroup>
   <div class="col-md-9">
     <div class="row">
-      <div
-        cdkDropList
-        class="soldier-list col-md-4"
+      <roster-squad
         *ngFor="let squad of this.service.data[this.division]?.squads"
+        class="col-md-4"
+        [squad]="squad"
+        (drop)="onDrop($event)"
       >
-        <div class="soldier-box" *ngFor="let soldier of squad.members" cdkDrag>
-          {{ soldier.username }}
-        </div>
+      </roster-squad>
+      <div class="add-squad-button col-md-4">
+        <button
+          nbButton
+          shape="round"
+          outline
+          status="primary"
+          (click)="createSquad()"
+        >
+          <nb-icon icon="plus-square-outline"></nb-icon>Neues Squad
+        </button>
       </div>
     </div>
   </div>
-  <div cdkDropList class="soldier-list col-md-3">
+  <div
+    cdkDropList
+    class="soldier-list col-md-3"
+    (cdkDropListDropped)="onDrop($event)"
+  >
     <div
       class="soldier-box"
       *ngFor="let soldier of this.service.data[this.division]?.pool"
       cdkDrag
+      cdkDropListSortingDisabled
+      [cdkDragData]="soldier"
+    >
+      {{ soldier.username }}
+    </div>
+    <div
+      class="soldier-box"
+      *ngFor="let soldier of this.service.data[this.division]?.reserve"
+      cdkDrag
+      cdkDropListSortingDisabled
+      [cdkDragData]="soldier"
     >
       {{ soldier.username }}
     </div>

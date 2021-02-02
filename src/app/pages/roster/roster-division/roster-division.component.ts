@@ -1,4 +1,7 @@
+import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { Component, Input } from "@angular/core";
+import { NbDialogService } from "@nebular/theme";
+import { CreateSquadComponent } from "../create-squad/create-squad.component";
 import { RosterDataService } from "../roster-data.service";
 
 @Component({
@@ -9,5 +12,18 @@ import { RosterDataService } from "../roster-data.service";
 export class RosterDivisionComponent {
   @Input() division: string;
 
-  constructor(public service: RosterDataService) {}
+  constructor(
+    public service: RosterDataService,
+    private dialogService: NbDialogService
+  ) {}
+
+  onDrop(event: CdkDragDrop<any>) {
+    this.service.drop(event, this.division);
+  }
+
+  createSquad() {
+    this.dialogService.open(CreateSquadComponent).onClose.subscribe((name) => {
+      if (name) this.service.createSquad(name, this.division);
+    });
+  }
 }
