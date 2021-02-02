@@ -10,6 +10,7 @@ import {
   HrWarningsService,
   MemberAutocompleteService,
   RecruitsService,
+  RosterService,
   UserService,
 } from ".";
 
@@ -24,6 +25,7 @@ const SERVICES = [
   MemberAutocompleteService,
   HLLEventService,
   UserService,
+  RosterService,
 ];
 
 @NgModule({

@@ -23,6 +23,7 @@ import {
   RecruitsData,
   UserData,
 } from "./data";
+import { RosterData } from "./data/roster";
 import {
   CurrentManpowerService,
   HLLEventService,
@@ -30,6 +31,7 @@ import {
   HLLMapService,
   HrWarningsService,
   RecruitsService,
+  RosterService,
   UserService,
 } from "./mock";
 import { MockDataModule } from "./mock/mock-data.module";
@@ -51,6 +53,7 @@ const DATA_MOCK_SERVICES = [
   //{ provide: MemberAutocompleteData, useClass: MemberAutocompleteService },
   MemberAutocompleteData,
   { provide: UserData, useClass: UserService },
+  { provide: RosterData, useClass: RosterService },
 ];
 
 export const NB_CORE_PROVIDERS = [

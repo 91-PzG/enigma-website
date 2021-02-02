@@ -7,4 +7,5 @@ export * from "./hll-map.service";
 export * from "./hrWarnings.service";
 export * from "./member-autocomplete.service";
 export * from "./recruits.service";
+export * from "./roster.service";
 export * from "./user.service";

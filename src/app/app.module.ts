@@ -1,3 +1,4 @@
+import { DragDropModule } from "@angular/cdk/drag-drop";
 import {
   HttpClientModule,
   HttpRequest,
@@ -39,6 +40,7 @@ import { AppComponent } from "./app.component";
     CoreModule.forRoot(),
     NbEvaIconsModule,
     ThemeModule.forRoot(),
+    DragDropModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
