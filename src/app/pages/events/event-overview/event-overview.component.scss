@@ -1,3 +1,5 @@
+@import "../../../@theme/styles/themes.scss";
+
 .right-align {
   text-align: end;
 }
@@ -8,4 +10,10 @@
 
 .small-text {
   font-size: small;
+}
+
+@include nb-install-component {
+  .date-card {
+    border-bottom: solid 0.0625rem nb-theme(border-basic-color-4);
+  }
 }
