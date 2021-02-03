@@ -1,6 +1,6 @@
 export type EnrolementType = "AN" | "AB" | "RE";
 export type Roles = "Commander" | null;
-export type Divisions = "infanterie" | "recon" | "armor" | "artillerie";
+export type Divisions = "infanterie" | "recon" | "armor" | "artillery";
 
 export class Enrolment {
   id: number;

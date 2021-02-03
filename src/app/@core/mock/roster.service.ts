@@ -21,7 +21,7 @@ export class RosterService {
     infanterie: {
       pool: [
         {
-          id: 20,
+          id: 2,
           division: "infanterie",
           squadlead: false,
           commander: false,
@@ -33,7 +33,7 @@ export class RosterService {
           role: null,
         },
         {
-          id: 21,
+          id: 3,
           division: "infanterie",
           squadlead: false,
           commander: false,
@@ -45,7 +45,7 @@ export class RosterService {
           role: null,
         },
         {
-          id: 22,
+          id: 4,
           division: "infanterie",
           squadlead: false,
           commander: false,
@@ -57,7 +57,7 @@ export class RosterService {
           role: null,
         },
         {
-          id: 23,
+          id: 5,
           division: "infanterie",
           squadlead: false,
           commander: false,
@@ -71,7 +71,7 @@ export class RosterService {
       ],
       reserve: [
         {
-          id: 3,
+          id: 6,
           division: "infanterie",
           squadlead: true,
           commander: false,
@@ -87,11 +87,11 @@ export class RosterService {
         {
           id: 1,
           name: "Angriff",
-          division: null,
+          division: "infanterie",
           position: 0,
           members: [
             {
-              id: 3,
+              id: 7,
               division: "infanterie",
               squadlead: true,
               commander: false,
@@ -107,11 +107,11 @@ export class RosterService {
         {
           id: 2,
           name: "Verteidigung",
-          division: null,
+          division: "infanterie",
           position: 1,
           members: [
             {
-              id: 4,
+              id: 8,
               division: "infanterie",
               squadlead: true,
               commander: false,
@@ -127,11 +127,11 @@ export class RosterService {
         {
           id: 3,
           name: "Abficker",
-          division: null,
+          division: "infanterie",
           position: 2,
           members: [
             {
-              id: 5,
+              id: 9,
               division: "infanterie",
               squadlead: true,
               commander: false,
@@ -148,10 +148,10 @@ export class RosterService {
           id: 4,
           name: "Hybrid",
           position: 3,
-          division: null,
+          division: "infanterie",
           members: [
             {
-              id: 6,
+              id: 10,
               division: "infanterie",
               squadlead: true,
               commander: false,
@@ -169,8 +169,8 @@ export class RosterService {
     recon: {
       pool: [
         {
-          id: 2,
-          division: "infanterie",
+          id: 11,
+          division: "recon",
           squadlead: false,
           commander: false,
           timestamp: new Date().toString(),
@@ -183,8 +183,8 @@ export class RosterService {
       ],
       reserve: [
         {
-          id: 3,
-          division: "infanterie",
+          id: 12,
+          division: "recon",
           squadlead: true,
           commander: false,
           timestamp: new Date().toString(),
@@ -197,21 +197,21 @@ export class RosterService {
       ],
       squads: [
         {
-          id: 1,
+          id: 5,
           name: "Squad #1",
           position: 1,
-          division: null,
+          division: "recon",
           members: [
             {
-              id: 3,
-              division: "infanterie",
+              id: 13,
+              division: "recon",
               squadlead: true,
               commander: false,
               timestamp: new Date().toString(),
               teilahme: "AN",
               username: "Samu",
-              squad: null,
-              position: null,
+              squad: 5,
+              position: 0,
               role: null,
             },
           ],
@@ -221,8 +221,8 @@ export class RosterService {
     armor: {
       pool: [
         {
-          id: 2,
-          division: "infanterie",
+          id: 14,
+          division: "armor",
           squadlead: false,
           commander: false,
           timestamp: new Date().toString(),
@@ -235,8 +235,8 @@ export class RosterService {
       ],
       reserve: [
         {
-          id: 3,
-          division: "infanterie",
+          id: 15,
+          division: "armor",
           squadlead: true,
           commander: false,
           timestamp: new Date().toString(),
@@ -249,21 +249,21 @@ export class RosterService {
       ],
       squads: [
         {
-          id: 1,
+          id: 6,
           name: "Squad #1",
           position: 1,
-          division: null,
+          division: "armor",
           members: [
             {
-              id: 3,
-              division: "infanterie",
+              id: 16,
+              division: "armor",
               squadlead: true,
               commander: false,
               timestamp: new Date().toString(),
               teilahme: "AN",
               username: "Samu",
-              squad: null,
-              position: null,
+              squad: 6,
+              position: 0,
               role: null,
             },
           ],
@@ -273,8 +273,8 @@ export class RosterService {
     artillery: {
       pool: [
         {
-          id: 2,
-          division: "infanterie",
+          id: 17,
+          division: "artillery",
           squadlead: false,
           commander: false,
           timestamp: new Date().toString(),
@@ -287,8 +287,8 @@ export class RosterService {
       ],
       reserve: [
         {
-          id: 3,
-          division: "infanterie",
+          id: 18,
+          division: "artillery",
           squadlead: true,
           commander: false,
           timestamp: new Date().toString(),
@@ -301,21 +301,21 @@ export class RosterService {
       ],
       squads: [
         {
-          id: 1,
+          id: 7,
           name: "Squad #1",
           position: 1,
-          division: null,
+          division: "artillery",
           members: [
             {
-              id: 3,
-              division: "infanterie",
+              id: 19,
+              division: "artillery",
               squadlead: true,
               commander: false,
               timestamp: new Date().toString(),
               teilahme: "AN",
               username: "Samu",
-              squad: 1,
-              position: null,
+              squad: 7,
+              position: 0,
               role: null,
             },
           ],

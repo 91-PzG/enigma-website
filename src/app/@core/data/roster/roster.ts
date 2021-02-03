@@ -39,7 +39,7 @@ export class Roster {
         case "armor":
           this.armor.moveTo(this.commander);
           break;
-        case "artillerie":
+        case "artillery":
           this.artillery.moveTo(this.commander);
           break;
         case "recon":
