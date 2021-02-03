@@ -63,8 +63,8 @@ export const NB_CORE_PROVIDERS = [
     strategies: [
       NbPasswordAuthStrategy.setup({
         name: "email",
-        baseEndpoint: "https://dev.samuelhoera.dev",
-        login: { endpoint: "/auth/signin", method: "post" },
+        baseEndpoint: "https://dev.samuelhoera.dev/",
+        login: { endpoint: "auth/signin", method: "post" },
         logout: { endpoint: "" },
         token: { class: NbAuthJWTToken, key: "accessToken" },
       }),
