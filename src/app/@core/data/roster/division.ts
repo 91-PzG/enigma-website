@@ -11,6 +11,7 @@ export class Division {
   pool: Enrolment[];
   reserve: Enrolment[];
   squads: Squad[] = [];
+  enroled: number = 0;
 
   sortByDate = (a: Enrolment, b: Enrolment) => {
     return a.timestamp > b.timestamp ? 1 : -1;
@@ -21,6 +22,7 @@ export class Division {
     this.reserve = data.reserve;
     data.squads.forEach((squad) => {
       this.squads.push(new Squad(squad));
+      this.enroled += squad.members?.length;
     });
   }
 
@@ -61,6 +63,7 @@ export class Division {
       this.squads
         .find((squad) => squad.id == soldier.squad)
         .removeSoldier(soldier.position);
+      this.enroled--;
     } else if (soldier.teilahme == "AN") {
       const index = this.pool.findIndex((find) => find.id == soldier.id);
       this.pool.splice(index, 1);
@@ -79,6 +82,7 @@ export class Division {
       this.squads
         .find((squad) => squad.id == soldier.squad)
         .addSoldier(soldier);
+      this.enroled++;
     } else if ((soldier.teilahme = "AN")) {
       this.pool.push(soldier);
       this.pool.sort(this.sortByDate);
