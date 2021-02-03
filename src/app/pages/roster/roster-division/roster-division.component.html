@@ -6,6 +6,8 @@
         class="col-md-4"
         [squad]="squad"
         (drop)="onDrop($event)"
+        (delete)="deleteSquad($event)"
+        (rename)="renameSquad($event)"
       >
       </roster-squad>
       <div class="add-squad-button col-md-4">
@@ -21,28 +23,26 @@
       </div>
     </div>
   </div>
-  <div
-    cdkDropList
-    class="soldier-list col-md-3"
-    (cdkDropListDropped)="onDrop($event)"
-  >
-    <div
-      class="soldier-box"
-      *ngFor="let soldier of this.service.data[this.division]?.pool"
-      cdkDrag
-      cdkDropListSortingDisabled
-      [cdkDragData]="soldier"
-    >
-      {{ soldier.username }}
-    </div>
-    <div
-      class="soldier-box"
-      *ngFor="let soldier of this.service.data[this.division]?.reserve"
-      cdkDrag
-      cdkDropListSortingDisabled
-      [cdkDragData]="soldier"
-    >
-      {{ soldier.username }}
+  <div class="col-md-3">
+    <div cdkDropList class="soldier-list" (cdkDropListDropped)="onDrop($event)">
+      <div
+        class="soldier-box"
+        *ngFor="let soldier of this.service.data[this.division]?.pool"
+        cdkDrag
+        cdkDropListSortingDisabled
+        [cdkDragData]="soldier"
+      >
+        {{ soldier.username }}
+      </div>
+      <div
+        class="soldier-box"
+        *ngFor="let soldier of this.service.data[this.division]?.reserve"
+        cdkDrag
+        cdkDropListSortingDisabled
+        [cdkDragData]="soldier"
+      >
+        {{ soldier.username }}
+      </div>
     </div>
   </div>
 </div>

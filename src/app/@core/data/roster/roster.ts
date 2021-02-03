@@ -2,6 +2,7 @@ import { Division, DivisionDto } from "./division";
 import { Enrolment } from "./enrolment";
 
 export interface RosterDto {
+  eventname: string;
   commander: Enrolment | null;
   infanterie: DivisionDto;
   armor: DivisionDto;
@@ -10,6 +11,7 @@ export interface RosterDto {
 }
 
 export class Roster {
+  eventname: string;
   commander: Enrolment | null;
   infanterie: Division;
   armor: Division;
@@ -17,6 +19,7 @@ export class Roster {
   artillery: Division;
 
   constructor(data: RosterDto) {
+    this.eventname = data.eventname;
     this.commander = data.commander;
     this.infanterie = new Division(data.infanterie);
     this.armor = new Division(data.armor);
@@ -32,18 +35,18 @@ export class Roster {
   removeCommander() {
     if (this.commander) {
       this.commander.role = null;
-      switch (this.commander.abteilung) {
-        case "Armor":
-          this.armor.moveTo(this.commander, null);
+      switch (this.commander.division) {
+        case "armor":
+          this.armor.moveTo(this.commander);
           break;
-        case "Artillerie":
-          this.artillery.moveTo(this.commander, null);
+        case "artillerie":
+          this.artillery.moveTo(this.commander);
           break;
-        case "Recon":
-          this.recon.moveTo(this.commander, null);
+        case "recon":
+          this.recon.moveTo(this.commander);
           break;
         default:
-          this.infanterie.moveTo(this.commander, null);
+          this.infanterie.moveTo(this.commander);
       }
       this.commander = null;
     }

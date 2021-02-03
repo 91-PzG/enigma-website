@@ -1,4 +1,23 @@
-<h5>{{ this.squad.name }}</h5>
+<div
+  class="squad-header"
+  (mouseenter)="hover = true"
+  (mouseleave)="hover = false"
+>
+  <input
+    fullWidth
+    nbInput
+    fieldSize="large"
+    [value]="this.squad.name"
+    (focusout)="test()"
+    (keyup.enter)="test()"
+    [attr.id]="'squad-name-' + this.squad.id"
+  />
+  <div class="trash">
+    <button nbButton ghost *ngIf="hover" (click)="deleteSquad()">
+      <nb-icon icon="trash-2-outline"></nb-icon>
+    </button>
+  </div>
+</div>
 <div
   cdkDropList
   class="soldier-list"

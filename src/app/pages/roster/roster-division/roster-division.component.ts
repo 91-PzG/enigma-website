@@ -26,4 +26,12 @@ export class RosterDivisionComponent {
       if (name) this.service.createSquad(name, this.division);
     });
   }
+
+  deleteSquad(position: number) {
+    this.service.deleteSquad(position, this.division);
+  }
+
+  renameSquad({ name, position }) {
+    this.service.renameSquad(name, position, this.division);
+  }
 }

@@ -1,5 +1,5 @@
 <h1 id="title" class="title">Login</h1>
-<p class="sub-title">Hello! Log in with your discord username.</p>
+<p class="sub-title">Hallo! Loge dich mit deinem Discordnamen ein.</p>
 
 <nb-alert
   *ngIf="showMessages.error && errors?.length && !submitted"
@@ -44,17 +44,14 @@
     />
     <ng-container *ngIf="email.invalid && email.touched">
       <p class="caption status-danger" *ngIf="email.errors?.required">
-        Email is required!
-      </p>
-      <p class="caption status-danger" *ngIf="email.errors?.pattern">
-        Email should be the real one!
+        Bitte gib deinen Nutzernamen ein!
       </p>
     </ng-container>
   </div>
 
   <div class="form-control-group">
     <span class="label-with-link">
-      <label class="label" for="input-password">Password:</label>
+      <label class="label" for="input-password">Passwort:</label>
     </span>
     <input
       nbInput

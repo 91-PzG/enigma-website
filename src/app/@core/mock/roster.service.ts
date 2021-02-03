@@ -5,9 +5,10 @@ import { Roster, RosterDto } from "../data/roster";
 @Injectable()
 export class RosterService {
   data: RosterDto = {
+    eventname: "Freundschaftsspiel gegen die 38.",
     commander: {
       id: 1,
-      abteilung: "Infanterie",
+      division: "infanterie",
       squadlead: false,
       commander: true,
       timestamp: new Date().toString(),
@@ -21,7 +22,7 @@ export class RosterService {
       pool: [
         {
           id: 20,
-          abteilung: "Infanterie",
+          division: "infanterie",
           squadlead: false,
           commander: false,
           timestamp: new Date().toString(),
@@ -33,7 +34,7 @@ export class RosterService {
         },
         {
           id: 21,
-          abteilung: "Infanterie",
+          division: "infanterie",
           squadlead: false,
           commander: false,
           timestamp: new Date().toString(),
@@ -45,7 +46,7 @@ export class RosterService {
         },
         {
           id: 22,
-          abteilung: "Infanterie",
+          division: "infanterie",
           squadlead: false,
           commander: false,
           timestamp: new Date().toString(),
@@ -57,7 +58,7 @@ export class RosterService {
         },
         {
           id: 23,
-          abteilung: "Infanterie",
+          division: "infanterie",
           squadlead: false,
           commander: false,
           timestamp: new Date().toString(),
@@ -71,7 +72,7 @@ export class RosterService {
       reserve: [
         {
           id: 3,
-          abteilung: "Infanterie",
+          division: "infanterie",
           squadlead: true,
           commander: false,
           timestamp: new Date().toString(),
@@ -86,11 +87,12 @@ export class RosterService {
         {
           id: 1,
           name: "Angriff",
-          position: 1,
+          division: null,
+          position: 0,
           members: [
             {
               id: 3,
-              abteilung: "Infanterie",
+              division: "infanterie",
               squadlead: true,
               commander: false,
               timestamp: new Date().toString(),
@@ -105,11 +107,12 @@ export class RosterService {
         {
           id: 2,
           name: "Verteidigung",
+          division: null,
           position: 1,
           members: [
             {
               id: 4,
-              abteilung: "Infanterie",
+              division: "infanterie",
               squadlead: true,
               commander: false,
               timestamp: new Date().toString(),
@@ -124,11 +127,12 @@ export class RosterService {
         {
           id: 3,
           name: "Abficker",
-          position: 1,
+          division: null,
+          position: 2,
           members: [
             {
               id: 5,
-              abteilung: "Infanterie",
+              division: "infanterie",
               squadlead: true,
               commander: false,
               timestamp: new Date().toString(),
@@ -143,11 +147,12 @@ export class RosterService {
         {
           id: 4,
           name: "Hybrid",
-          position: 1,
+          position: 3,
+          division: null,
           members: [
             {
               id: 6,
-              abteilung: "Infanterie",
+              division: "infanterie",
               squadlead: true,
               commander: false,
               timestamp: new Date().toString(),
@@ -165,7 +170,7 @@ export class RosterService {
       pool: [
         {
           id: 2,
-          abteilung: "Infanterie",
+          division: "infanterie",
           squadlead: false,
           commander: false,
           timestamp: new Date().toString(),
@@ -179,7 +184,7 @@ export class RosterService {
       reserve: [
         {
           id: 3,
-          abteilung: "Infanterie",
+          division: "infanterie",
           squadlead: true,
           commander: false,
           timestamp: new Date().toString(),
@@ -195,10 +200,11 @@ export class RosterService {
           id: 1,
           name: "Squad #1",
           position: 1,
+          division: null,
           members: [
             {
               id: 3,
-              abteilung: "Infanterie",
+              division: "infanterie",
               squadlead: true,
               commander: false,
               timestamp: new Date().toString(),
@@ -216,7 +222,7 @@ export class RosterService {
       pool: [
         {
           id: 2,
-          abteilung: "Infanterie",
+          division: "infanterie",
           squadlead: false,
           commander: false,
           timestamp: new Date().toString(),
@@ -230,7 +236,7 @@ export class RosterService {
       reserve: [
         {
           id: 3,
-          abteilung: "Infanterie",
+          division: "infanterie",
           squadlead: true,
           commander: false,
           timestamp: new Date().toString(),
@@ -246,10 +252,11 @@ export class RosterService {
           id: 1,
           name: "Squad #1",
           position: 1,
+          division: null,
           members: [
             {
               id: 3,
-              abteilung: "Infanterie",
+              division: "infanterie",
               squadlead: true,
               commander: false,
               timestamp: new Date().toString(),
@@ -267,7 +274,7 @@ export class RosterService {
       pool: [
         {
           id: 2,
-          abteilung: "Infanterie",
+          division: "infanterie",
           squadlead: false,
           commander: false,
           timestamp: new Date().toString(),
@@ -281,7 +288,7 @@ export class RosterService {
       reserve: [
         {
           id: 3,
-          abteilung: "Infanterie",
+          division: "infanterie",
           squadlead: true,
           commander: false,
           timestamp: new Date().toString(),
@@ -297,16 +304,17 @@ export class RosterService {
           id: 1,
           name: "Squad #1",
           position: 1,
+          division: null,
           members: [
             {
               id: 3,
-              abteilung: "Infanterie",
+              division: "infanterie",
               squadlead: true,
               commander: false,
               timestamp: new Date().toString(),
               teilahme: "AN",
               username: "Samu",
-              squad: null,
+              squad: 1,
               position: null,
               role: null,
             },

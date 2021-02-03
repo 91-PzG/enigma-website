@@ -1,0 +1,29 @@
+@import "../../../@theme/styles/themes.scss";
+
+.squad-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.squad-name {
+  width: 100%;
+}
+
+input {
+  font-size: 20px;
+}
+
+.trash {
+  width: 50px;
+}
+
+@include nb-install-component {
+  input {
+    min-height: 40px;
+    padding: 0px 0px 10px !important;
+    border: none !important;
+    background: nb-theme(background-basic-color-1) !important;
+    font-size: 20px !important;
+  }
+}

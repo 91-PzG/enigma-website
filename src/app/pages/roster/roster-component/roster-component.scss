@@ -1,24 +1,39 @@
+@import "../../../@theme/styles/themes.scss";
+
+@include nb-install-component {
+  .soldier-list {
+    border: solid 1px nb-theme(border-basic-color-4);
+    background: nb-theme(background-basic-color-2);
+  }
+
+  .soldier-box {
+    border-bottom: solid 1px nb-theme(border-basic-color-4);
+    color: nb-theme(text-hint-color);
+    background: nb-theme(background-basic-color-2);
+  }
+}
+
 .soldier-list {
-  border: solid 1px #ccc;
-  min-height: 60px;
+  min-height: 40px;
   display: block;
-  background: white;
   border-radius: 4px;
   overflow: hidden;
 }
 
 .soldier-box {
-  padding-bottom: 20px 10px;
-  border-bottom: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
+  width: 100%;
+  padding: 10px 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  //justify-content: space-between;
   box-sizing: border-box;
   cursor: move;
-  background: white;
-  font-size: 14px;
+  font-size: 15px;
+}
+
+.soldier-box:last-child {
+  border: none !important;
 }
 
 .cdk-drag-preview {
@@ -47,4 +62,8 @@
 .add-squad-button {
   margin-top: auto;
   margin-bottom: auto;
+}
+
+roster-squad {
+  margin-bottom: 20px;
 }

@@ -24,9 +24,9 @@ export class Division {
     });
   }
 
-  createSquad(squad: SquadDto) {
-    squad.position = this.squads.length + 1;
-    this.squads.push(new Squad(squad));
+  addSquad(squad: SquadDto) {
+    this.shiftSquads(this.squads.length, squad.position);
+    this.squads.splice(squad.position, 0, new Squad(squad));
   }
 
   moveSquad(oldPos: number, newPos: number) {
@@ -34,10 +34,14 @@ export class Division {
     squad.position = newPos;
 
     this.shiftSquads(oldPos, newPos);
-    this.squads.push(squad);
+    this.squads.splice(newPos, 0, squad);
   }
 
-  deleteSquad(pos: number) {
+  removeSquad(pos: number) {
+    this.squads[pos].members.forEach((soldier) => {
+      soldier.squad = null;
+      this.moveTo(soldier);
+    });
     this.shiftSquads(pos, this.squads.length);
   }
 
@@ -70,7 +74,7 @@ export class Division {
     this.squads.find((f) => f.id == squad).moveSoldier(oldPos, newPos);
   }
 
-  moveTo(soldier: Enrolment, index: number) {
+  moveTo(soldier: Enrolment) {
     if (soldier.squad) {
       this.squads
         .find((squad) => squad.id == soldier.squad)
@@ -82,5 +86,9 @@ export class Division {
       this.reserve.push(soldier);
       this.reserve.sort(this.sortByDate);
     }
+  }
+
+  renameSquad(name: string, position: number) {
+    this.squads[position].name = name;
   }
 }

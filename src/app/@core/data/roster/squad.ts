@@ -4,20 +4,22 @@ export interface SquadDto {
   id: number;
   name: string;
   position: number;
-  members: Enrolment[];
+  division: string;
+  members?: Enrolment[];
 }
 
 export class Squad implements SquadDto {
   id: number;
   name: string;
   position: number;
+  division: string;
   members: Enrolment[];
 
   constructor(data: SquadDto) {
     this.id = data.id;
     this.name = data.name;
     this.position = data.position;
-    this.members = data.members;
+    this.members = data.members ? data.members : [];
   }
 
   addSoldier(soldier: Enrolment) {

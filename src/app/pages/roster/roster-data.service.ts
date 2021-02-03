@@ -1,16 +1,20 @@
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { Injectable } from "@angular/core";
+import { io, Socket } from "socket.io-client";
 import {
   Division,
   Enrolment,
   Roster,
   RosterData,
+  SquadDto,
 } from "../../@core/data/roster";
 
 @Injectable({ providedIn: "root" })
 export class RosterDataService {
   data: Roster;
-  test: number;
+  socket: Socket;
+  eventId: number;
+
   divisions: { name: string; key: string }[] = [
     { name: "Infanterie", key: "infanterie" },
     { name: "Panzer", key: "armor" },
@@ -18,45 +22,97 @@ export class RosterDataService {
     { name: "Artillerie", key: "artillery" },
   ];
 
-  constructor(private service: RosterData) {
-    this.test = Math.random();
-  }
+  constructor(private service: RosterData) {}
 
   loadRoster(id: number) {
+    this.eventId = id;
+
     const observable = this.service.getData(id);
     observable.subscribe((data) => {
       this.data = data;
     });
+
+    this.connectToSocket();
     return observable;
   }
 
+  deleteSquad(position: number, division: string) {
+    this.socket.emit("delete-squad", { position, division });
+  }
+
   createSquad(name: string, division: string) {
-    this.getDivision(division).createSquad({
+    this.socket.emit("create-squad", {
       name,
-      id: 1,
-      position: 5,
-      members: [],
+      division,
+      position: this.getDivision(division).squads.length,
     });
   }
 
+  renameSquad(name: string, position: number, division: string) {
+    this.socket.emit("rename-squad", { name, position, division });
+  }
+
   drop(event: CdkDragDrop<any>, division: string) {
-    const div = this.getDivision(division);
-    if (event.container.id == event.previousContainer.id) {
-      if (event.container.id.startsWith("squad"))
-        div.moveInSquad(
-          event.previousIndex,
-          event.currentIndex,
-          Number.parseInt(event.container.id.substring(6))
-        );
-    } else {
-      const soldier: Enrolment = event.item.data;
-      div.moveFrom(soldier);
+    const oldSoldier = event.item.data;
+    const newSoldier = new Enrolment(oldSoldier);
 
-      soldier.squad = Number.parseInt(event.container.id.substring(6));
-      soldier.position = event.currentIndex;
+    newSoldier.position = event.currentIndex;
+    if (event.container.id.startsWith("squad"))
+      newSoldier.squad = Number.parseInt(event.container.id.substring(6));
+    else newSoldier.squad = null;
 
-      div.moveTo(soldier, event.currentIndex);
-    }
+    this.socket.emit("move-soldier", { oldSoldier, newSoldier });
+  }
+
+  private connectToSocket() {
+    this.socket = io("172.16.1.36:3000", { query: { eventId: this.eventId } });
+
+    this.socket.on("create-squad", (squad: SquadDto) => {
+      this.getDivision(squad.division).addSquad(squad);
+    });
+
+    this.socket.on(
+      "move-soldier",
+      ({
+        oldSoldier,
+        newSoldier,
+      }: {
+        oldSoldier: Enrolment;
+        newSoldier: Enrolment;
+      }) => {
+        if (newSoldier.division == oldSoldier.division) {
+          const division = this.getDivision(newSoldier.division);
+          if (oldSoldier.squad == newSoldier.squad) {
+            if (oldSoldier.squad) {
+              division.moveInSquad(
+                oldSoldier.position,
+                newSoldier.position,
+                newSoldier.squad
+              );
+            }
+          } else {
+            division.moveFrom(oldSoldier);
+            division.moveTo(newSoldier);
+          }
+        } else {
+          const oldDivision = this.getDivision(oldSoldier.division);
+          const newDivision = this.getDivision(newSoldier.division);
+          oldDivision.moveFrom(oldSoldier);
+          newDivision.moveTo(newSoldier);
+        }
+      }
+    );
+
+    this.socket.on(
+      "delete-squad",
+      ({ position, division }: { position: number; division: string }) => {
+        this.getDivision(division).removeSquad(position);
+      }
+    );
+
+    this.socket.on("rename-squad", ({ name, position, division }) => {
+      this.getDivision(division).renameSquad(name, position);
+    });
   }
 
   private getDivision(division: string): Division {
