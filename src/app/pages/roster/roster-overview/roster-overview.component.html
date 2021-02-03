@@ -1,4 +1,52 @@
-<div class="row show-grid">
-  <div>Test</div>
-  <div>Test</div>
+<div class="col-md-5 list">
+  <div class="row">
+    <div class="col-6 cell">Kommandant</div>
+    <div class="col-6 border-left cell">
+      {{ this.service.data.commander.username }}
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 list" *ngFor="let division of this.service.divisions">
+  <div
+    class="row"
+    [class.border-bottom]="this.unfolded[division.key]"
+    (click)="this.unfolded[division.key] = !this.unfolded[division.key]"
+  >
+    <div class="col-10 cell">{{ division.name }}</div>
+    <div class="col-2 border-left cell drop-down">
+      {{ this.service.data[division.key].enroled }}
+      <nb-icon
+        [icon]="
+          this.unfolded[division.key]
+            ? 'arrow-up-outline'
+            : 'arrow-down-outline'
+        "
+      ></nb-icon>
+    </div>
+  </div>
+  <div *ngIf="this.unfolded[division.key]">
+    <div
+      *ngFor="let squad of this.service.data[division.key].squads"
+      class="row border-bottom"
+    >
+      <div class="col-5 cell">{{ squad.name }}</div>
+      <div class="col-5 cell border-left">{{ squad.members[0]?.username }}</div>
+      <div class="col-2 cell border-left">
+        {{ squad.members.length }}
+      </div>
+    </div>
+    <div class="row border-bottom">
+      <div class="col-10 cell">Anmeldepool</div>
+      <div class="col-2 cell border-left">
+        {{ this.service.data[division.key].pool.length }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-10 cell">Reserve</div>
+      <div class="col-2 cell border-left">
+        {{ this.service.data[division.key].reserve.length }}
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,29 @@
+@import "../../../@theme/styles/themes.scss";
+
+@include nb-install-component {
+  .list {
+    border-radius: 4px;
+    border: solid 1px nb-theme(border-basic-color-4) !important;
+    background: nb-theme(background-basic-color-2);
+    margin-bottom: 20px;
+  }
+
+  .border-left {
+    border-left: solid 1px nb-theme(border-basic-color-4) !important;
+  }
+
+  .border-bottom {
+    border-bottom: solid 1px nb-theme(border-basic-color-4) !important;
+  }
+}
+
+.cell {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.drop-down {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
