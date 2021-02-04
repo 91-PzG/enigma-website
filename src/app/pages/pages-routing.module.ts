@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
 import { NotFoundComponent } from "./miscellaneous/not-found/not-found.component";
+import { WorkInProgressComponent } from "./miscellaneous/work-in-progress/work-in-progress.component";
 import { PagesComponent } from "./pages.component";
 
 const routes: Routes = [
@@ -10,6 +11,8 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       { path: "home", component: HomeComponent },
+      { path: "members", component: WorkInProgressComponent },
+      { path: "calendar", component: WorkInProgressComponent },
       {
         path: "events",
         loadChildren: () =>

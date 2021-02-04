@@ -7,15 +7,22 @@ export class NbMenuItemWithPermissions extends NbMenuItem {
 
 export const MENU_ITEMS: NbMenuItemWithPermissions[] = [
   { title: "Home", icon: "home-outline", link: "/home", home: true },
+  { title: "Mitglieder", icon: "people-outline", link: "/members", home: true },
+  {
+    title: "Kalender",
+    icon: "calendar-outline",
+    link: "/calendar",
+    home: true,
+  },
   {
     title: "Events",
-    icon: "calendar-outline",
+    icon: "list-outline",
     link: "/events",
     access: { permission: "view", resource: "events" },
   },
   {
     title: "Human Resources",
-    icon: "people-outline",
+    icon: "archive-outline",
     children: [
       {
         title: "Dashboard",
