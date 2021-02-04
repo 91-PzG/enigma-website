@@ -8,9 +8,13 @@
           *ngIf="accessChecker.isGranted('manage','roster') | async"
           nbButton
           (click)="edit=!edit"
+          outline
+          status="primary"
         >
           {{edit?"Stop":"Edit"}}</button
-        ><button nbButton (click)="refresh()">Refresh</button>
+        ><button nbButton (click)="refresh()" outline status="primary">
+          Refresh
+        </button>
       </div>
     </div></nb-card-header
   >
