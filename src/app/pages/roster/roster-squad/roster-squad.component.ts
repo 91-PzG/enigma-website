@@ -14,6 +14,8 @@ export class RosterSquadComponent {
   hover = false;
 
   @Input() squad: Squad;
+  @Input() edit: boolean;
+
   @Output() drop = new EventEmitter<CdkDragDrop<any>>();
   @Output() delete = new EventEmitter<number>();
   @Output() rename = new EventEmitter<{ name: string; position: number }>();

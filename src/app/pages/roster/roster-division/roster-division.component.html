@@ -5,12 +5,13 @@
         *ngFor="let squad of this.service.data[this.division]?.squads"
         class="col-md-4"
         [squad]="squad"
+        [edit]="edit"
         (drop)="onDrop($event)"
         (delete)="deleteSquad($event)"
         (rename)="renameSquad($event)"
       >
       </roster-squad>
-      <div class="add-squad-button col-md-4">
+      <div class="add-squad-button col-md-4" *ngIf="edit">
         <button
           nbButton
           shape="round"
@@ -24,7 +25,12 @@
     </div>
   </div>
   <div class="col-md-3">
-    <div cdkDropList class="soldier-list" (cdkDropListDropped)="onDrop($event)">
+    <div
+      cdkDropList
+      [cdkDropListDisabled]="!edit"
+      class="soldier-list"
+      (cdkDropListDropped)="onDrop($event)"
+    >
       <div
         class="soldier-box"
         *ngFor="let soldier of this.service.data[this.division]?.pool"

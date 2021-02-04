@@ -1,5 +1,19 @@
 <nb-card
-  ><nb-card-header>{{this.service.data.eventname}}</nb-card-header>
+  ><nb-card-header
+    ><div class="header">
+      <h4>{{this.service.data.eventname}}</h4>
+      <div>
+        <button
+          class="edit-button"
+          *ngIf="accessChecker.isGranted('manage','roster') | async"
+          nbButton
+          (click)="edit=!edit"
+        >
+          {{edit?"Stop":"Edit"}}</button
+        ><button nbButton (click)="refresh()">Refresh</button>
+      </div>
+    </div></nb-card-header
+  >
   <nb-card-body
     [nbSpinner]="loading"
     nbSpinnerStatus="primary"
@@ -10,6 +24,9 @@
       <nb-tab
         *ngFor="let division of this.service.divisions"
         [tabTitle]="division.name"
-        ><roster-division [division]="division.key"></roster-division
+        ><roster-division
+          [division]="division.key"
+          [edit]="edit"
+        ></roster-division
       ></nb-tab> </nb-tabset></nb-card-body
 ></nb-card>
