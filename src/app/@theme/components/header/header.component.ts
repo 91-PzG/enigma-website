@@ -127,11 +127,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private login() {
-    this.userMenu[1] = { title: "Log out", link: "auth/logout" };
+    this.userMenu = [
+      { title: "Profile" },
+      { title: "Log out", link: "auth/logout" },
+    ];
   }
 
   private logout() {
-    this.userMenu[1] = { title: "Log in", link: "auth/login" };
+    this.userMenu = [{ title: "Log in", link: "auth/login" }];
   }
 
   private setLocalTheme(theme: string) {
