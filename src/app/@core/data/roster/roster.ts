@@ -35,19 +35,7 @@ export class Roster {
   removeCommander() {
     if (this.commander) {
       this.commander.role = null;
-      switch (this.commander.division) {
-        case "armor":
-          this.armor.moveTo(this.commander);
-          break;
-        case "artillery":
-          this.artillery.moveTo(this.commander);
-          break;
-        case "recon":
-          this.recon.moveTo(this.commander);
-          break;
-        default:
-          this.infanterie.moveTo(this.commander);
-      }
+      this[this.commander.division].moveTo(this.commander);
       this.commander = null;
     }
   }
