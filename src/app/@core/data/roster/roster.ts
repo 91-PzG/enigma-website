@@ -17,6 +17,7 @@ export class Roster {
   armor: Division;
   recon: Division;
   artillery: Division;
+  enroled: number = 0;
 
   constructor(data: RosterDto) {
     this.eventname = data.eventname;
@@ -25,6 +26,15 @@ export class Roster {
     this.armor = new Division(data.armor);
     this.recon = new Division(data.recon);
     this.artillery = new Division(data.artillery);
+    this.calcEnroled();
+  }
+
+  calcEnroled() {
+    this.enroled =
+      this.infanterie.enroled +
+      this.armor.enroled +
+      this.recon.enroled +
+      this.artillery.enroled;
   }
 
   setCommander(commander: Enrolment) {

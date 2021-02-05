@@ -67,3 +67,18 @@
 roster-squad {
   margin-bottom: 20px;
 }
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit-button {
+  margin-right: 20px;
+}
+
+.cdk-drag-disabled {
+  cursor: default !important;
+}

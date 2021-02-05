@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { WorkInProgressComponent } from "../miscellaneous/work-in-progress/work-in-progress.component";
 import { ArchiveComponent } from "./archive/archive.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 
@@ -10,7 +11,7 @@ const routes: Routes = [
     path: "dashboard",
     component: DashboardComponent,
   },
-  { path: "archive", component: ArchiveComponent },
+  { path: "archive", component: WorkInProgressComponent },
 ];
 
 @NgModule({

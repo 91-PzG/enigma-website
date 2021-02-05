@@ -11,6 +11,7 @@ import { RosterDataService } from "../roster-data.service";
 })
 export class RosterDivisionComponent {
   @Input() division: string;
+  @Input() edit: boolean;
 
   constructor(
     public service: RosterDataService,

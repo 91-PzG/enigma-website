@@ -25,6 +25,8 @@ export class RosterDataService {
   constructor(private service: RosterData) {}
 
   loadRoster(id: number) {
+    if (this.socket?.connected) this.socket.disconnect();
+
     this.eventId = id;
 
     const observable = this.service.getData(id);
@@ -100,6 +102,7 @@ export class RosterDataService {
           oldDivision.moveFrom(oldSoldier);
           newDivision.moveTo(newSoldier);
         }
+        this.data.calcEnroled();
       }
     );
 
@@ -107,6 +110,7 @@ export class RosterDataService {
       "delete-squad",
       ({ position, division }: { position: number; division: string }) => {
         this.getDivision(division).removeSquad(position);
+        this.data.calcEnroled();
       }
     );
 

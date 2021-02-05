@@ -1,6 +1,6 @@
-import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { NbAccessChecker } from "@nebular/security";
 import { CreateSquadComponent } from "../create-squad/create-squad.component";
 import { RosterDataService } from "../roster-data.service";
 import { RosterDivisionComponent } from "../roster-division/roster-division.component";
@@ -21,23 +21,22 @@ export const ROSTER_COMPONENTS = [
 })
 export class RosterComponent {
   loading = true;
-  movies = [
-    "Episode I - The Phantom Menace",
-    "Episode II - Attack of the Clones",
-    "Episode III - Revenge of the Sith",
-    "Episode IV - A New Hope",
-    "Episode V - The Empire Strikes Back",
-    "Episode VI - Return of the Jedi",
-  ];
+  edit = false;
+  eventId: number;
 
-  constructor(public service: RosterDataService, router: Router) {
-    const eventId = Number.parseInt(router.url.split("/")[2]);
-    this.service.loadRoster(eventId).subscribe(() => {
-      this.loading = false;
-    });
+  constructor(
+    public accessChecker: NbAccessChecker,
+    public service: RosterDataService,
+    router: Router
+  ) {
+    this.eventId = Number.parseInt(router.url.split("/")[2]);
+    this.refresh();
   }
 
-  drop(event: CdkDragDrop<any>) {
-    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+  refresh() {
+    this.loading = true;
+    this.service.loadRoster(this.eventId).subscribe(() => {
+      this.loading = false;
+    });
   }
 }

@@ -4,23 +4,22 @@
   (mouseleave)="hover = false"
 >
   <input
-    fullWidth
     nbInput
     fieldSize="large"
     [value]="this.squad.name"
+    [readOnly]="!edit"
     (focusout)="test()"
     (keyup.enter)="test()"
     [attr.id]="'squad-name-' + this.squad.id"
   />
-  <div class="trash">
-    <button nbButton ghost *ngIf="hover" (click)="deleteSquad()">
-      <nb-icon icon="trash-2-outline"></nb-icon>
-    </button>
-  </div>
+  <button nbButton ghost *ngIf="hover && edit" (click)="deleteSquad()">
+    <nb-icon icon="trash-2-outline"></nb-icon>
+  </button>
 </div>
 <div
   cdkDropList
   class="soldier-list"
+  [cdkDropListDisabled]="!edit"
   (cdkDropListDropped)="onDrop($event)"
   id="{{ 'squad-' + squad.id }}"
 >
