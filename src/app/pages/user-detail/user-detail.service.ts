@@ -1,7 +1,7 @@
 import { Compiler, Injectable, Injector, Type } from "@angular/core";
 import { NgModuleFactory } from "@angular/core/src/r3_symbols";
 import { NbDialogRef, NbDialogService } from "@nebular/theme";
-import { UserDetailComponent } from "./user-detail-component/user-detail.component";
+import { WorkInProgressComponent } from "../miscellaneous/work-in-progress/work-in-progress.component";
 import { UserDetailModule } from "./user-detail.module";
 
 @Injectable()
@@ -17,10 +17,10 @@ export class UserDetailService {
   ) {}
 
   openDialog() {
-    if (!this.loaded) this.loadUserDetailModule();
-    const dialogRef = this.dialogService.open(UserDetailComponent, {
-      closeOnBackdropClick: false,
-      closeOnEsc: false,
+    //if (!this.loaded) this.loadUserDetailModule();
+    const dialogRef = this.dialogService.open(WorkInProgressComponent, {
+      closeOnBackdropClick: true,
+      closeOnEsc: true,
     });
   }
 
