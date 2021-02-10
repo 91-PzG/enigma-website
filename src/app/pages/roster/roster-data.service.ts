@@ -67,7 +67,9 @@ export class RosterDataService {
   }
 
   private connectToSocket() {
-    this.socket = io("localhost:3000", { query: { eventId: this.eventId } });
+    this.socket = io("localhost:3000", {
+      query: { eventId: this.eventId.toString() },
+    });
 
     this.socket.on("create-squad", (squad: SquadDto) => {
       this.getDivision(squad.division).addSquad(squad);
