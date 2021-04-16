@@ -26,19 +26,19 @@ export class EventListComponent {
       name: {
         title: "Name",
       },
-      datum: {
+      date: {
         title: "Datum",
         sortDirection: "desc",
         valuePrepareFunction: this.prepareDate.bind(this),
       },
-      anmeldefrist: {
+      registerByDate: {
         title: "Anmeldefrist",
         valuePrepareFunction: this.prepareDate.bind(this),
       },
       players: {
         title: "Spieler",
       },
-      beschreibung: {
+      description: {
         title: "Beschreibung",
         valuePrepareFunction: this.shortenDescription,
       },
@@ -57,7 +57,6 @@ export class EventListComponent {
 
   private setData(data: EventListEntry[]) {
     data = data.map((entry) => {
-      entry["players"] = `${entry.teilnehmer}/${entry.spielerzahl}`;
       entry["icon"] = entry.closed
         ? "slash-outline"
         : entry.locked

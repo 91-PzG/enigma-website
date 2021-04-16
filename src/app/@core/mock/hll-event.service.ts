@@ -7,6 +7,7 @@ import { HLLEvent, HLLEventData } from "../data/hll-event";
 @Injectable()
 export class HLLEventService extends HLLEventData {
   data: HLLEvent[] = [
+    /*
     {
       id: 1,
       name: "Freundschaftsspiel 91/18 vs PBS",
@@ -81,7 +82,7 @@ export class HLLEventService extends HLLEventData {
       anmeldung: {
         type: "AN",
         abteilung: "Infanterie",
-        squad: 1,
+        squad: "1",
       },
     },
     {
@@ -108,9 +109,9 @@ export class HLLEventService extends HLLEventData {
       anmeldung: {
         type: "RE",
         abteilung: "Infanterie",
-        squad: 2,
+        squad: "2",
       },
-    },
+    },*/
   ];
 
   getData(eventId: number): Observable<HLLEvent> {

@@ -19,7 +19,7 @@ export class RosterDivisionComponent {
   ) {}
 
   onDrop(event: CdkDragDrop<any>) {
-    this.service.drop(event, this.division);
+    this.service.drop(event);
   }
 
   createSquad() {
@@ -28,11 +28,11 @@ export class RosterDivisionComponent {
     });
   }
 
-  deleteSquad(position: number) {
-    this.service.deleteSquad(position, this.division);
+  deleteSquad(id: number) {
+    this.service.deleteSquad(id);
   }
 
-  renameSquad({ name, position }) {
-    this.service.renameSquad(name, position, this.division);
+  renameSquad({ name, position, id }) {
+    this.service.renameSquad(name, position, this.division, id);
   }
 }

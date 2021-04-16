@@ -8,9 +8,9 @@ export class Enrolment {
   squadlead: boolean;
   commander: boolean;
   timestamp: string;
-  teilahme: EnrolementType;
+  enrolmentType: EnrolementType;
   username: string;
-  squad: number | null;
+  squadId: number | null;
   position: number;
   role: Roles;
 
@@ -20,9 +20,9 @@ export class Enrolment {
     this.squadlead = data.squadlead;
     this.commander = data.commander;
     this.timestamp = data.timestamp;
-    this.teilahme = data.teilahme;
+    this.enrolmentType = data.enrolmentType;
     this.username = data.username;
-    this.squad = data.squad;
+    this.squadId = data.squadId;
     this.position = data.position;
     this.role = data.role;
   }

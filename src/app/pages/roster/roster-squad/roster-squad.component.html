@@ -8,8 +8,8 @@
     fieldSize="large"
     [value]="this.squad.name"
     [readOnly]="!edit"
-    (focusout)="test()"
-    (keyup.enter)="test()"
+    (focusout)="renameSquad()"
+    (keyup.enter)="renameSquad()"
     [attr.id]="'squad-name-' + this.squad.id"
   />
   <button nbButton ghost *ngIf="hover && edit" (click)="deleteSquad()">

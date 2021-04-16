@@ -9,23 +9,23 @@
       >
         <nb-stepper #stepper>
           <nb-step label="Übersicht">
-            <overview-form (next)="next($event)"></overview-form>
+            <overview-form (next)="overviewNext($event)"></overview-form>
           </nb-step>
           <nb-step label="Info">
             <info-form
-              (next)="next($event)"
+              (next)="infoNext($event)"
               (previous)="previous()"
             ></info-form>
           </nb-step>
           <nb-step label="Spiel">
             <spiel-form
-              (next)="next($event)"
+              (next)="gameNext($event)"
               (previous)="previous()"
             ></spiel-form>
           </nb-step>
           <nb-step label="Discord">
             <discord-form
-              (next)="submit($event)"
+              (next)="discordNext($event)"
               (previous)="previous()"
             ></discord-form>
           </nb-step>

@@ -29,8 +29,8 @@ export class EventOverviewComponent {
   }
 
   private setAnmeldung() {
-    if (this.event.anmeldung) {
-      switch (this.event.anmeldung.type) {
+    if (this.event.enrolment) {
+      switch (this.event.enrolment.enrolmentType) {
         case "RE":
           this.anmeldung = {
             status: "info",
@@ -42,8 +42,8 @@ export class EventOverviewComponent {
           this.anmeldung = {
             status: "primary",
             message: `Du hast dich für das Event angemeldet${
-              this.event.anmeldung.squad
-                ? ` und bist in Squad ${this.event.anmeldung.squad} ${this.event.anmeldung.abteilung} eingeteilt`
+              this.event.enrolment.squad
+                ? ` und bist in Squad ${this.event.enrolment.squad} ${this.event.enrolment.division} eingeteilt`
                 : ",aber bist noch nicht eingeteilt"
             }.`,
           };
@@ -56,7 +56,7 @@ export class EventOverviewComponent {
       }
     } else {
       this.anmeldung = {
-        status: this.event.verpflichtend ? "warning" : "basic",
+        status: this.event.mandatory ? "warning" : "basic",
         message: "Du hast dich noch nicht für das Event gemeldet!",
       };
     }

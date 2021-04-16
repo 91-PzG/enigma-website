@@ -96,7 +96,6 @@ export class OverviewFormComponent implements OnInit {
             find.username == this.overviewForm.controls["organisator"].value
         ).id,
       };
-      console.log(dto);
       this.next.emit(dto);
     }
   }

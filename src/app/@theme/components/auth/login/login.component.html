@@ -6,9 +6,11 @@
   outline="danger"
   role="alert"
 >
-  <p class="alert-title"><b>Oh snap!</b></p>
+  <p class="alert-title"><b>Fehler!</b></p>
   <ul class="alert-message-list">
-    <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>
+    <li class="alert-message">
+      Dein Nutzername oder Passwort sind ist nicht korrekt
+    </li>
   </ul>
 </nb-alert>
 
@@ -87,14 +89,14 @@
     </ng-container>
   </div>
 
-  <div class="form-control-group accept-group">
+  <!--<div class="form-control-group accept-group">
     <nb-checkbox
       name="rememberMe"
       [(ngModel)]="user.rememberMe"
       *ngIf="rememberMe"
       >Remember me</nb-checkbox
     >
-  </div>
+  </div>-->
 
   <button
     nbButton

@@ -12,8 +12,10 @@ import { map } from "rxjs/operators";
 import { EventChannel, EventchannelData } from "../../../../@core/data";
 
 export type DiscordForm = {
-  verpflichtend: boolean;
+  mandatory: boolean;
   sendToDiscord: boolean;
+  singlePool: boolean;
+  publishDate: Date;
   channel: {
     id?: string;
     name: string;
@@ -28,7 +30,8 @@ export type DiscordForm = {
 })
 export class DiscordComponent implements OnInit {
   discordForm: FormGroup;
-  isVerpflichtend = false;
+  isMandatory = false;
+  isSinglePool = false;
   isSentToDiscord = false;
 
   private eventChannels: EventChannel[] = [];
@@ -49,6 +52,7 @@ export class DiscordComponent implements OnInit {
   ngOnInit(): void {
     this.discordForm = this.fb.group({
       channel: [""],
+      publishDate: [""],
     });
   }
 
@@ -75,18 +79,19 @@ export class DiscordComponent implements OnInit {
 
   onSubmit() {
     this.discordForm.markAsDirty();
-    console.log(this.discordForm.status);
     if (this.discordForm.valid) {
       const channelId = this.eventChannels.find(
         (find) => find.name == this.discordForm.controls["channel"].value
       );
       const dto: DiscordForm = {
-        verpflichtend: this.isVerpflichtend,
+        mandatory: this.isMandatory,
         sendToDiscord: this.isSentToDiscord,
+        singlePool: this.isSinglePool,
         channel: {
           id: channelId ? channelId.id : null,
           name: this.discordForm.controls["channel"].value,
         },
+        publishDate: this.discordForm.controls["publishDate"].value,
       };
       this.next.emit(dto);
     }
@@ -99,10 +104,14 @@ export class DiscordComponent implements OnInit {
   toggleDiscord(checked: boolean) {
     this.isSentToDiscord = checked;
     if (this.isSentToDiscord) {
-      this.discordForm.controls["channel"].setValidators(Validators.required);
+      this.discordForm.controls["publishDate"].clearValidators();
+      this.discordForm.get("publishDate").disable();
     } else {
-      this.discordForm.controls["channel"].clearValidators();
+      this.discordForm.controls["publishDate"].setValidators(
+        Validators.required
+      );
+      this.discordForm.get("publishDate").enable();
     }
-    this.discordForm.controls["channel"].updateValueAndValidity();
+    this.discordForm.controls["publishDate"].updateValueAndValidity();
   }
 }

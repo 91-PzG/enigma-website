@@ -18,20 +18,28 @@ export class RosterSquadComponent {
 
   @Output() drop = new EventEmitter<CdkDragDrop<any>>();
   @Output() delete = new EventEmitter<number>();
-  @Output() rename = new EventEmitter<{ name: string; position: number }>();
+  @Output() rename = new EventEmitter<{
+    name: string;
+    position: number;
+    id: number;
+  }>();
 
   onDrop(event: CdkDragDrop<any>) {
     this.drop.emit(event);
   }
 
   deleteSquad() {
-    this.delete.emit(this.squad.position);
+    this.delete.emit(this.squad.id);
   }
 
-  test() {
+  renameSquad() {
     const name = (document.getElementById(
       "squad-name-" + this.squad.id
     ) as HTMLInputElement).value;
-    this.rename.emit({ name, position: this.squad.position });
+    this.rename.emit({
+      name,
+      position: this.squad.position,
+      id: this.squad.id,
+    });
   }
 }

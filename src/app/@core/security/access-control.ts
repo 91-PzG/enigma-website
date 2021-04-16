@@ -5,7 +5,7 @@ export const accessControl: NbAccessControl = {
   member: {
     view: ["events", "roster"],
   },
-  eventOrga: {
+  eventorga: {
     parent: "member",
     view: "eo",
     manage: ["events", "roster", "participation"],

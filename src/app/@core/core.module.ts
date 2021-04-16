@@ -26,12 +26,10 @@ import {
 import { RosterData } from "./data/roster";
 import {
   CurrentManpowerService,
-  HLLEventService,
   HLLFactionService,
   HLLMapService,
   HrWarningsService,
   RecruitsService,
-  RosterService,
   UserService,
 } from "./mock";
 import { MockDataModule } from "./mock/mock-data.module";
@@ -42,7 +40,8 @@ import { LayoutService, StateService } from "./utils";
 const DATA_MOCK_SERVICES = [
   { provide: RecruitsData, useClass: RecruitsService },
   { provide: HrWarningsData, useClass: HrWarningsService },
-  { provide: HLLEventData, useClass: HLLEventService },
+  //{ provide: HLLEventData, useClass: HLLEventService },
+  HLLEventData,
   { provide: CurrentManpowerData, useClass: CurrentManpowerService },
   //{ provide: EventListData, useClass: EventListService },
   EventListData,
@@ -53,7 +52,8 @@ const DATA_MOCK_SERVICES = [
   //{ provide: MemberAutocompleteData, useClass: MemberAutocompleteService },
   MemberAutocompleteData,
   { provide: UserData, useClass: UserService },
-  { provide: RosterData, useClass: RosterService },
+  //{ provide: RosterData, useClass: RosterService },
+  RosterData,
 ];
 
 export const NB_CORE_PROVIDERS = [
@@ -63,7 +63,7 @@ export const NB_CORE_PROVIDERS = [
     strategies: [
       NbPasswordAuthStrategy.setup({
         name: "email",
-        baseEndpoint: "https://dev.samuelhoera.dev/",
+        baseEndpoint: "https://api.91pzg.de/",
         login: { endpoint: "auth/signin", method: "post" },
         logout: { endpoint: "" },
         token: { class: NbAuthJWTToken, key: "accessToken" },

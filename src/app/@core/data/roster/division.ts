@@ -41,7 +41,7 @@ export class Division {
 
   removeSquad(pos: number) {
     this.squads[pos].members.forEach((soldier) => {
-      soldier.squad = null;
+      soldier.squadId = null;
       this.moveTo(soldier);
     });
     this.shiftSquads(pos, this.squads.length);
@@ -59,12 +59,12 @@ export class Division {
   }
 
   moveFrom(soldier: Enrolment) {
-    if (soldier.squad) {
+    if (soldier.squadId) {
       this.squads
-        .find((squad) => squad.id == soldier.squad)
+        .find((squad) => squad.id == soldier.squadId)
         .removeSoldier(soldier.position);
       this.enroled--;
-    } else if (soldier.teilahme == "AN") {
+    } else if (soldier.enrolmentType == "AN") {
       const index = this.pool.findIndex((find) => find.id == soldier.id);
       this.pool.splice(index, 1);
     } else {
@@ -78,12 +78,12 @@ export class Division {
   }
 
   moveTo(soldier: Enrolment) {
-    if (soldier.squad) {
+    if (soldier.squadId) {
       this.squads
-        .find((squad) => squad.id == soldier.squad)
+        .find((squad) => squad.id == soldier.squadId)
         .addSoldier(soldier);
       this.enroled++;
-    } else if ((soldier.teilahme = "AN")) {
+    } else if ((soldier.enrolmentType = "AN")) {
       this.pool.push(soldier);
       this.pool.sort(this.sortByDate);
     } else {

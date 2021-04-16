@@ -1,18 +1,35 @@
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { Injectable } from "@angular/core";
-import { io, Socket } from "socket.io-client";
+import * as io from "socket.io-client";
 import {
   Division,
+  DivisionDto,
   Enrolment,
   Roster,
   RosterData,
+  RosterDto,
   SquadDto,
 } from "../../@core/data/roster";
 
+const emptyDivisionDto: DivisionDto = {
+  pool: [],
+  reserve: [],
+  squads: [],
+};
+
+const emptyRosterDto: RosterDto = {
+  eventname: "",
+  commander: null,
+  infanterie: emptyDivisionDto,
+  armor: emptyDivisionDto,
+  artillery: emptyDivisionDto,
+  recon: emptyDivisionDto,
+};
+
 @Injectable({ providedIn: "root" })
 export class RosterDataService {
-  data: Roster;
-  socket: Socket;
+  data: Roster = new Roster(emptyRosterDto);
+  socket: any;
   eventId: number;
 
   divisions: { name: string; key: string }[] = [
@@ -31,15 +48,16 @@ export class RosterDataService {
 
     const observable = this.service.getData(id);
     observable.subscribe((data) => {
-      this.data = data;
+      console.log(data);
+      this.data = new Roster(data);
     });
 
     this.connectToSocket();
     return observable;
   }
 
-  deleteSquad(position: number, division: string) {
-    this.socket.emit("delete-squad", { position, division });
+  deleteSquad(id: number) {
+    this.socket.emit("delete-squad", { id });
   }
 
   createSquad(name: string, division: string) {
@@ -47,31 +65,40 @@ export class RosterDataService {
       name,
       division,
       position: this.getDivision(division).squads.length,
+      eventId: this.eventId,
     });
   }
 
-  renameSquad(name: string, position: number, division: string) {
-    this.socket.emit("rename-squad", { name, position, division });
+  renameSquad(name: string, position: number, division: string, id: number) {
+    this.socket.emit("rename-squad", { name, position, division, id });
   }
 
-  drop(event: CdkDragDrop<any>, division: string) {
+  drop(event: CdkDragDrop<any>) {
     const oldSoldier = event.item.data;
     const newSoldier = new Enrolment(oldSoldier);
 
     newSoldier.position = event.currentIndex;
     if (event.container.id.startsWith("squad"))
-      newSoldier.squad = Number.parseInt(event.container.id.substring(6));
-    else newSoldier.squad = null;
+      newSoldier.squadId = Number.parseInt(event.container.id.substring(6));
+    else newSoldier.squadId = null;
+
+    if (
+      !newSoldier.squadId &&
+      !oldSoldier.squadId &&
+      newSoldier.division == oldSoldier.division
+    )
+      return;
 
     this.socket.emit("move-soldier", { oldSoldier, newSoldier });
   }
 
   private connectToSocket() {
-    this.socket = io("localhost:3000", {
+    this.socket = io.connect("https://api.91pzg.de", {
       query: { eventId: this.eventId.toString() },
     });
 
     this.socket.on("create-squad", (squad: SquadDto) => {
+      console.log("test");
       this.getDivision(squad.division).addSquad(squad);
     });
 
@@ -84,23 +111,15 @@ export class RosterDataService {
         oldSoldier: Enrolment;
         newSoldier: Enrolment;
       }) => {
-        if (newSoldier.division == oldSoldier.division) {
-          const division = this.getDivision(newSoldier.division);
-          if (oldSoldier.squad == newSoldier.squad) {
-            if (oldSoldier.squad) {
-              division.moveInSquad(
-                oldSoldier.position,
-                newSoldier.position,
-                newSoldier.squad
-              );
-            }
-          } else {
-            division.moveFrom(oldSoldier);
-            division.moveTo(newSoldier);
-          }
+        const newDivision = this.getDivision(newSoldier.division);
+        if (oldSoldier.squadId && oldSoldier.squadId == newSoldier.squadId) {
+          newDivision.moveInSquad(
+            oldSoldier.position,
+            newSoldier.position,
+            newSoldier.squadId
+          );
         } else {
           const oldDivision = this.getDivision(oldSoldier.division);
-          const newDivision = this.getDivision(newSoldier.division);
           oldDivision.moveFrom(oldSoldier);
           newDivision.moveTo(newSoldier);
         }

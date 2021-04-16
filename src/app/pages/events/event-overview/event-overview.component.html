@@ -9,18 +9,18 @@
         ><div class="row">
           <div class="col-6 small-text">Datum:</div>
           <div class="col-6 right-align small-text">
-            {{ event?.datum | localDate }}
+            {{ event?.date | localDate }}
           </div>
         </div>
         <div class="row">
           <div class="col-6 small-text">Vorbesprechung:</div>
           <div class="col-6 right-align small-text">
-            {{ event?.vorbesprechung | localDate }}
+            {{ event?.briefing | localDate }}
           </div>
         </div></nb-card-body
       >
       <nb-card-body>
-        {{ event?.beschreibung }}
+        {{ event?.description }}
       </nb-card-body>
       <nb-card-footer
         ><div class="row">
@@ -36,19 +36,19 @@
         ><div class="row">
           <div class="col-md-3 col-6">
             <div class="small-text">Kommandant:</div>
-            <div>{{ event?.kommandant }}</div>
+            <div>{{ event?.commander }}</div>
           </div>
           <div class="col-md-3 col-6">
             <div class="small-text">Runden:</div>
-            <div>{{ event?.runden }}</div>
+            <div>{{ event?.rounds }}</div>
           </div>
           <div class="col-md-3 col-6">
             <div class="small-text">Karte:</div>
-            <div>{{ event?.karte }}</div>
+            <div>{{ event?.map }}</div>
           </div>
           <div class="col-md-3 col-6">
             <div class="small-text">Seite:</div>
-            <div>{{ event?.seite }}</div>
+            <div>{{ event?.faction }}</div>
           </div>
         </div></nb-card-body
       >
@@ -62,11 +62,11 @@
         ><div class="row">
           <div class="col-6">
             <div class="small-text">Spieler:</div>
-            <div>{{ event?.teilnehmer }}/{{ event?.spielerzahl }}</div>
+            <div>{{ event?.playerCount }}/{{ event?.maxPlayerCount }}</div>
           </div>
           <div class="col-6">
             <div class="small-text">Anmeldefrist:</div>
-            <div>{{ event?.anmeldefrist | localDate }}</div>
+            <div>{{ event?.registerByDate | localDate }}</div>
           </div>
         </div></nb-card-body
       >
@@ -81,7 +81,7 @@
           </div>
           <div class="col-6">
             <div class="small-text">Passwort:</div>
-            <div>{{ event?.passwort }}</div>
+            <div>{{ event?.password }}</div>
           </div>
         </div></nb-card-body
       >

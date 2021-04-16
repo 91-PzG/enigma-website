@@ -11,8 +11,8 @@ export interface MemberAutocomplete {
 export class MemberAutocompleteData {
   constructor(private http: HttpClient) {}
   getData(): Observable<MemberAutocomplete[]> {
-    return this.http.get(
-      "https://dev.samuelhoera.dev/users/list"
-    ) as Observable<MemberAutocomplete[]>;
+    return this.http.get("https://api.91pzg.de/users/list") as Observable<
+      MemberAutocomplete[]
+    >;
   }
 }

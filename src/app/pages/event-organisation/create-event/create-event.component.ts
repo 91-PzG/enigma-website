@@ -34,12 +34,49 @@ export class CreateEventComponent {
   sending = false;
 
   eventDto = {};
+  controlDto = {};
   result = { header: "Creating event...", button: "Try again" };
 
   constructor(private router: Router, private http: HttpClient) {}
 
-  next(dto: DiscordForm | InfoForm | OverviewForm | GameForm) {
-    Object.entries(dto).forEach(([key, value]) => (this.eventDto[key] = value));
+  discordNext(dto: DiscordForm) {
+    this.eventDto["mandatory"] = dto.mandatory;
+    this.eventDto["singlePool"] = dto.singlePool;
+    this.eventDto["channelName"] = dto.channel.name;
+    if (!dto.sendToDiscord) this.eventDto["autoPublishDate"] = dto.publishDate;
+
+    this.controlDto["publish"] = dto.sendToDiscord;
+
+    this.stepper.next();
+    this.submit();
+  }
+
+  infoNext(dto: InfoForm) {
+    this.eventDto["meetingPoint"] = dto.treffpunkt;
+    this.eventDto["server"] = dto.server;
+    this.eventDto["password"] = dto.passwort;
+    this.eventDto["briefing"] = dto.vorbesprechung;
+
+    this.stepper.next();
+  }
+
+  overviewNext(dto: OverviewForm) {
+    this.eventDto["name"] = dto.name;
+    this.eventDto["date"] = dto.datum;
+    this.eventDto["description"] = dto.beschreibung;
+    this.eventDto["registerByDate"] = dto.anmeldefrist;
+
+    this.controlDto["organisator"] = dto.organisator;
+
+    this.stepper.next();
+  }
+
+  gameNext(dto: GameForm) {
+    this.eventDto["commander"] = dto.kommandant;
+    this.eventDto["rounds"] = dto.runden;
+    this.eventDto["hllMap"] = dto.karte;
+    this.eventDto["faction"] = dto.seite;
+
     this.stepper.next();
   }
 
@@ -47,18 +84,22 @@ export class CreateEventComponent {
     this.stepper.previous();
   }
 
-  submit(dto: DiscordForm) {
+  submit() {
     this.sending = true;
     setTimeout(() => (this.sending = false), 1000);
-    this.next(dto);
     this.commitEvent();
   }
 
   commitEvent() {
+    console.log(this.eventDto);
     this.http
-      .post("https://dev.samuelhoera.dev/events", this.eventDto)
+      .post("https://api.91pzg.de/events", {
+        data: this.eventDto,
+        control: this.controlDto,
+      })
       .subscribe(
         (data: any) => {
+          this.eventId = data.id;
           this.result.header = "Event successfully created!";
           this.result.button = "View Event";
         },
@@ -70,7 +111,7 @@ export class CreateEventComponent {
   }
 
   finalButton() {
-    if (this.eventId) console.log("Route to event");
+    if (this.eventId) this.router.navigate(["events", this.eventId]);
     else this.stepper.reset();
   }
 }

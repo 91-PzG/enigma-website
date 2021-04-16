@@ -16,6 +16,7 @@ export class Squad implements SquadDto {
   members: Enrolment[];
 
   constructor(data: SquadDto) {
+    console.log(data);
     this.id = data.id;
     this.name = data.name;
     this.position = data.position;
@@ -46,7 +47,7 @@ export class Squad implements SquadDto {
 
     this.members.splice(oldPos, 1);
     this.members.forEach((s) => {
-      if (s.position >= left && s.position <= right) s.position += 1 * dir;
+      if (s.position >= left && s.position <= right) s.position += dir;
     });
   }
 }

@@ -1,6 +1,14 @@
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Roster } from "./roster";
 
-export abstract class RosterData {
-  abstract getData(id: number): Observable<Roster>;
+@Injectable()
+export class RosterData {
+  constructor(private http: HttpClient) {}
+  getData(id: number): Observable<Roster> {
+    return this.http.get(
+      `https://api.91pzg.de/enrolment/${id}`
+    ) as Observable<Roster>;
+  }
 }

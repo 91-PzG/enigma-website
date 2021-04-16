@@ -11,7 +11,8 @@ export class RoleProvider implements NbRoleProvider {
   getRole(): Observable<string[]> {
     return this.authService.onTokenChange().pipe(
       map((token: NbAuthJWTToken) => {
-        return token.isValid() ? ["clanrat"] : ["guest"];
+        if (!token.isValid()) return ["guest"];
+        return token.getPayload().roles || ["guest"];
       })
     );
   }

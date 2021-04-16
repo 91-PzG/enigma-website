@@ -1,34 +1,42 @@
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
 export interface HLLEvent {
   id: number;
   name: string;
-  beschreibung: string;
-  datum: string;
-  treffpunkt: string;
+  description: string;
+  date: string;
+  meetingPoint: string;
   server: string;
-  passwort: string;
-  anmeldefrist: string;
-  spielerzahl: number;
-  teilnehmer: number;
+  password: string;
+  registerByDate: string;
+  maxPlayerCount: number;
+  playerCount: number;
   organisator: string;
-  verpflichtend: boolean;
+  mandatory: boolean;
   closed: true;
-  vorbesprechung: string;
-  runden: number;
-  karte: string;
-  seite: string;
-  kommandant: string;
+  briefing: string;
+  rounds: number;
+  map: string;
+  faction: string;
+  commander: string;
   locked: boolean;
-  anmeldung: Anmeldung | null;
+  enrolment: Enrolment | null;
 }
 
-export interface Anmeldung {
-  type: string;
-  squad: number;
-  abteilung: string;
+export interface Enrolment {
+  enrolmentType: string;
+  squad: string;
+  division: string;
 }
 
-export abstract class HLLEventData {
-  abstract getData(eventId: number): Observable<HLLEvent>;
+@Injectable()
+export class HLLEventData {
+  constructor(private http: HttpClient) {}
+  getData(eventId: number): Observable<HLLEvent> {
+    return this.http.get(
+      `https://api.91pzg.de/events/${eventId}`
+    ) as Observable<HLLEvent>;
+  }
 }
