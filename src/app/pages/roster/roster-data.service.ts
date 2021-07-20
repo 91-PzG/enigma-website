@@ -48,7 +48,6 @@ export class RosterDataService {
 
     const observable = this.service.getData(id);
     observable.subscribe((data) => {
-      console.log(data);
       this.data = new Roster(data);
     });
 
@@ -93,12 +92,11 @@ export class RosterDataService {
   }
 
   private connectToSocket() {
-    this.socket = io.connect("https://api.91pzg.de", {
+    this.socket = io.connect("https://api.91-pzg.de", {
       query: { eventId: this.eventId.toString() },
     });
 
     this.socket.on("create-squad", (squad: SquadDto) => {
-      console.log("test");
       this.getDivision(squad.division).addSquad(squad);
     });
 

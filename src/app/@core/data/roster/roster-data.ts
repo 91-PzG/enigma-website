@@ -8,7 +8,7 @@ export class RosterData {
   constructor(private http: HttpClient) {}
   getData(id: number): Observable<Roster> {
     return this.http.get(
-      `https://api.91pzg.de/enrolment/${id}`
+      `https://api.91-pzg.de/enrolment/${id}`
     ) as Observable<Roster>;
   }
 }

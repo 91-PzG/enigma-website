@@ -8,6 +8,7 @@ import {
   NbActionsModule,
   NbAlertModule,
   NbButtonModule,
+  NbCardModule,
   NbCheckboxModule,
   NbContextMenuModule,
   NbIconModule,
@@ -20,7 +21,13 @@ import {
   NbThemeModule,
   NbUserModule,
 } from "@nebular/theme";
-import { FooterComponent, HeaderComponent, LoginComponent } from "./components";
+import {
+  FooterComponent,
+  HeaderComponent,
+  LoginComponent,
+  OAuth2CallbackComponent,
+  OAuth2LoginComponent,
+} from "./components";
 import {
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
@@ -47,6 +54,7 @@ const NB_MODULES = [
   NbSelectModule,
   NbIconModule,
   NbEvaIconsModule,
+  NbCardModule,
 ];
 const COMPONENTS = [
   HeaderComponent,
@@ -55,6 +63,8 @@ const COMPONENTS = [
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
   LoginComponent,
+  OAuth2CallbackComponent,
+  OAuth2LoginComponent,
 ];
 const PIPES = [LocalDatePipe];
 

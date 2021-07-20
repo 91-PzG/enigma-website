@@ -11,7 +11,7 @@ export interface EventChannel {
 export class EventchannelData {
   constructor(private http: HttpClient) {}
   getData(): Observable<EventChannel[]> {
-    return this.http.get("https://api.91pzg.de/channels") as Observable<
+    return this.http.get("https://api.91-pzg.de/channels") as Observable<
       EventChannel[]
     >;
   }

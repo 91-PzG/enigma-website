@@ -18,7 +18,7 @@ export interface EventListEntry {
 export class EventListData {
   constructor(private http: HttpClient) {}
   getData(): Observable<EventListEntry[]> {
-    return this.http.get("https://api.91pzg.de/") as Observable<
+    return this.http.get("https://api.91-pzg.de/events") as Observable<
       EventListEntry[]
     >;
   }

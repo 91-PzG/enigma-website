@@ -8,6 +8,7 @@ import {
 import {
   NbAuthJWTToken,
   NbAuthModule,
+  NbOAuth2AuthStrategy,
   NbPasswordAuthStrategy,
 } from "@nebular/auth";
 import { NbRoleProvider, NbSecurityModule } from "@nebular/security";
@@ -63,10 +64,20 @@ export const NB_CORE_PROVIDERS = [
     strategies: [
       NbPasswordAuthStrategy.setup({
         name: "email",
-        baseEndpoint: "https://api.91pzg.de/",
+        baseEndpoint: "https://api.91-pzg.de/",
         login: { endpoint: "auth/signin", method: "post" },
         logout: { endpoint: "" },
         token: { class: NbAuthJWTToken, key: "accessToken" },
+      }),
+      NbOAuth2AuthStrategy.setup({
+        name: "discord",
+        clientId: "630819443236405250",
+        authorize: {
+          endpoint: "https://discord.com/api/oauth2/authorize",
+          responseType: "token",
+          scope: "identify",
+          redirectUri: "http://localhost:4200/auth/callback",
+        },
       }),
     ],
   }).providers,

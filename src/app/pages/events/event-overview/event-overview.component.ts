@@ -43,7 +43,12 @@ export class EventOverviewComponent {
             status: "primary",
             message: `Du hast dich für das Event angemeldet${
               this.event.enrolment.squad
-                ? ` und bist in Squad ${this.event.enrolment.squad} ${this.event.enrolment.division} eingeteilt`
+                ? ` und bist in Squad ${
+                    this.event.enrolment.squad.name
+                  } in der ${
+                    this.event.enrolment.division.charAt(0).toUpperCase() +
+                    this.event.enrolment.division.slice(1)
+                  } Abteilung eingeteilt`
                 : ",aber bist noch nicht eingeteilt"
             }.`,
           };

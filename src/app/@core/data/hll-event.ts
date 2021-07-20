@@ -18,7 +18,7 @@ export interface HLLEvent {
   closed: true;
   briefing: string;
   rounds: number;
-  map: string;
+  hllMap: string;
   faction: string;
   commander: string;
   locked: boolean;
@@ -27,7 +27,7 @@ export interface HLLEvent {
 
 export interface Enrolment {
   enrolmentType: string;
-  squad: string;
+  squad: { name: string };
   division: string;
 }
 
@@ -36,7 +36,7 @@ export class HLLEventData {
   constructor(private http: HttpClient) {}
   getData(eventId: number): Observable<HLLEvent> {
     return this.http.get(
-      `https://api.91pzg.de/events/${eventId}`
+      `https://api.91-pzg.de/events/${eventId}`
     ) as Observable<HLLEvent>;
   }
 }

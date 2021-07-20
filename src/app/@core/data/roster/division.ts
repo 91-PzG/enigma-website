@@ -20,6 +20,7 @@ export class Division {
   constructor(data: DivisionDto) {
     this.pool = data.pool;
     this.reserve = data.reserve;
+    console.log(data);
     data.squads.forEach((squad) => {
       this.squads.push(new Squad(squad));
       this.enroled += squad.members?.length;

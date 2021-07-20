@@ -91,9 +91,8 @@ export class CreateEventComponent {
   }
 
   commitEvent() {
-    console.log(this.eventDto);
     this.http
-      .post("https://api.91pzg.de/events", {
+      .post("https://api.91-pzg.de/events", {
         data: this.eventDto,
         control: this.controlDto,
       })
@@ -105,7 +104,6 @@ export class CreateEventComponent {
         },
         (error: HttpErrorResponse) => {
           this.result.header = `${error.status}: ${error.statusText}`;
-          console.log(error);
         }
       );
   }

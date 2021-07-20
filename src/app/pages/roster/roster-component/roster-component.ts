@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { NavigationStart, Router } from "@angular/router";
 import { NbAccessChecker } from "@nebular/security";
+import { filter } from "rxjs/operators";
 import { CreateSquadComponent } from "../create-squad/create-squad.component";
 import { RosterDataService } from "../roster-data.service";
 import { RosterDivisionComponent } from "../roster-division/roster-division.component";
@@ -30,6 +31,12 @@ export class RosterComponent {
     router: Router
   ) {
     this.eventId = Number.parseInt(router.url.split("/")[2]);
+    router.events
+      .pipe(filter((event) => event instanceof NavigationStart))
+      .subscribe(() => {
+        console.log("test");
+        this.service.socket?.disconnect();
+      });
     this.refresh();
   }
 
