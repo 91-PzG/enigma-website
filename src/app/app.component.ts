@@ -14,7 +14,8 @@ export class AppComponent {
     private domSanitizer: DomSanitizer
   ) {
     this.iconLibraries.registerSvgPack("roles", {
-      antiTank: '<img src="../assets/role_icons/ico_HLLAntiTank.svg">',
+      antiTank:
+        '<img src="../assets/role_icons/ico_HLLAntiTank.svg" width="25px">',
     });
   }
 }
