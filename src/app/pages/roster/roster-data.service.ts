@@ -1,6 +1,7 @@
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { Injectable } from "@angular/core";
 import * as io from "socket.io-client";
+import { environment } from "../../../environments/environment";
 import {
   Division,
   DivisionDto,
@@ -92,7 +93,7 @@ export class RosterDataService {
   }
 
   private connectToSocket() {
-    this.socket = io.connect("https://api.91-pzg.de", {
+    this.socket = io.connect(environment.api, {
       query: { eventId: this.eventId.toString() },
     });
 

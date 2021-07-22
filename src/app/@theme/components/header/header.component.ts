@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userMenu: NbMenuItem[] = [
     { title: "Profile" },
-    { title: "Log in", link: "auth/login" },
+    { title: "Log in", link: "auth/discord" },
   ];
 
   constructor(
@@ -134,7 +134,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private logout() {
-    this.userMenu = [{ title: "Log in", link: "auth/login" }];
+    this.userMenu = [{ title: "Log in", link: "auth/discord" }];
   }
 
   private setLocalTheme(theme: string) {

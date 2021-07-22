@@ -1,14 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
-import {
-  NbAuthJWTToken,
-  NbAuthResult,
-  NbAuthService,
-  NbTokenService,
-} from "@nebular/auth";
+import { NbAuthJWTToken, NbAuthService, NbTokenService } from "@nebular/auth";
 import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import { environment } from "../../../../../environments/environment";
 
 @Component({
   selector: "oauth2-callback",
@@ -27,22 +22,20 @@ export class OAuth2CallbackComponent implements OnDestroy {
     private http: HttpClient,
     private tokenService: NbTokenService
   ) {
-    this.authService
-      .authenticate("discord")
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((authResult: NbAuthResult) => {
-        if (authResult.isSuccess() && authResult.getRedirect()) {
-          this.http
-            .get("http://localhost:3333/auth/discord", {
-              params: { token: authResult.getResponse().access_token },
-            })
-            .subscribe((enigmaToken: { accessToken: string }) => {
-              this.tokenService.set(
-                new NbAuthJWTToken(enigmaToken.accessToken, "enigma")
-              );
-              this.router.navigateByUrl(authResult.getRedirect());
-            });
-        }
+    const token = this.router.url.split("&")[1].split("=")[1];
+    this.authenticate(token);
+  }
+
+  private authenticate(token: string) {
+    this.http
+      .get(`${environment.api}/auth/discord`, {
+        params: { token },
+      })
+      .subscribe((enigmaToken: { accessToken: string }) => {
+        this.tokenService.set(
+          new NbAuthJWTToken(enigmaToken.accessToken, "enigma")
+        );
+        this.router.navigateByUrl("");
       });
   }
 

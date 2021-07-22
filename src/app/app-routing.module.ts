@@ -1,14 +1,7 @@
 import { NgModule } from "@angular/core";
 import { ExtraOptions, RouterModule, Routes } from "@angular/router";
+import { NbAuthComponent, NbLogoutComponent } from "@nebular/auth";
 import {
-  NbAuthComponent,
-  NbLogoutComponent,
-  NbRegisterComponent,
-  NbRequestPasswordComponent,
-  NbResetPasswordComponent,
-} from "@nebular/auth";
-import {
-  LoginComponent,
   OAuth2CallbackComponent,
   OAuth2LoginComponent,
 } from "./@theme/components";
@@ -19,10 +12,6 @@ const routes: Routes = [
     component: NbAuthComponent,
     children: [
       {
-        path: "login",
-        component: LoginComponent,
-      },
-      {
         path: "callback",
         component: OAuth2CallbackComponent,
       },
@@ -31,20 +20,8 @@ const routes: Routes = [
         component: OAuth2LoginComponent,
       },
       {
-        path: "register",
-        component: NbRegisterComponent,
-      },
-      {
         path: "logout",
         component: NbLogoutComponent,
-      },
-      {
-        path: "request-password",
-        component: NbRequestPasswordComponent,
-      },
-      {
-        path: "reset-password",
-        component: NbResetPasswordComponent,
       },
     ],
   },

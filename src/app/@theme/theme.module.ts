@@ -24,7 +24,6 @@ import {
 import {
   FooterComponent,
   HeaderComponent,
-  LoginComponent,
   OAuth2CallbackComponent,
   OAuth2LoginComponent,
 } from "./components";
@@ -62,7 +61,6 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
-  LoginComponent,
   OAuth2CallbackComponent,
   OAuth2LoginComponent,
 ];

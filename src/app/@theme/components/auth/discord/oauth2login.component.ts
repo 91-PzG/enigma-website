@@ -1,58 +1,26 @@
-import { Component, OnDestroy } from "@angular/core";
-import { NbAuthOAuth2Token, NbAuthResult, NbAuthService } from "@nebular/auth";
+import { DOCUMENT } from "@angular/common";
+import { Component, Inject, OnDestroy } from "@angular/core";
+import { NbAuthOAuth2Token } from "@nebular/auth";
 import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import { environment } from "../../../../../environments/environment";
 
 @Component({
   selector: "oauth2-login",
-  template: `
-    <nb-layout>
-      <nb-layout-column>
-        <nb-card>
-          <nb-card-body>
-            <p>Current User Authenticated: {{ !!token }}</p>
-            <p>Current User Token: {{ token | json }}</p>
-            <button nbButton status="success" *ngIf="!token" (click)="login()">
-              Sign In with Discord
-            </button>
-            <button nbButton status="warning" *ngIf="token" (click)="logout()">
-              Sign Out
-            </button>
-          </nb-card-body>
-        </nb-card>
-      </nb-layout-column>
-    </nb-layout>
-  `,
+  template: ` test `,
 })
 export class OAuth2LoginComponent implements OnDestroy {
   token: NbAuthOAuth2Token;
 
   private destroy$ = new Subject<void>();
 
-  constructor(private authService: NbAuthService) {
-    this.authService
-      .onTokenChange()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((token: NbAuthOAuth2Token) => {
-        this.token = null;
-        if (token && token.isValid()) {
-          this.token = token;
-        }
-      });
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.login();
   }
 
   login() {
-    this.authService
-      .authenticate("discord")
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((authResult: NbAuthResult) => {});
-  }
+    const discordAuthUrl = `${environment.discordOauth2.endpoint}?client_id=${environment.discordOauth2.clientId}&redirect_uri=${environment.discordOauth2.redirectUri}&response_type=${environment.discordOauth2.responseType}&scope=${environment.discordOauth2.scope}`;
 
-  logout() {
-    this.authService
-      .logout("discord")
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((authResult: NbAuthResult) => {});
+    this.document.location.href = discordAuthUrl;
   }
 
   ngOnDestroy(): void {

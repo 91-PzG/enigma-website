@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Component, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { NbStepperComponent } from "@nebular/theme";
+import { environment } from "../../../../environments/environment";
 import {
   DiscordComponent,
   DiscordForm,
@@ -92,7 +93,7 @@ export class CreateEventComponent {
 
   commitEvent() {
     this.http
-      .post("https://api.91-pzg.de/events", {
+      .post(`${environment.api}/events`, {
         data: this.eventDto,
         control: this.controlDto,
       })
