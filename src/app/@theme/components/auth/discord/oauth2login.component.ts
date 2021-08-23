@@ -6,7 +6,7 @@ import { environment } from "../../../../../environments/environment";
 
 @Component({
   selector: "oauth2-login",
-  template: ` test `,
+  template: ` Redirecting to Discord `,
 })
 export class OAuth2LoginComponent implements OnDestroy {
   token: NbAuthOAuth2Token;

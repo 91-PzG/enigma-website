@@ -20,7 +20,6 @@ export class Division {
   constructor(data: DivisionDto) {
     this.pool = data.pool;
     this.reserve = data.reserve;
-    console.log(data);
     data.squads.forEach((squad) => {
       this.squads.push(new Squad(squad));
       this.enroled += squad.members?.length;
@@ -95,5 +94,13 @@ export class Division {
 
   renameSquad(name: string, position: number) {
     this.squads[position].name = name;
+  }
+
+  setAttendance(soldier: Enrolment) {
+    if (soldier.squadId == null) {
+      if (soldier.enrolmentType == "AN") {
+        //const index = this.pool.findIndex((soldier)=>{})
+      }
+    }
   }
 }

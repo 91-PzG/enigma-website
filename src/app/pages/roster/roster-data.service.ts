@@ -137,6 +137,10 @@ export class RosterDataService {
     this.socket.on("rename-squad", ({ name, position, division }) => {
       this.getDivision(division).renameSquad(name, position);
     });
+
+    this.socket.on("set-attendance", ({ soldier }: { soldier: Enrolment }) => {
+      this.getDivision(soldier.division);
+    });
   }
 
   private getDivision(division: string): Division {

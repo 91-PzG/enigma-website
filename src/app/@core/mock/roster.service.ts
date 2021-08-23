@@ -17,6 +17,7 @@ export class RosterService {
       squadId: null,
       position: null,
       role: "Commander",
+      isPresent: true,
     },
     infanterie: {
       pool: [
@@ -31,6 +32,7 @@ export class RosterService {
           squadId: null,
           position: null,
           role: null,
+          isPresent: true,
         },
         {
           id: 3,
@@ -43,6 +45,7 @@ export class RosterService {
           squadId: null,
           position: null,
           role: null,
+          isPresent: true,
         },
         {
           id: 4,
@@ -55,6 +58,7 @@ export class RosterService {
           squadId: null,
           position: null,
           role: null,
+          isPresent: true,
         },
         {
           id: 5,
@@ -67,6 +71,7 @@ export class RosterService {
           squadId: null,
           position: null,
           role: null,
+          isPresent: true,
         },
       ],
       reserve: [
@@ -81,6 +86,7 @@ export class RosterService {
           squadId: null,
           position: null,
           role: null,
+          isPresent: true,
         },
       ],
       squads: [
@@ -101,6 +107,7 @@ export class RosterService {
               squadId: 1,
               position: 0,
               role: null,
+              isPresent: true,
             },
           ],
         },
@@ -121,6 +128,7 @@ export class RosterService {
               squadId: 2,
               position: 0,
               role: null,
+              isPresent: true,
             },
           ],
         },
@@ -141,6 +149,7 @@ export class RosterService {
               squadId: 3,
               position: 0,
               role: null,
+              isPresent: true,
             },
           ],
         },
@@ -161,6 +170,7 @@ export class RosterService {
               squadId: 4,
               position: 0,
               role: null,
+              isPresent: true,
             },
           ],
         },
@@ -179,6 +189,7 @@ export class RosterService {
           squadId: null,
           position: null,
           role: null,
+          isPresent: true,
         },
       ],
       reserve: [
@@ -193,6 +204,7 @@ export class RosterService {
           squadId: null,
           position: null,
           role: null,
+          isPresent: true,
         },
       ],
       squads: [
@@ -213,6 +225,7 @@ export class RosterService {
               squadId: 5,
               position: 0,
               role: null,
+              isPresent: true,
             },
           ],
         },
@@ -231,6 +244,7 @@ export class RosterService {
           squadId: null,
           position: null,
           role: null,
+          isPresent: true,
         },
       ],
       reserve: [
@@ -245,6 +259,7 @@ export class RosterService {
           squadId: null,
           position: null,
           role: null,
+          isPresent: true,
         },
       ],
       squads: [
@@ -265,6 +280,7 @@ export class RosterService {
               squadId: 6,
               position: 0,
               role: null,
+              isPresent: true,
             },
           ],
         },
@@ -283,6 +299,7 @@ export class RosterService {
           squadId: null,
           position: null,
           role: null,
+          isPresent: true,
         },
       ],
       reserve: [
@@ -297,6 +314,7 @@ export class RosterService {
           squadId: null,
           position: null,
           role: null,
+          isPresent: true,
         },
       ],
       squads: [
@@ -317,6 +335,7 @@ export class RosterService {
               squadId: 7,
               position: 0,
               role: null,
+              isPresent: true,
             },
           ],
         },

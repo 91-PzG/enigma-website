@@ -6,7 +6,7 @@
     background: nb-theme(background-basic-color-2);
   }
 
-  .soldier-box {
+  .soldierbox {
     border-bottom: solid 1px nb-theme(border-basic-color-4);
     color: nb-theme(text-hint-color);
     background: nb-theme(background-basic-color-2);
@@ -20,19 +20,19 @@
   overflow: hidden;
 }
 
-.soldier-box {
+.soldierbox {
   width: 100%;
   padding: 10px 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  //justify-content: space-between;
-  box-sizing: border-box;
+  box-sizing: content-box;
   cursor: move;
   font-size: 15px;
+  height: 20px;
 }
 
-.soldier-box:last-child {
+.soldierbox:last-child {
   border: none !important;
 }
 

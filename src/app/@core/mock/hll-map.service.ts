@@ -16,6 +16,8 @@ export class HLLMapService extends HLLMapData {
     { name: "Omaha Beach" },
     { name: "Hill 400" },
     { name: "Purple Heart Lane" },
+    { name: "Kursk" },
+    { name: "Stalingrad" },
     { name: "folgt" },
   ];
 

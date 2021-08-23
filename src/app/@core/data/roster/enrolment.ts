@@ -13,6 +13,7 @@ export class Enrolment {
   squadId: number | null;
   position: number;
   role: Roles;
+  isPresent: boolean;
 
   constructor(data: Enrolment) {
     this.id = data.id;

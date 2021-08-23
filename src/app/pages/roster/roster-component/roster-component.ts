@@ -7,12 +7,14 @@ import { RosterDataService } from "../roster-data.service";
 import { RosterDivisionComponent } from "../roster-division/roster-division.component";
 import { RosterOverviewComponent } from "../roster-overview/roster-overview.component";
 import { RosterSquadComponent } from "../roster-squad/roster-squad.component";
+import { SoldierBoxComponent } from "../soldier-box/soldier-box.component";
 
 export const ROSTER_COMPONENTS = [
   RosterOverviewComponent,
   RosterDivisionComponent,
   RosterSquadComponent,
   CreateSquadComponent,
+  SoldierBoxComponent,
 ];
 
 @Component({
@@ -33,10 +35,7 @@ export class RosterComponent {
     this.eventId = Number.parseInt(router.url.split("/")[2]);
     router.events
       .pipe(filter((event) => event instanceof NavigationStart))
-      .subscribe(() => {
-        console.log("test");
-        this.service.socket?.disconnect();
-      });
+      .subscribe(() => {});
     this.refresh();
   }
 

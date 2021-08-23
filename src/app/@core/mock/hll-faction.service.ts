@@ -9,6 +9,7 @@ export class HLLFactionService extends HLLFactionData {
   data: HLLFaction[] = [
     { name: "Alliierte" },
     { name: "Achsenmächte" },
+    { name: "Soviets" },
     { name: "folgt" },
   ];
 

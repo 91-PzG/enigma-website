@@ -4,13 +4,13 @@
 
 export const environment = {
   production: false,
-  api: "http://localhost:3333",
+  api: "https://api.91-pzg.de",
   discordOauth2: {
     endpoint: "https://discord.com/api/oauth2/authorize",
     responseType: "token",
     scope: "identify",
     redirectUri: "http://localhost:4200/auth/callback",
-    clientId: "664920660719697940",
+    clientId: "630819443236405250",
   },
 };
 
