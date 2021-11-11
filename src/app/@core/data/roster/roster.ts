@@ -34,7 +34,8 @@ export class Roster {
       this.infanterie.enroled +
       this.armor.enroled +
       this.recon.enroled +
-      this.artillery.enroled;
+      this.artillery.enroled +
+      (this.commander ? 1 : 0);
   }
 
   setCommander(commander: Enrolment) {

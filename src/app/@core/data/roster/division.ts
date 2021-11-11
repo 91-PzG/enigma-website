@@ -95,4 +95,12 @@ export class Division {
   renameSquad(name: string, position: number) {
     this.squads[position].name = name;
   }
+
+  setAttendance(soldier: Enrolment) {
+    if (soldier.squadId == null) {
+      if (soldier.enrolmentType == "AN") {
+        //const index = this.pool.findIndex((soldier)=>{})
+      }
+    }
+  }
 }

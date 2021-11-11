@@ -16,7 +16,6 @@ export class Squad implements SquadDto {
   members: Enrolment[];
 
   constructor(data: SquadDto) {
-    console.log(data);
     this.id = data.id;
     this.name = data.name;
     this.position = data.position;

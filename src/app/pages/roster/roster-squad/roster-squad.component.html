@@ -23,12 +23,12 @@
   (cdkDropListDropped)="onDrop($event)"
   id="{{ 'squad-' + squad.id }}"
 >
-  <div
-    class="soldier-box"
+  <soldier-box
+    class="soldierbox"
     *ngFor="let soldier of this.squad.members"
     cdkDrag
     [cdkDragData]="soldier"
+    [soldier]="soldier"
   >
-    {{ soldier.username }}
-  </div>
+  </soldier-box>
 </div>

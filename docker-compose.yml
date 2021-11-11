@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  enigma-frontend:
+    build:
+      context: .
+    container_name: "enigma-frontend"
+    ports:
+      - 3001:4200

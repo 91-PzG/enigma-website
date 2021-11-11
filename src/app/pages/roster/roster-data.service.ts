@@ -1,6 +1,7 @@
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { Injectable } from "@angular/core";
 import * as io from "socket.io-client";
+import { environment } from "../../../environments/environment";
 import {
   Division,
   DivisionDto,
@@ -48,7 +49,6 @@ export class RosterDataService {
 
     const observable = this.service.getData(id);
     observable.subscribe((data) => {
-      console.log(data);
       this.data = new Roster(data);
     });
 
@@ -93,12 +93,11 @@ export class RosterDataService {
   }
 
   private connectToSocket() {
-    this.socket = io.connect("https://api.91pzg.de", {
+    this.socket = io.connect(environment.api, {
       query: { eventId: this.eventId.toString() },
     });
 
     this.socket.on("create-squad", (squad: SquadDto) => {
-      console.log("test");
       this.getDivision(squad.division).addSquad(squad);
     });
 
@@ -137,6 +136,10 @@ export class RosterDataService {
 
     this.socket.on("rename-squad", ({ name, position, division }) => {
       this.getDivision(division).renameSquad(name, position);
+    });
+
+    this.socket.on("set-attendance", ({ soldier }: { soldier: Enrolment }) => {
+      this.getDivision(soldier.division);
     });
   }
 

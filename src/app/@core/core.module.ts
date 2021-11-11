@@ -62,13 +62,19 @@ export const NB_CORE_PROVIDERS = [
   ...NbAuthModule.forRoot({
     strategies: [
       NbPasswordAuthStrategy.setup({
-        name: "email",
-        baseEndpoint: "https://api.91pzg.de/",
-        login: { endpoint: "auth/signin", method: "post" },
-        logout: { endpoint: "" },
+        name: "enigma",
         token: { class: NbAuthJWTToken, key: "accessToken" },
+        logout: {
+          endpoint: "",
+        },
       }),
     ],
+    forms: {
+      logout: {
+        redirectDelay: 0,
+        strategy: "enigma",
+      },
+    },
   }).providers,
   ...NbSecurityModule.forRoot({
     accessControl,
