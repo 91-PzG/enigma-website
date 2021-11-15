@@ -17,7 +17,7 @@ import { Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
 import {
   MemberAutocomplete,
-  MemberAutocompleteData,
+  MemberAutocompleteService,
 } from "../../../../@core/data";
 
 export type OverviewForm = {
@@ -44,8 +44,8 @@ export class OverviewFormComponent implements OnInit {
 
   @Output() next = new EventEmitter<OverviewForm>();
 
-  constructor(private fb: FormBuilder, service: MemberAutocompleteData) {
-    service.getData().subscribe((members) => {
+  constructor(private fb: FormBuilder, service: MemberAutocompleteService) {
+    service.getData().then((members) => {
       this.memberList = members;
       this.filteredMembers$ = of(this.memberList);
     });

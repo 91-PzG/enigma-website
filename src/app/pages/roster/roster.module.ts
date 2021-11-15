@@ -12,7 +12,7 @@ import {
 } from "@nebular/theme";
 import { ThemeModule } from "../../@theme/theme.module";
 import { ROSTER_COMPONENTS } from "./roster-component/roster-component";
-import { RosterDataService } from "./roster-data.service";
+import { RosterSocketService } from "./roster-data.service";
 import { RosterRoutingModule, routedComponents } from "./roster-routing.module";
 
 @NgModule({
@@ -30,6 +30,6 @@ import { RosterRoutingModule, routedComponents } from "./roster-routing.module";
     DragDropModule,
   ],
   declarations: [...routedComponents, ...ROSTER_COMPONENTS],
-  providers: [RosterDataService],
+  providers: [RosterSocketService],
 })
 export class RosterModule {}

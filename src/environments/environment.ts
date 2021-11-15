@@ -2,9 +2,12 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
+import { Environment } from "./environment.interface";
+
+export const environment: Environment = {
   production: false,
-  api: "https://api.91-pzg.de",
+  api: "http://127.0.0.1:3333",
+  mockApi: false,
   discordOauth2: {
     endpoint: "https://discord.com/api/oauth2/authorize",
     responseType: "token",
@@ -13,12 +16,3 @@ export const environment = {
     clientId: "630819443236405250",
   },
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

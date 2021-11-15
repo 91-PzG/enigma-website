@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { firstValueFrom } from "rxjs";
 import { environment } from "../../../environments/environment";
 
 export interface MemberAutocomplete {
@@ -9,11 +9,12 @@ export interface MemberAutocomplete {
 }
 
 @Injectable()
-export class MemberAutocompleteData {
+export class MemberAutocompleteService {
   constructor(private http: HttpClient) {}
-  getData(): Observable<MemberAutocomplete[]> {
-    return this.http.get(`${environment.api}/users/list`) as Observable<
-      MemberAutocomplete[]
-    >;
+
+  getData(): Promise<MemberAutocomplete[]> {
+    return firstValueFrom<MemberAutocomplete[]>(
+      this.http.get<MemberAutocomplete[]>(`${environment.api}/users/list`)
+    );
   }
 }

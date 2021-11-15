@@ -11,11 +11,11 @@ import { Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
 import {
   HLLFaction,
-  HLLFactionData,
+  HLLFactionService,
   HLLMap,
-  HLLMapData,
+  HLLMapService,
   MemberAutocomplete,
-  MemberAutocompleteData,
+  MemberAutocompleteService,
 } from "../../../../@core/data";
 
 export type GameForm = {
@@ -46,17 +46,17 @@ export class SpielFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    mapService: HLLMapData,
-    factionService: HLLFactionData,
-    memberService: MemberAutocompleteData
+    mapService: HLLMapService,
+    factionService: HLLFactionService,
+    memberService: MemberAutocompleteService
   ) {
-    mapService.getData().subscribe((maps) => {
+    mapService.getData().then((maps) => {
       this.maps = maps;
     });
-    factionService.getData().subscribe((factions) => {
+    factionService.getData().then((factions) => {
       this.factions = factions;
     });
-    memberService.getData().subscribe((members) => {
+    memberService.getData().then((members) => {
       this.memberList = members;
       this.filteredMembers$ = of(this.memberList);
     });

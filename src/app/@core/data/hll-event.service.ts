@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { firstValueFrom } from "rxjs";
 import { environment } from "../../../environments/environment";
 
 export interface HLLEvent {
@@ -33,11 +33,11 @@ export interface Enrolment {
 }
 
 @Injectable()
-export class HLLEventData {
+export class HLLEventService {
   constructor(private http: HttpClient) {}
-  getData(eventId: number): Observable<HLLEvent> {
-    return this.http.get(
-      `${environment.api}/events/${eventId}`
-    ) as Observable<HLLEvent>;
+  getData(eventId: number): Promise<HLLEvent> {
+    return firstValueFrom<HLLEvent>(
+      this.http.get<HLLEvent>(`${environment.api}/events/${eventId}`)
+    );
   }
 }

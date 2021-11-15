@@ -9,7 +9,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
-import { EventChannel, EventchannelData } from "../../../../@core/data";
+import { EventChannel, EventChannelService } from "../../../../@core/data";
 
 export type DiscordForm = {
   mandatory: boolean;
@@ -42,8 +42,8 @@ export class DiscordComponent implements OnInit {
   @Output() next = new EventEmitter<DiscordForm>();
   @Output() previous = new EventEmitter<void>();
 
-  constructor(private fb: FormBuilder, service: EventchannelData) {
-    service.getData().subscribe((channels) => {
+  constructor(private fb: FormBuilder, service: EventChannelService) {
+    service.getData().then((channels) => {
       this.eventChannels = channels;
       this.filteredChannels$ = of(this.eventChannels);
     });

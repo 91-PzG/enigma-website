@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { RosterDataService } from "../roster-data.service";
+import { RosterSocketService } from "../roster-data.service";
 
 @Component({
   selector: "roster-overview",
@@ -14,5 +14,5 @@ export class RosterOverviewComponent {
     artillery: false,
   };
 
-  constructor(public service: RosterDataService) {}
+  constructor(public service: RosterSocketService) {}
 }

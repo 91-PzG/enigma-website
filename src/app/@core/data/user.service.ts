@@ -1,4 +1,4 @@
-import { Observable } from "rxjs";
+import { Injectable } from "@angular/core";
 
 export interface User {
   contact: Contact;
@@ -9,7 +9,7 @@ export interface Contact {
   discordId: string;
   username: string;
   member: boolean;
-  comment: string;
+  comment?: string;
 }
 
 export interface Member {
@@ -26,6 +26,17 @@ export interface Member {
   missedConsecutiveEvents: number;
 }
 
-export abstract class UserData {
-  abstract getData(): Observable<User>;
+@Injectable()
+export class UserService {
+  getData(): Promise<User> {
+    const user: User = {
+      contact: {
+        discordId: "",
+        username: "",
+        member: false,
+      },
+    };
+
+    return Promise.resolve<User>(user);
+  }
 }

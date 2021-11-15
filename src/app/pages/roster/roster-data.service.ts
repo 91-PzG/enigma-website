@@ -1,16 +1,12 @@
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { Injectable } from "@angular/core";
-import * as io from "socket.io-client";
+import { io } from "socket.io-client";
 import { environment } from "../../../environments/environment";
-import {
-  Division,
-  DivisionDto,
-  Enrolment,
-  Roster,
-  RosterData,
-  RosterDto,
-  SquadDto,
-} from "../../@core/data/roster";
+import { Division, DivisionDto } from "../../../util/division";
+import { Enrolment } from "../../../util/enrolment";
+import { Roster, RosterDto } from "../../../util/roster";
+import { SquadDto } from "../../../util/squad";
+import { RosterService } from "../../@core/data";
 
 const emptyDivisionDto: DivisionDto = {
   pool: [],
@@ -27,8 +23,8 @@ const emptyRosterDto: RosterDto = {
   recon: emptyDivisionDto,
 };
 
-@Injectable({ providedIn: "root" })
-export class RosterDataService {
+@Injectable()
+export class RosterSocketService {
   data: Roster = new Roster(emptyRosterDto);
   socket: any;
   eventId: number;
@@ -40,20 +36,17 @@ export class RosterDataService {
     { name: "Artillerie", key: "artillery" },
   ];
 
-  constructor(private service: RosterData) {}
+  constructor(private service: RosterService) {}
 
-  loadRoster(id: number) {
+  async loadRoster(id: number): Promise<void> {
     if (this.socket?.connected) this.socket.disconnect();
 
     this.eventId = id;
 
-    const observable = this.service.getData(id);
-    observable.subscribe((data) => {
-      this.data = new Roster(data);
-    });
+    const data = await this.service.getData(id);
+    this.data = new Roster(data);
 
     this.connectToSocket();
-    return observable;
   }
 
   deleteSquad(id: number) {
@@ -93,7 +86,7 @@ export class RosterDataService {
   }
 
   private connectToSocket() {
-    this.socket = io.connect(environment.api, {
+    this.socket = io(environment.api, {
       query: { eventId: this.eventId.toString() },
     });
 

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { firstValueFrom } from "rxjs";
 import { environment } from "../../../environments/environment";
 
 export interface EventListEntry {
@@ -16,11 +16,11 @@ export interface EventListEntry {
 }
 
 @Injectable()
-export class EventListData {
+export class EventListService {
   constructor(private http: HttpClient) {}
-  getData(): Observable<EventListEntry[]> {
-    return this.http.get(`${environment.api}/events`) as Observable<
-      EventListEntry[]
-    >;
+  getData(): Promise<EventListEntry[]> {
+    return firstValueFrom<EventListEntry[]>(
+      this.http.get<EventListEntry[]>(`${environment.api}/events`)
+    );
   }
 }

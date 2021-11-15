@@ -11,54 +11,18 @@ import {
   NbPasswordAuthStrategy,
 } from "@nebular/auth";
 import { NbRoleProvider, NbSecurityModule } from "@nebular/security";
-import {
-  CurrentManpowerData,
-  EventchannelData,
-  EventListData,
-  HLLEventData,
-  HLLFactionData,
-  HLLMapData,
-  HrWarningsData,
-  MemberAutocompleteData,
-  RecruitsData,
-  UserData,
-} from "./data";
-import { RosterData } from "./data/roster";
-import {
-  CurrentManpowerService,
-  HLLFactionService,
-  HLLMapService,
-  HrWarningsService,
-  RecruitsService,
-  UserService,
-} from "./mock";
+import { environment } from "../../environments/environment";
+import { DataModule } from "./data/data.module";
 import { MockDataModule } from "./mock/mock-data.module";
 import { throwIfAlreadyLoaded } from "./module-import-guard";
 import { accessControl, RoleProvider } from "./security";
 import { LayoutService, StateService } from "./utils";
 
-const DATA_MOCK_SERVICES = [
-  { provide: RecruitsData, useClass: RecruitsService },
-  { provide: HrWarningsData, useClass: HrWarningsService },
-  //{ provide: HLLEventData, useClass: HLLEventService },
-  HLLEventData,
-  { provide: CurrentManpowerData, useClass: CurrentManpowerService },
-  //{ provide: EventListData, useClass: EventListService },
-  EventListData,
-  { provide: HLLMapData, useClass: HLLMapService },
-  { provide: HLLFactionData, useClass: HLLFactionService },
-  //{ provide: EventchannelData, useClass: EventChannelService },
-  EventchannelData,
-  //{ provide: MemberAutocompleteData, useClass: MemberAutocompleteService },
-  MemberAutocompleteData,
-  { provide: UserData, useClass: UserService },
-  //{ provide: RosterData, useClass: RosterService },
-  RosterData,
-];
+const DATA_MODULE: ModuleWithProviders<DataModule | MockDataModule> =
+  environment.mockApi ? MockDataModule.forRoot() : DataModule.forRoot();
 
-export const NB_CORE_PROVIDERS = [
-  ...MockDataModule.forRoot().providers,
-  ...DATA_MOCK_SERVICES,
+const CORE_PROVIDERS = [
+  ...DATA_MODULE.providers,
   ...NbAuthModule.forRoot({
     strategies: [
       NbPasswordAuthStrategy.setup({
@@ -97,7 +61,7 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
-      providers: [...NB_CORE_PROVIDERS],
+      providers: [...CORE_PROVIDERS],
     };
   }
 }

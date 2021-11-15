@@ -1,7 +1,10 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { LocalDataSource } from "ng2-smart-table";
-import { EventListData, EventListEntry } from "../../../@core/data/event-list";
+import {
+  EventListEntry,
+  EventListService,
+} from "../../../@core/data/event-list.service";
 import { LocalDatePipe } from "../../../@theme/pipes";
 import { EventListIconComponent } from "./event-list-icon.component";
 
@@ -49,10 +52,8 @@ export class EventListComponent {
 
   datePipe = new LocalDatePipe();
 
-  constructor(private service: EventListData, private router: Router) {
-    this.service
-      .getData()
-      .subscribe((data: EventListEntry[]) => this.setData(data));
+  constructor(private service: EventListService, private router: Router) {
+    this.service.getData().then((data) => this.setData(data));
   }
 
   private setData(data: EventListEntry[]) {

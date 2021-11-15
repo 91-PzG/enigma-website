@@ -1,6 +1,9 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { HLLEvent, HLLEventData } from "../../../@core/data/hll-event";
+import {
+  HLLEvent,
+  HLLEventService,
+} from "../../../@core/data/hll-event.service";
 
 @Component({
   selector: "event-overview",
@@ -13,9 +16,9 @@ export class EventOverviewComponent {
     status: "basic",
   };
 
-  constructor(private service: HLLEventData, private router: Router) {
+  constructor(private service: HLLEventService, private router: Router) {
     const eventId = Number.parseInt(router.url.split("/")[2]);
-    service.getData(eventId).subscribe((event) => this.setEvent(event));
+    service.getData(eventId).then((event) => this.setEvent(event));
   }
 
   viewSquad() {

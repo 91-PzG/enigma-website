@@ -7,8 +7,8 @@
 }
 
 .squad-name {
-  max-width: calc(100%-40px);
-  width: calc(100%-40px);
+  max-width: calc(100% - 40px);
+  width: calc(100% - 40px);
 }
 
 @include nb-install-component {

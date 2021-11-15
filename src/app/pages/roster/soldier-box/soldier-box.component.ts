@@ -1,5 +1,5 @@
 import { AfterContentInit, Component, Input } from "@angular/core";
-import { Enrolment } from "../../../@core/data/roster";
+import { Enrolment } from "../../../../util/enrolment";
 
 @Component({
   selector: "soldier-box",

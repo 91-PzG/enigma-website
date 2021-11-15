@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { NbDialogRef } from "@nebular/theme";
-import { User, UserData } from "../../../@core/data";
+import { User, UserService } from "../../../@core/data";
 
 @Component({
   selector: "user-detail-component",
@@ -12,9 +12,9 @@ export class UserDetailComponent {
 
   constructor(
     protected dialogRef: NbDialogRef<UserDetailComponent>,
-    private userData: UserData
+    private userData: UserService
   ) {
-    userData.getData().subscribe((user) => {
+    userData.getData().then((user) => {
       this.user = user;
     });
   }

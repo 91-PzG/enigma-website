@@ -1,5 +1,10 @@
-import { Compiler, Injectable, Injector, Type } from "@angular/core";
-import { NgModuleFactory } from "@angular/core/src/r3_symbols";
+import {
+  Compiler,
+  Injectable,
+  Injector,
+  NgModuleFactory,
+  Type,
+} from "@angular/core";
 import { NbDialogRef, NbDialogService } from "@nebular/theme";
 import { UserDetailComponent } from "./user-detail-component/user-detail.component";
 import { UserDetailModule } from "./user-detail.module";

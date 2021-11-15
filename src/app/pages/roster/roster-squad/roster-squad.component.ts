@@ -1,6 +1,6 @@
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { Squad } from "../../../@core/data/roster";
+import { Squad } from "../../../../util/squad";
 
 @Component({
   selector: "roster-squad",
@@ -33,9 +33,9 @@ export class RosterSquadComponent {
   }
 
   renameSquad() {
-    const name = (document.getElementById(
-      "squad-name-" + this.squad.id
-    ) as HTMLInputElement).value;
+    const name = (
+      document.getElementById("squad-name-" + this.squad.id) as HTMLInputElement
+    ).value;
     this.rename.emit({
       name,
       position: this.squad.position,

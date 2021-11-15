@@ -2,7 +2,7 @@ import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { Component, Input } from "@angular/core";
 import { NbDialogService } from "@nebular/theme";
 import { CreateSquadComponent } from "../create-squad/create-squad.component";
-import { RosterDataService } from "../roster-data.service";
+import { RosterSocketService } from "../roster-data.service";
 
 @Component({
   selector: "roster-division",
@@ -14,7 +14,7 @@ export class RosterDivisionComponent {
   @Input() edit: boolean;
 
   constructor(
-    public service: RosterDataService,
+    public service: RosterSocketService,
     private dialogService: NbDialogService
   ) {}
 

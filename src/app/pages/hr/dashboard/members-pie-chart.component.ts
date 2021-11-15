@@ -2,8 +2,8 @@ import { AfterViewInit, Component, OnDestroy } from "@angular/core";
 import { NbThemeService } from "@nebular/theme";
 import {
   CurrentManpower,
-  CurrentManpowerData,
-} from "../../../@core/data/current-manpower";
+  CurrentManpowerService,
+} from "../../../@core/data/current-manpower.service";
 
 @Component({
   selector: "hr-pie",
@@ -15,7 +15,7 @@ export class MembersPieChartComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private theme: NbThemeService,
-    private service: CurrentManpowerData
+    private service: CurrentManpowerService
   ) {}
 
   private formatData(data: CurrentManpower): { name: string; value: number }[] {
@@ -28,7 +28,7 @@ export class MembersPieChartComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().subscribe((config) => {
-      this.service.getData().subscribe((data) => {
+      this.service.getData().then((data) => {
         const colors = config.variables;
         const echarts: any = config.variables.echarts;
 

@@ -1,9 +1,8 @@
 import { Component } from "@angular/core";
-import { NavigationStart, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { NbAccessChecker } from "@nebular/security";
-import { filter } from "rxjs/operators";
 import { CreateSquadComponent } from "../create-squad/create-squad.component";
-import { RosterDataService } from "../roster-data.service";
+import { RosterSocketService } from "../roster-data.service";
 import { RosterDivisionComponent } from "../roster-division/roster-division.component";
 import { RosterOverviewComponent } from "../roster-overview/roster-overview.component";
 import { RosterSquadComponent } from "../roster-squad/roster-squad.component";
@@ -29,20 +28,16 @@ export class RosterComponent {
 
   constructor(
     public accessChecker: NbAccessChecker,
-    public service: RosterDataService,
+    public service: RosterSocketService,
     router: Router
   ) {
     this.eventId = Number.parseInt(router.url.split("/")[2]);
-    router.events
-      .pipe(filter((event) => event instanceof NavigationStart))
-      .subscribe(() => {});
     this.refresh();
   }
 
-  refresh() {
+  async refresh() {
     this.loading = true;
-    this.service.loadRoster(this.eventId).subscribe(() => {
-      this.loading = false;
-    });
+    await this.service.loadRoster(this.eventId);
+    this.loading = false;
   }
 }

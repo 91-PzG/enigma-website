@@ -1,5 +1,16 @@
-import { CommonModule } from "@angular/common";
-import { ModuleWithProviders, NgModule } from "@angular/core";
+import { ModuleWithProviders, NgModule, Provider } from "@angular/core";
+import {
+  CurrentManpowerMockService,
+  EventChannelMockService,
+  EventListMockService,
+  HLLEventMockService,
+  HLLFactionMockService,
+  HrWarningsMockService,
+  MemberAutocompleteMockService,
+  RecruitsMockService,
+  RosterMockService,
+  UserMockService,
+} from ".";
 import {
   CurrentManpowerService,
   EventChannelService,
@@ -12,24 +23,26 @@ import {
   RecruitsService,
   RosterService,
   UserService,
-} from ".";
+} from "../data";
 
-const SERVICES = [
-  RecruitsService,
-  HrWarningsService,
-  CurrentManpowerService,
-  EventListService,
-  HLLMapService,
-  HLLFactionService,
-  EventChannelService,
-  MemberAutocompleteService,
-  HLLEventService,
-  UserService,
-  RosterService,
+const SERVICES: Provider[] = [
+  { provide: RecruitsService, useClass: RecruitsMockService },
+  { provide: HrWarningsService, useClass: HrWarningsMockService },
+  { provide: CurrentManpowerService, useClass: CurrentManpowerMockService },
+  { provide: EventListService, useClass: EventListMockService },
+  { provide: HLLMapService, useClass: HLLEventMockService },
+  { provide: HLLFactionService, useClass: HLLFactionMockService },
+  { provide: EventChannelService, useClass: EventChannelMockService },
+  {
+    provide: MemberAutocompleteService,
+    useClass: MemberAutocompleteMockService,
+  },
+  { provide: HLLEventService, useClass: HLLEventMockService },
+  { provide: UserService, useClass: UserMockService },
+  { provide: RosterService, useClass: RosterMockService },
 ];
 
 @NgModule({
-  imports: [CommonModule],
   providers: [...SERVICES],
 })
 export class MockDataModule {
