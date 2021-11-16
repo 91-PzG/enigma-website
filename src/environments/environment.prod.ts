@@ -8,7 +8,7 @@ export const environment: Environment = {
     endpoint: "https://discord.com/api/oauth2/authorize",
     responseType: "token",
     scope: "identify",
-    redirectUri: "http://localhost:4200/auth/callback",
+    redirectUri: "https://enigma.91-pzg.de/auth/callback",
     clientId: "630819443236405250",
   },
 };
