@@ -8,6 +8,7 @@ import {
   HLLMapService,
   HrWarningsService,
   MemberAutocompleteService,
+  MemberListService,
   RecruitsService,
   RosterService,
   UserService,
@@ -25,6 +26,7 @@ const DATA_SERVICES = [
   RecruitsService,
   RosterService,
   UserService,
+  MemberListService,
 ];
 
 @NgModule({

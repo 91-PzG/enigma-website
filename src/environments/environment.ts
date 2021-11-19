@@ -13,6 +13,6 @@ export const environment: Environment = {
     responseType: "token",
     scope: "identify",
     redirectUri: "http://localhost:4200/auth/callback",
-    clientId: "630819443236405250",
+    clientId: "910964507306778655",
   },
 };

@@ -6,6 +6,7 @@ export * from "./hll-faction.service";
 export * from "./hll-map.service";
 export * from "./hrWarnings.service";
 export * from "./member-autocomplete.service";
+export * from "./memberlist.service";
 export * from "./recruits.service";
 export * from "./roster.service";
 export * from "./user.service";
