@@ -4,7 +4,6 @@ export interface SquadDto {
   id: number;
   name: string;
   position: number;
-  division: string;
   members?: Enrolment[];
 }
 
@@ -12,7 +11,6 @@ export class Squad implements SquadDto {
   id: number;
   name: string;
   position: number;
-  division: string;
   members: Enrolment[];
 
   constructor(data: SquadDto) {
