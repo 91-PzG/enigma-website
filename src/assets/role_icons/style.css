@@ -1,18 +1,19 @@
 @font-face {
-  font-family: 'hllroles';
-  src:  url('fonts/hllroles.eot?djh3zw');
-  src:  url('fonts/hllroles.eot?djh3zw#iefix') format('embedded-opentype'),
-    url('fonts/hllroles.ttf?djh3zw') format('truetype'),
-    url('fonts/hllroles.woff?djh3zw') format('woff'),
-    url('fonts/hllroles.svg?djh3zw#hllroles') format('svg');
+  font-family: "hllroles";
+  src: url("fonts/hllroles.eot?djh3zw");
+  src: url("fonts/hllroles.eot?djh3zw#iefix") format("embedded-opentype"),
+    url("fonts/hllroles.ttf?djh3zw") format("truetype"),
+    url("fonts/hllroles.woff?djh3zw") format("woff"),
+    url("fonts/hllroles.svg?djh3zw#hllroles") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
-[class^="role-"], [class*=" role-"] {
+[class^="role-"],
+[class*=" role-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'hllroles' !important;
+  font-family: "hllroles" !important;
   speak: never;
   font-style: normal;
   font-weight: normal;

@@ -5,16 +5,16 @@ import { NbStepperComponent } from "@nebular/theme";
 import { environment } from "../../../../environments/environment";
 import {
   DiscordComponent,
-  DiscordForm
+  DiscordForm,
 } from "./discord-form/discord-form.component";
 import { InfoForm, InfoFormComponent } from "./info-form/info-form.component";
 import {
   OverviewForm,
-  OverviewFormComponent
+  OverviewFormComponent,
 } from "./overview-form/overview-form.component";
 import {
   GameForm,
-  SpielFormComponent
+  SpielFormComponent,
 } from "./spiel-form/spiel-form.component";
 
 export const CREATE_EVENT_COMPONENTS = [
