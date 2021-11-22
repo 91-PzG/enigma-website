@@ -51,6 +51,10 @@ export class RosterSocketService {
     this.socket.emit("rename-squad", { name, position, id });
   }
 
+  setAttandance(soldier: Enrolment) {
+    this.socket.emit("set-attendance", soldier);
+  }
+
   drop(event: CdkDragDrop<any>) {
     const oldSoldier = event.item.data;
     const newSoldier = new Enrolment(oldSoldier);
@@ -100,12 +104,15 @@ export class RosterSocketService {
       this.data.removeSquad(position);
     });
 
-    this.socket.on("rename-squad", ({ name, position }) => {
-      this.data.renameSquad(name, position);
-    });
+    this.socket.on(
+      "rename-squad",
+      ({ name, position }: { name: string; position: number }) => {
+        this.data.renameSquad(name, position);
+      }
+    );
 
-    this.socket.on("set-attendance", ({ soldier }: { soldier: Enrolment }) => {
-      // TODO
+    this.socket.on("set-attendance", (soldier: Enrolment) => {
+      this.data.setAttendance(soldier);
     });
   }
 }

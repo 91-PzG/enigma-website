@@ -62,4 +62,4 @@ jobs:
         run: npm ci --no-optional --debug && npm i --global @nestjs/cli
 
       - name: Build
-        run: npm run build
+        run: npm run build:prod

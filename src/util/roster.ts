@@ -122,8 +122,20 @@ export class Roster implements RosterDto {
   setAttendance(soldier: Enrolment) {
     if (soldier.squadId == null) {
       if (soldier.enrolmentType == "AN") {
-        //const index = this.pool.findIndex((soldier)=>{})
+        const index = this.pool.findIndex((s) => s.id == soldier.id);
+        this.pool[index] = soldier;
+      } else {
+        const index = this.reserve.findIndex((s) => s.id == soldier.id);
+        this.reserve[index] = soldier;
       }
+    } else {
+      const squadIndex = this.squads.findIndex(
+        (squad) => squad.id == soldier.squadId
+      );
+      const enrolmentIndex = this.squads[squadIndex].members.findIndex(
+        (s) => s.id == soldier.id
+      );
+      this.squads[squadIndex].members[enrolmentIndex] = soldier;
     }
   }
 }

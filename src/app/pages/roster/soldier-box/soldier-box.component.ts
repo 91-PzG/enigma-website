@@ -1,5 +1,6 @@
 import { AfterContentInit, Component, Input } from "@angular/core";
 import { Enrolment } from "../../../../util/enrolment";
+import { RosterSocketService } from "../roster-data.service";
 
 @Component({
   selector: "soldier-box",
@@ -15,20 +16,13 @@ export class SoldierBoxComponent implements AfterContentInit {
   attendance: string;
   attendanceStatus: string;
 
+  constructor(public service: RosterSocketService) {}
+
   ngAfterContentInit(): void {
     this.role = "role-" + (this.soldier.role ? this.soldier.role : "rifleman");
-
-    this.setAttendance();
   }
 
   switchAttendance() {
-    this.soldier.isPresent = !this.soldier.isPresent;
-    this.setAttendance();
-  }
-
-  setAttendance() {
-    [this.attendance, this.attendanceStatus] = this.soldier.isPresent
-      ? ["checkmark-outline", "success"]
-      : ["close-outline", "danger"];
+    this.service.setAttandance(this.soldier);
   }
 }
