@@ -12,7 +12,11 @@ import { LocalDatePipe } from "../../../@theme/pipes";
 export class MemberListComponent {
   settings = {
     pager: { display: false },
-    actions: false,
+    actions: {
+      add: false,
+      edit: true,
+      delete: false,
+    },
     columns: {
       id: {
         title: "ID",
@@ -23,17 +27,10 @@ export class MemberListComponent {
         title: "Name",
         filter: true,
       },
-      recruitSince: {
-        title: "Rekrut seit",
-        valuePrepareFunction: this.prepareDate.bind(this),
-      },
-      memberSince: {
-        title: "Mitglied seit",
-        valuePrepareFunction: this.prepareDate.bind(this),
-      },
+
       division: {
         title: "Abteilung",
-        select: true,
+        filter: true,
       },
       rank: {
         title: "Rang",
@@ -42,6 +39,14 @@ export class MemberListComponent {
       roles: {
         title: "Rollen",
         filter: true,
+      },
+      recruitSince: {
+        title: "Rekrut seit",
+        valuePrepareFunction: this.prepareDate.bind(this),
+      },
+      memberSince: {
+        title: "Mitglied seit",
+        valuePrepareFunction: this.prepareDate.bind(this),
       },
       comment: {
         title: "Bemerkungen",
@@ -60,11 +65,65 @@ export class MemberListComponent {
   }
   private setData(data: MemberListDto[]) {
     data = data.map((entry) => {
+      entry.rank = this.prepareTranslationRank(entry.rank);
+      entry.division = this.prepareTranslationDivision(entry.division);
+      entry.roles = this.prepareTranslationRoles(entry.roles);
       return entry;
     });
     this.source.load(data);
   }
   prepareDate(date: string): string {
     return this.datePipe.transform(date);
+  }
+  prepareTranslationRank(text: string): string {
+    switch (text) {
+      case "recruit":
+        return "Rekrut";
+      case "soldier":
+        return "Mannschaft";
+      case "clanrat":
+        return "Clanrat";
+      case "corporal":
+        return "Korporal";
+      default:
+        return text;
+    }
+  }
+  prepareTranslationDivision(text: string): string {
+    switch (text) {
+      case "recon":
+        return "Aufklärer";
+      case "infanterie":
+        return "Infanterie";
+      case "armor":
+        return "Panzer";
+      case "artillery":
+        return "Artillerie";
+      default:
+        return text;
+    }
+  }
+  prepareTranslationRoles(text: string): string {
+    return text
+      .slice(1, -1)
+      .split(",")
+      .map((role) => {
+        return this.translaterole(role);
+      })
+      .join(", ");
+  }
+  private translaterole(text: string): string {
+    switch (text) {
+      case "member":
+        return "Clanmitglied";
+      case "eventorga":
+        return "Eventorganisation";
+      case "hr":
+        return "Personalabteilung";
+      case "clanrat":
+        return "Clanrat";
+      default:
+        return text;
+    }
   }
 }

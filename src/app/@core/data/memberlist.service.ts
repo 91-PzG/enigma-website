@@ -10,7 +10,7 @@ export interface MemberListDto {
   rank: string;
   memberSince: Date;
   recruitSince: Date;
-  roles: string[];
+  roles: string;
   comment: string;
 }
 
