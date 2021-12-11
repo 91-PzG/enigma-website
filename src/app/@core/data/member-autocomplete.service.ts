@@ -14,7 +14,7 @@ export class MemberAutocompleteService {
 
   getData(): Promise<MemberAutocomplete[]> {
     return firstValueFrom<MemberAutocomplete[]>(
-      this.http.get<MemberAutocomplete[]>(`${environment.api}/users/list`)
+      this.http.get<MemberAutocomplete[]>(`${environment.api}/users/name-list`)
     );
   }
 }

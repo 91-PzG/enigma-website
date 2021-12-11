@@ -23,14 +23,59 @@
     nbSpinnerStatus="primary"
     nbSpinnerSize="giant"
     nbSpinnerMessage=""
-    ><nb-tabset>
-      <nb-tab tabTitle="Übersicht"><roster-overview></roster-overview></nb-tab>
-      <nb-tab
-        *ngFor="let division of this.service.divisions"
-        [tabTitle]="division.name"
-        ><roster-division
-          [division]="division.key"
-          [edit]="edit"
-        ></roster-division
-      ></nb-tab> </nb-tabset></nb-card-body
-></nb-card>
+    ><div class="row show-grid" cdkDropListGroup>
+      <div class="col-md-9">
+        <div class="row">
+          <roster-squad
+            *ngFor="let squad of this.service.data?.squads"
+            class="col-md-4"
+            [squad]="squad"
+            [edit]="edit"
+            (drop)="onDrop($event)"
+            (delete)="deleteSquad($event)"
+            (rename)="renameSquad($event)"
+          >
+          </roster-squad>
+          <div class="add-squad-button col-md-4" *ngIf="edit">
+            <button
+              nbButton
+              shape="round"
+              outline
+              status="primary"
+              (click)="createSquad()"
+            >
+              <nb-icon icon="plus-square-outline"></nb-icon>Neues Squad
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div
+          cdkDropList
+          [cdkDropListDisabled]="!edit"
+          class="soldier-list"
+          (cdkDropListDropped)="onDrop($event)"
+        >
+          <div
+            class="soldierbox"
+            *ngFor="let soldier of this.service.data?.pool"
+            cdkDrag
+            cdkDropListSortingDisabled
+            [cdkDragData]="soldier"
+          >
+            {{ soldier.name }}
+          </div>
+          <!--<div
+        class="soldier-box"
+        *ngFor="let soldier of this.service.data?.reserve"
+        cdkDrag
+        cdkDropListSortingDisabled
+        [cdkDragData]="soldier"
+      >
+        {{ soldier.username }}
+      </div>-->
+        </div>
+      </div>
+    </div>
+  </nb-card-body></nb-card
+>
