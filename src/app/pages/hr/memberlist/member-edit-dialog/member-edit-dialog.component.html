@@ -1,0 +1,66 @@
+<nb-card>
+  <nb-card-header>{{ getName() }}</nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label for="recruitSince" class="label">Rekrut seit:</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="recruitSince"
+          placeholder="Datum"
+          formControlName="recruitSince"
+          [ngClass]="{
+            'form-control-danger': form.invalid && (form.dirty || form.touched)
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="recruitTill" class="label">Rekrut bis:</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="recruitTill"
+          placeholder="Datum"
+          formControlName="recruitTill"
+          [ngClass]="{
+            'form-control-danger': form.invalid && (form.dirty || form.touched)
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="memberSince" class="label">Mitglied seit:</label>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          id="memberSince"
+          placeholder="Datum"
+          formControlName="memberSince"
+          [ngClass]="{
+            'form-control-danger': form.invalid && (form.dirty || form.touched)
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="comment" class="label">Bemerkung:</label>
+        <textarea
+          rows="5"
+          type="text"
+          nbInput
+          fullWidth
+          id="comment"
+          placeholder="Bemerkung"
+          formControlName="comment"
+          [ngClass]="{
+            'form-control-danger': form.invalid && (form.dirty || form.touched)
+          }"
+        ></textarea>
+      </div>
+    </form>
+    <button class="navButton" nbButton (click)="onSubmit()">speichern</button>
+  </nb-card-body>
+</nb-card>

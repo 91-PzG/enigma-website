@@ -33,6 +33,10 @@ export const MENU_ITEMS: NbMenuItemWithPermissions[] = [
         link: "/hr/memberlist",
       },
       {
+        title: "Recruitlist",
+        link: "/hr/recruitlist",
+      },
+      {
         title: "Archive",
         link: "/hr/archive",
       },

@@ -12,18 +12,18 @@ export interface Contact {
   comment?: string;
 }
 
-export interface Member {
-  recruitSince: string | null;
-  recruitTill: string | null;
-  memberSince: string | null;
-  memberTill: string | null;
-  abteilung: string;
-  dienstgrad: string;
-  reserve: boolean;
-  avatar: string;
-  rechte: string;
-  missedEvents: number;
-  missedConsecutiveEvents: number;
+export class Member {
+  recruitSince: string | null = "";
+  recruitTill: string | null = "";
+  memberSince: string | null = "";
+  memberTill: string | null = "";
+  abteilung: string = "";
+  dienstgrad: string = "";
+  reserve: boolean = false;
+  avatar: string = "";
+  rechte: string = "";
+  missedEvents: number = 0;
+  missedConsecutiveEvents: number = 0;
 }
 
 @Injectable()

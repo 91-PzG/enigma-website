@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { LocalDataSource } from "ng2-smart-table";
 import { MemberListDto, MemberListService } from "../../../@core/data";
 import { LocalDatePipe } from "../../../@theme/pipes";
+import { EditButtonComponent } from "./editbutton.component";
 
 @Component({
   selector: "memberlist-component",
@@ -14,14 +15,23 @@ export class MemberListComponent {
     pager: { display: false },
     actions: {
       add: false,
-      edit: true,
+      edit: false,
       delete: false,
     },
     columns: {
+      edit: {
+        title: "Edit",
+        filter: false,
+        sort: false,
+        type: "custom",
+        renderComponent: EditButtonComponent,
+        valuePrepareFunction: (value, row, cell) => {
+          return row;
+        },
+      },
       id: {
         title: "ID",
         filter: true,
-        hide: true,
       },
       name: {
         title: "Name",
@@ -48,6 +58,7 @@ export class MemberListComponent {
         title: "Mitglied seit",
         valuePrepareFunction: this.prepareDate.bind(this),
       },
+
       comment: {
         title: "Bemerkungen",
         filter: false,
@@ -68,6 +79,7 @@ export class MemberListComponent {
       entry.rank = this.prepareTranslationRank(entry.rank);
       entry.division = this.prepareTranslationDivision(entry.division);
       entry.roles = this.prepareTranslationRoles(entry.roles);
+      entry["edit"] = "<button></button>";
       return entry;
     });
     this.source.load(data);
