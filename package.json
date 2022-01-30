@@ -95,7 +95,7 @@
     "prettier": "^2.5.1",
     "protractor": "~7.0.0",
     "rimraf": "^3.0.2",
-    "stylelint": "^14.2.0",
+    "stylelint": "^14.3.0",
     "ts-node": "^10.4.0",
     "tslint-language-service": "^0.9.9",
     "tslint": "~6.1.0",
