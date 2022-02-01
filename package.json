@@ -39,7 +39,7 @@
     "@angular/platform-browser-dynamic": "^13.2.0",
     "@angular/platform-browser": "^13.2.0",
     "@angular/router": "^13.2.0",
-    "@nebular/auth": "^9.0.0",
+    "@nebular/auth": "^9.0.1",
     "@nebular/eva-icons": "^9.0.0",
     "@nebular/moment": "^9.0.0",
     "@nebular/security": "^9.0.0",
