@@ -41,7 +41,7 @@
     "@angular/router": "^13.2.0",
     "@nebular/auth": "^9.0.0",
     "@nebular/eva-icons": "^9.0.0",
-    "@nebular/moment": "^9.0.0",
+    "@nebular/moment": "^9.0.1",
     "@nebular/security": "^9.0.0",
     "@nebular/theme": "^9.0.0",
     "bootstrap": "^5.1.3",
