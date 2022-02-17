@@ -6,7 +6,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { NbDialogService } from "@nebular/theme";
-import { Member } from "../../../../@core/data";
+import { MemberListDto, UserService } from "../../../../@core/data";
 
 @Component({
   templateUrl: "./member-edit-dialog.component.html",
@@ -15,18 +15,19 @@ import { Member } from "../../../../@core/data";
 })
 export class MemberEditDialogComponent {
   form: FormGroup;
-  member: Member = new Member();
+  member: MemberListDto = new MemberListDto();
 
   name = new FormControl("");
 
   constructor(
     private dialogService: NbDialogService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService
   ) {}
 
   ngOnIntit() {}
 
-  setMember(member: Member) {
+  setMember(member: MemberListDto) {
     this.member = member;
     this.form = this.fb.group({
       recruitSince: [member.recruitSince || "", Validators.required],
@@ -41,5 +42,10 @@ export class MemberEditDialogComponent {
     //@ts-ignore
     return this.member.name;
   }
-  onSubmit() {}
+
+  onSubmit() {
+    this.member.comment = this.form.controls[`comment`].value;
+    this.member.recruitSince = this.form.controls[`recruitSince`].value;
+    this.userService.update(this.member);
+  }
 }

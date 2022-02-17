@@ -3,13 +3,17 @@ import { Injectable } from "@angular/core";
 import { firstValueFrom } from "rxjs";
 import { environment } from "../../../environments/environment";
 
-export interface MemberListDto {
+export class MemberListDto {
   id: string;
   name: string;
   division: string;
   rank: string;
   memberSince: Date;
+  memberSinceString?: string;
   recruitSince: Date;
+  recruitSinceString?: string;
+  recruitTill: Date;
+  memberTill: Date;
   roles: string;
   comment: string;
 }

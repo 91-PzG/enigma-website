@@ -1,7 +1,15 @@
-import { Component } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+} from "@angular/core";
 import { Router } from "@angular/router";
 import { LocalDataSource } from "ng2-smart-table";
-import { MemberListDto, MemberListService } from "../../../@core/data";
+import {
+  MemberListDto,
+  MemberListService,
+  UserService,
+} from "../../../@core/data";
 import { LocalDatePipe } from "../../../@theme/pipes";
 import { EditButtonComponent } from "./editbutton.component";
 
@@ -9,8 +17,13 @@ import { EditButtonComponent } from "./editbutton.component";
   selector: "memberlist-component",
   styleUrls: ["./memberlist.component.scss"],
   templateUrl: "./memberlist.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MemberListComponent {
+  hideID = true;
+  compactList = true;
+  fullList = false;
+
   settings = {
     pager: { display: false },
     actions: {
@@ -32,6 +45,7 @@ export class MemberListComponent {
       id: {
         title: "ID",
         filter: true,
+        hide: this.hideID,
       },
       name: {
         title: "Name",
@@ -50,15 +64,14 @@ export class MemberListComponent {
         title: "Rollen",
         filter: true,
       },
-      recruitSince: {
-        title: "Rekrut seit",
-        valuePrepareFunction: this.prepareDate.bind(this),
-      },
-      memberSince: {
+      recruitSinceString: {
         title: "Mitglied seit",
-        valuePrepareFunction: this.prepareDate.bind(this),
+        compareFunction: this.customDateSort,
       },
-
+      memberSinceString: {
+        title: "Mannschaft seit",
+        compareFunction: this.customDateSort,
+      },
       comment: {
         title: "Bemerkungen",
         filter: false,
@@ -71,22 +84,61 @@ export class MemberListComponent {
 
   datePipe = new LocalDatePipe();
 
-  constructor(private service: MemberListService, private router: Router) {
+  constructor(
+    private service: MemberListService,
+    private router: Router,
+    private cd: ChangeDetectorRef,
+    private userService: UserService
+  ) {
     this.service.getData().then((data) => this.setData(data));
+    this.userService.onUpdate.subscribe((user) =>
+      this.source.update(user, this.prepareMember(user))
+    );
   }
+
+  customDateSort(direction: any, a: string, b: string) {
+    const convertDate = (date: string) => {
+      const split = date.split(".");
+      [split[0], split[1]] = [split[1], split[0]];
+      return split.join(".");
+    };
+    const first = convertDate(a);
+    const second = convertDate(b);
+
+    if (first < second) {
+      return -1 * direction;
+    }
+    if (first > second) {
+      return direction;
+    }
+    return 0;
+  }
+
+  private prepareMember = (entry: MemberListDto) => {
+    entry.rank = this.prepareTranslationRank(entry.rank);
+    entry.division = this.prepareTranslationDivision(entry.division);
+    entry.roles = this.prepareTranslationRoles(entry.roles);
+    entry.memberSinceString = this.prepareDate(entry.memberSince);
+    entry.recruitSinceString = this.prepareDate(entry.recruitSince);
+    entry["edit"] = "<button></button>";
+    return entry;
+  };
+
   private setData(data: MemberListDto[]) {
-    data = data.map((entry) => {
-      entry.rank = this.prepareTranslationRank(entry.rank);
-      entry.division = this.prepareTranslationDivision(entry.division);
-      entry.roles = this.prepareTranslationRoles(entry.roles);
-      entry["edit"] = "<button></button>";
-      return entry;
-    });
+    data = data
+      .filter((f) => f.roles !== "{guest}" /*&& f.rank === "recruit"*/)
+      .map(this.prepareMember);
     this.source.load(data);
   }
-  prepareDate(date: string): string {
-    return this.datePipe.transform(date);
+
+  prepareDate(date: Date): string {
+    if (typeof date != "undefined" && date) {
+      return this.datePipe.transform(date);
+    } else {
+      return "-";
+    }
   }
+
   prepareTranslationRank(text: string): string {
     switch (text) {
       case "recruit":
@@ -115,6 +167,7 @@ export class MemberListComponent {
         return text;
     }
   }
+
   prepareTranslationRoles(text: string): string {
     return text
       .slice(1, -1)
@@ -124,6 +177,7 @@ export class MemberListComponent {
       })
       .join(", ");
   }
+
   private translaterole(text: string): string {
     switch (text) {
       case "member":
@@ -137,5 +191,14 @@ export class MemberListComponent {
       default:
         return text;
     }
+  }
+
+  updateList(value): void {
+    if (value == "full") {
+      this.hideID = false;
+    } else {
+      this.hideID = true;
+    }
+    this.cd.markForCheck();
   }
 }

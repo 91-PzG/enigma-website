@@ -1,16 +1,8 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-
-export interface User {
-  contact: Contact;
-  member?: Member;
-}
-
-export interface Contact {
-  discordId: string;
-  username: string;
-  member: boolean;
-  comment?: string;
-}
+import { Subject } from "rxjs";
+import { environment } from "../../../environments/environment";
+import { MemberListDto } from "./memberlist.service";
 
 export class Member {
   recruitSince: string | null = "";
@@ -24,19 +16,25 @@ export class Member {
   rechte: string = "";
   missedEvents: number = 0;
   missedConsecutiveEvents: number = 0;
+  comment: string;
+  name: string;
+  id: string;
 }
 
 @Injectable()
 export class UserService {
-  getData(): Promise<User> {
-    const user: User = {
-      contact: {
-        discordId: "",
-        username: "",
-        member: false,
-      },
-    };
+  onUpdate: Subject<MemberListDto> = new Subject<MemberListDto>();
 
-    return Promise.resolve<User>(user);
+  constructor(private http: HttpClient) {}
+
+  getData(): Promise<Member> {
+    return null;
+  }
+
+  update(user: MemberListDto) {
+    console.log(user);
+    return this.http
+      .patch(`${environment.api}/users/${user.id}`, user)
+      .subscribe(() => this.onUpdate.next(user));
   }
 }

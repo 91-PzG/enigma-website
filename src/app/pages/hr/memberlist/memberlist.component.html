@@ -1,5 +1,14 @@
 <nb-card>
-  <nb-card-header> Member Liste </nb-card-header>
+  <nb-card-header>
+    <nb-button-group (valueChange)="updateList($event)">
+      <button nbButtonToggle [(pressed)]="compactList" value="compact">
+        Kompakte Liste
+      </button>
+      <button nbButtonToggle [(pressed)]="fullList" value="full">
+        Volle Liste
+      </button>
+    </nb-button-group>
+  </nb-card-header>
   <nb-card-body class="table">
     <ng2-smart-table [settings]="settings" [source]="source" class="table">
     </ng2-smart-table>

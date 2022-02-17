@@ -14,7 +14,7 @@ export const routedComponents = [
 const routes: Routes = [
   {
     path: "dashboard",
-    component: WorkInProgressComponent,
+    component: DashboardComponent,
   },
   {
     path: "memberlist",

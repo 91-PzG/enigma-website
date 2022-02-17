@@ -1,16 +1,18 @@
-import { NgModule } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NbDateFnsDateModule } from "@nebular/date-fns";
 import {
+  NbButtonGroupModule,
   NbCardModule,
   NbDatepickerModule,
   NbDialogModule,
   NbInputModule,
+  NbRadioModule,
+  NbToggleModule,
 } from "@nebular/theme";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 import { NgxEchartsModule } from "ngx-echarts";
 import { ThemeModule } from "../../@theme/theme.module";
-import { DASHBOARD_COMPONENTS } from "./dashboard/dashboard.component";
 import { HrRoutingModule, routedComponents } from "./hr-routing.module";
 import { EditButtonComponent } from "./memberlist/editbutton.component";
 import { MemberEditDialogComponent } from "./memberlist/member-edit-dialog/member-edit-dialog.component";
@@ -28,12 +30,15 @@ import { MemberEditDialogComponent } from "./memberlist/member-edit-dialog/membe
     ReactiveFormsModule,
     NbDialogModule.forChild(),
     NbDateFnsDateModule,
+    NbRadioModule,
+    NbToggleModule,
+    NbButtonGroupModule,
   ],
   declarations: [
     ...routedComponents,
-    ...DASHBOARD_COMPONENTS,
     EditButtonComponent,
     MemberEditDialogComponent,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HrModule {}

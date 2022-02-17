@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { NbDialogRef } from "@nebular/theme";
-import { User, UserService } from "../../../@core/data";
+import { Member, UserService } from "../../../@core/data";
 
 @Component({
   selector: "user-detail-component",
@@ -8,7 +8,7 @@ import { User, UserService } from "../../../@core/data";
   styleUrls: ["./user-detail.component.scss"],
 })
 export class UserDetailComponent {
-  user: User;
+  user: Member;
 
   constructor(
     protected dialogRef: NbDialogRef<UserDetailComponent>,
