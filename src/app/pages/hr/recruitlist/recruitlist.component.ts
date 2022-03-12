@@ -13,13 +13,13 @@ import {
 import { LocalDatePipe } from "../../../@theme/pipes";
 
 @Component({
-  selector: "archive-component",
-  styleUrls: ["./archive.component.scss"],
-  templateUrl: "./archive.component.html",
+  selector: "recruitlist-component",
+  styleUrls: ["./recruitlist.component.scss"],
+  templateUrl: "./recruitlist.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArchiveComponent {
-  hideID = false;
+export class RecruitListComponent {
+  hideID = true;
   compactList = true;
   fullList = false;
 
@@ -41,10 +41,27 @@ export class ArchiveComponent {
         filter: true,
       },
 
+      division: {
+        title: "Abteilung",
+        filter: true,
+      },
+      rank: {
+        title: "Rang",
+        filter: true,
+      },
+      roles: {
+        title: "Rollen",
+        filter: true,
+      },
+      recruitSinceString: {
+        title: "Rekrut seit",
+        compareFunction: this.customDateSort,
+      },
+
       comment: {
         title: "Bemerkungen",
         filter: false,
-        hide: false,
+        hide: true,
       },
     },
   };
@@ -92,7 +109,9 @@ export class ArchiveComponent {
   };
 
   private setData(data: MemberListDto[]) {
-    data = data.filter((f) => f.roles === "{guest}").map(this.prepareMember);
+    data = data
+      .filter((f) => f.roles !== "{guest}" && f.rank === "recruit")
+      .map(this.prepareMember);
     this.source.load(data);
   }
 

@@ -34,6 +34,11 @@ export const MENU_ITEMS: NbMenuItemWithPermissions[] = [
         icon: "people-outline",
         link: "/hr/memberlist",
       },
+      {
+        title: "Rekruten",
+        icon: "people-outline",
+        link: "/hr/recruitlist",
+      },
 
       {
         title: "Archiv",

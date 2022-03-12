@@ -19,6 +19,7 @@ import {
   NbMenuModule,
   NbSidebarModule,
 } from "@nebular/theme";
+import { NgxEchartsModule } from "ngx-echarts";
 import { CoreModule } from "./@core/core.module";
 import { ThemeModule } from "./@theme/theme.module";
 import { AppRoutingModule } from "./app-routing.module";
@@ -41,6 +42,7 @@ import { AppComponent } from "./app.component";
     NbEvaIconsModule,
     ThemeModule.forRoot(),
     DragDropModule,
+    NgxEchartsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },

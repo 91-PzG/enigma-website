@@ -1,14 +1,15 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { WorkInProgressComponent } from "../miscellaneous/work-in-progress/work-in-progress.component";
 import { ArchiveComponent } from "./archive/archive.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { MemberListComponent } from "./memberlist/memberlist.component";
+import { RecruitListComponent } from "./recruitlist/recruitlist.component";
 
 export const routedComponents = [
   DashboardComponent,
   ArchiveComponent,
   MemberListComponent,
+  RecruitListComponent,
 ];
 
 const routes: Routes = [
@@ -20,7 +21,11 @@ const routes: Routes = [
     path: "memberlist",
     component: MemberListComponent,
   },
-  { path: "archive", component: WorkInProgressComponent },
+  {
+    path: "recruitlist",
+    component: RecruitListComponent,
+  },
+  { path: "archive", component: ArchiveComponent },
 ];
 
 @NgModule({
